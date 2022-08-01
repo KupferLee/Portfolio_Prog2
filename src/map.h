@@ -7,9 +7,28 @@
 
 #include <nlohmann/json.hpp>
 #include <fstream>
+#include "raylib.h"
 
 class map {
 
+    nlohmann::json levelMap;
+    Texture2D tileAtlasTexture;
+    nlohmann::json tilesetDescription;
+
+    //structs for tilemaps
+    struct {
+        Texture2D tilemap;
+        int tileWidht;
+        int tileMapWidth;
+        int rowLength;
+    } tilemapData;
+
+    struct {
+        std::vector<int> layerGround;
+        std::vector<int> layerPath;
+        int mapWidth;
+        int mapHeight;
+    } mapData;
 };
 
 
