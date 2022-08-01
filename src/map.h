@@ -10,7 +10,12 @@
 #include "raylib.h"
 
 class map {
+public:
+    map();
+    ~map();
+    void drawMap();
 
+protected:
     nlohmann::json levelMap;
     Texture2D tileAtlasTexture;
     nlohmann::json tilesetDescription;

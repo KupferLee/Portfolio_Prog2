@@ -1,0 +1,14 @@
+{ "columns":1,
+ "image":"..\/..\/..\/..\/Se2\/Se2B3 Programmierung II\/Tiles-Sheet.png",
+ "imageheight":48,
+ "imagewidth":16,
+ "margin":0,
+ "name":"Tileset",
+ "spacing":0,
+ "tilecount":3,
+ "tiledversion":"1.8.4",
+ "tileheight":16,
+ "tilewidth":16,
+ "type":"tileset",
+ "version":"1.8"
+}

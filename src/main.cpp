@@ -4,6 +4,8 @@
 
 #include "config.h"
 
+#include "map.h"
+
 int main() {
     // Raylib initialization
     // Project name, screen size, fullscreen mode etc. can be specified in the config.h.in file
@@ -18,6 +20,8 @@ int main() {
     // ...
     // ...
     Texture2D myTexture = LoadTexture("assets/graphics/testimage.png");
+    map* current_map = new map;
+
 
     // Main game loop
     while (!WindowShouldClose()) // Detect window close button or ESC key
@@ -33,6 +37,8 @@ int main() {
             ClearBackground(WHITE);
             DrawText("Hello, world!", 10, 10, 30, LIGHTGRAY);
             DrawTexture(myTexture, 10, 100, WHITE);
+            current_map->drawMap();
+
 
         EndDrawing();
     } // Main game loop end
