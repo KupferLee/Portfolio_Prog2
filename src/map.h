@@ -26,6 +26,9 @@ protected:
     bool isStartDrawn = false;
     bool isFinDrawn = false;
 
+    void randomizeTiles();
+    void randomStartFin();
+
     //structs for tilemaps
     struct {
         Texture2D tilemap;

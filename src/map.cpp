@@ -53,8 +53,32 @@ void map::parse()
     }
 }
 
+void map::randomizeTiles() {
+    // draw grass
+    if (rand() % 10 <= 4) {
+        mapData.layerPath.push_back(0);
+    }
+    // draw start
+    else if (rand() % 10 <= 5 && this->isStartDrawn == false) {
+        mapData.layerPath.push_back(3);
+        this->isStartDrawn = true;
+    }
+    // draw finished
+    else if (rand() % 10 <= 1 && this->isFinDrawn == false &&
+               this->drawTick >= mapData.layerGround.size() - 60) {
+        mapData.layerPath.push_back(2);
+        this->isFinDrawn = true;
+    }
+    // draw nothing
+    else {
+        mapData.layerPath.push_back(-1);
+    }
+}
+
 // generates a random map
-// NOTE: this is not working yet
+// if there is already a grass tile the chance is higher that down or right will be another grass tile spawned
+//
+// NOTE: this is not failsafe yet!
 void map::random()
 {
     //go through all contents of "layers"
@@ -69,35 +93,82 @@ void map::random()
             }
         }
 
+        // NOTE: tiles begin with 0
         if (layer["name"] == "Path") {
-            for (auto const &tileID: layer["data"])
-            {
-                // first random if there is something gonna be drawn
-                if (rand() % 10 <= 3)
-                {
-                    // random what gets drawn
-                    if (rand() % 10 <= 3 && this->isStartDrawn == false)
-                    {
-                        mapData.layerPath.push_back(3);
-                        this->isStartDrawn = true;
-                    } else if (rand() % 10 <= 1 && this->isFinDrawn == false && this->drawTick >= mapData.layerGround.size() - 60)
-                    {
-                        mapData.layerPath.push_back(2);
-                        this->isFinDrawn = true;
-                    } else
-                    {
-                        mapData.layerPath.push_back(1);
+            for (auto const &tileID: layer["data"]) {
+
+                // as soon as first row down start here
+                if (drawTick > 30) {
+
+                    // if above tile was grass then chance for grass is higher
+                    if (mapData.layerPath.at(drawTick - 30) == 0) {
+                        // draw grass
+                        if (rand() % 10 <= 6) {
+                            mapData.layerPath.push_back(0);
+                        }
+                        //draw start
+                        else if (rand() % 10 <= 5 && this->isStartDrawn == false) {
+                            mapData.layerPath.push_back(3);
+                            this->isStartDrawn = true;
+                        }
+                        // draw fin
+                        else if (rand() % 10 <= 1 && this->isFinDrawn == false &&
+                                 this->drawTick >= mapData.layerGround.size() - 60) {
+                            mapData.layerPath.push_back(2);
+                            this->isFinDrawn = true;
+                        }
+                        // draw nothing
+                        else {
+                            mapData.layerPath.push_back(-1);
+                        }
                     }
 
-                } else
-                {
+                    // if tile before was grass then chance for grass is higher
+                    else if (mapData.layerPath.at(drawTick - 1) == 0) {
+                        // draw grass
+                        if (rand() % 10 <= 6) {
+                            mapData.layerPath.push_back(0);
+                        }
+
+                        //draw start
+                        else if (rand() % 10 <= 5 && this->isStartDrawn == false) {
+                            mapData.layerPath.push_back(3);
+                            this->isStartDrawn = true;
+                        }
+                        // draw fin
+                        else if (rand() % 10 <= 1 && this->isFinDrawn == false &&
+                                 this->drawTick >= mapData.layerGround.size() - 60) {
+                            mapData.layerPath.push_back(2);
+                            this->isFinDrawn = true;
+                        }
+                         
+                        //draw nothing
+                        else {
+                            mapData.layerPath.push_back(-1);
+                        }
+                    }
+
+                    // if last tile wasnt grass then go on
+                    else
+                    {
+                        mapData.layerPath.push_back(-1);
+                        //this->randomizeTiles();
+                    }
+
+                }
+                // randomize first row of tiles
+                else if (rand() % 10 <= 4) {
+                    mapData.layerPath.push_back(0);
+                }
+                else {
                     mapData.layerPath.push_back(0);
                 }
 
-                this->drawTick++;
+            this->drawTick++;
 
-            }
         }
+    }
+
 
         if (layer["name"] == "Items") {
             for (auto const &tileID: layer["data"]) {
@@ -109,6 +180,11 @@ void map::random()
     }
 }
 
+//set start and fin on grass tiles random
+void map::randomStartFin()
+{
+
+}
 
 // draws map after a set json file
 void map::draw()
