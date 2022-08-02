@@ -38,6 +38,13 @@ map::map()
             }
         }
 
+        if (layer["name"] == "Items") {
+            for (auto const &tileID: layer["data"]) {
+                mapData.layerItems.push_back(((int) tileID) - 1);
+
+            }
+        }
+
     }
 }
 
@@ -58,6 +65,16 @@ void map::drawMap()
             if (mapData.layerPath[x + y * mapData.mapWidth] != -1)
                 DrawTexturePro(tileAtlasTexture,
                                { (float)(mapData.layerPath[x + y * mapData.mapWidth] % this->tilemapData.tileMapWidth) * 16,(float)(mapData.layerPath[x + y * mapData.mapWidth] / this->tilemapData.tileMapWidth) * 16 ,16,16 },
+                               { (float)(x * 16 * 2),(float)(y * 16 * 2),16 * 2,16 * 2},
+                               {}, 0, WHITE);
+        }
+    }
+
+    for (int y{}; y < mapData.mapHeight; y++) {
+        for (int x{}; x < mapData.mapWidth; x++) {
+            if (mapData.layerItems[x + y * mapData.mapWidth] != -1)
+                DrawTexturePro(tileAtlasTexture,
+                               { (float)(mapData.layerItems[x + y * mapData.mapWidth] % this->tilemapData.tileMapWidth) * 16,(float)(mapData.layerPath[x + y * mapData.mapWidth] / this->tilemapData.tileMapWidth) * 16 ,16,16 },
                                { (float)(x * 16 * 2),(float)(y * 16 * 2),16 * 2,16 * 2},
                                {}, 0, WHITE);
         }

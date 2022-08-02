@@ -31,6 +31,7 @@ protected:
     struct {
         std::vector<int> layerGround;
         std::vector<int> layerPath;
+        std::vector<int> layerItems;
         int mapWidth;
         int mapHeight;
     } mapData;
