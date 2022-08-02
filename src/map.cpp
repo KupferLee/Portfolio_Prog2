@@ -72,18 +72,23 @@ void map::random()
         if (layer["name"] == "Path") {
             for (auto const &tileID: layer["data"])
             {
+                // first random if there is something gonna be drawn
                 if (rand() % 10 <= 3)
                 {
-                    mapData.layerPath.push_back(1);
-                } else if (rand() % 10 <= 3 && this->isStartDrawn == false)
-                {
-                    mapData.layerPath.push_back(3);
-                    this->isStartDrawn = true;
-                } else if (rand() % 10 <= 1 && this->isFinDrawn == false &&
-                           this->drawTick >= mapData.layerGround.size() - 60)
-                {
-                    mapData.layerPath.push_back(2);
-                    this->isFinDrawn = true;
+                    // random what gets drawn
+                    if (rand() % 10 <= 3 && this->isStartDrawn == false)
+                    {
+                        mapData.layerPath.push_back(3);
+                        this->isStartDrawn = true;
+                    } else if (rand() % 10 <= 1 && this->isFinDrawn == false && this->drawTick >= mapData.layerGround.size() - 60)
+                    {
+                        mapData.layerPath.push_back(2);
+                        this->isFinDrawn = true;
+                    } else
+                    {
+                        mapData.layerPath.push_back(1);
+                    }
+
                 } else
                 {
                     mapData.layerPath.push_back(0);
