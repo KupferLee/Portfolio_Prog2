@@ -17,27 +17,28 @@ int main() {
 #endif
 
     // Your own initialization code here
-    // ...
-    // ...
     Texture2D myTexture = LoadTexture("assets/graphics/testimage.png");
     map* current_map = new map;
 
+    // loading the current json data into vectors so they only need to be parsed once
+    current_map->random();
 
     // Main game loop
     while (!WindowShouldClose()) // Detect window close button or ESC key
     {
         // Updates that are made by frame are coded here
-        // ...
-        // ...
+
+
 
         BeginDrawing();
             // You can draw on the screen between BeginDrawing() and EndDrawing()
             // ...
             // ...
-            ClearBackground(WHITE);
-            DrawText("Hello, world!", 10, 10, 30, LIGHTGRAY);
-            DrawTexture(myTexture, 10, 100, WHITE);
-            current_map->drawMap();
+            ClearBackground(BLUE);
+            DrawText("If you see this, this is not working!", 10, 10, 30, DARKBLUE);
+
+            // draw what is currently loaded within the map vectors
+            current_map->draw();
 
 
         EndDrawing();
@@ -46,7 +47,6 @@ int main() {
     // De-initialization here
     // ...
     // ...
-    UnloadTexture(myTexture);
 
     // Close window and OpenGL context
     CloseWindow();

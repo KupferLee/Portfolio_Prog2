@@ -13,12 +13,18 @@ class map {
 public:
     map();
     ~map();
-    void drawMap();
+    void parse();
+    void draw();
+    void random();
 
 protected:
     nlohmann::json levelMap;
     Texture2D tileAtlasTexture;
     nlohmann::json tilesetDescription;
+
+    int drawTick = 0;
+    bool isStartDrawn = false;
+    bool isFinDrawn = false;
 
     //structs for tilemaps
     struct {
@@ -32,6 +38,7 @@ protected:
         std::vector<int> layerGround;
         std::vector<int> layerPath;
         std::vector<int> layerItems;
+        std::vector<int> startFin;
         int mapWidth;
         int mapHeight;
     } mapData;
