@@ -43,37 +43,23 @@ map::map()
 
 void map::drawMap()
 {
-    /*
-    for (int y{}; y < mapData.mapHeight; y++) {
-        for (int x{}; x < mapData.mapWidth; x++) {
-            DrawTexturePro(tileAtlasTexture,
-                           {
-                                   (float)(mapData.layerGround[x + y * mapData.mapWidth] % this->tilemapData.tileMapWidth) * 16,
-                                   (float)(mapData.layerGround[x + y * mapData.mapWidth] / this->tilemapData.tileMapWidth) * 16,
-                                   16,16
-                           },
-                           {
-                                   (float)(x * 16 * 4),
-                                   (float)(y * 16 * 4),
-                                   16 * 4,16 * 4
-                           },
-                           {}, 0, WHITE);
-        }	//this draws the tiles on screen. This uses a loop for each dimension to make the readability a *bit* easier. Those lines are fairly long, but its not too complex once you get into it
-    }   //also maybe these should be a function but that's for future me -o
-    //I'm future me and still dont want to -o
-     */
-
     for (int y{}; y < mapData.mapHeight; y++) {
         for (int x{}; x < mapData.mapWidth; x++) {
             if (mapData.layerGround[x + y * mapData.mapWidth] != -1)
-                DrawTexturePro(tileAtlasTexture, { (float)(mapData.layerGround[x + y * mapData.mapWidth] % this->tilemapData.tileMapWidth) * 32,(float)(mapData.layerGround[x + y * mapData.mapWidth] / this->tilemapData.tileMapWidth) * 32 ,32,32 }, { (float)(x * 32 * 4),(float)(y * 32 * 4),32 * 4,32 * 4 }, {}, 0, WHITE);
+                DrawTexturePro(tileAtlasTexture,
+                               { (float)(mapData.layerGround[x + y * mapData.mapWidth] % this->tilemapData.tileMapWidth) * 16,(float)(mapData.layerGround[x + y * mapData.mapWidth] / this->tilemapData.tileMapWidth) * 16,16,16 },
+                               { (float)(x * 16 * 2),(float)(y * 16 * 2),16 * 2,16 * 2},
+                               {}, 0, WHITE);
         }
     }
 
     for (int y{}; y < mapData.mapHeight; y++) {
         for (int x{}; x < mapData.mapWidth; x++) {
             if (mapData.layerPath[x + y * mapData.mapWidth] != -1)
-                DrawTexturePro(tileAtlasTexture, { (float)(mapData.layerPath[x + y * mapData.mapWidth] % this->tilemapData.tileMapWidth) * 32,(float)(mapData.layerPath[x + y * mapData.mapWidth] / this->tilemapData.tileMapWidth) * 32 ,32,32 }, { (float)(x * 32 * 4),(float)(y * 32 * 4),32 * 4,32 * 4 }, {}, 0, WHITE);
+                DrawTexturePro(tileAtlasTexture,
+                               { (float)(mapData.layerPath[x + y * mapData.mapWidth] % this->tilemapData.tileMapWidth) * 16,(float)(mapData.layerPath[x + y * mapData.mapWidth] / this->tilemapData.tileMapWidth) * 16 ,16,16 },
+                               { (float)(x * 16 * 2),(float)(y * 16 * 2),16 * 2,16 * 2},
+                               {}, 0, WHITE);
         }
     }
 }
