@@ -154,15 +154,15 @@ void map::randomStartFin()
             for (auto const &tileID: layer["data"]) {
                 this->checkpointTick++;
 
-                // 50% chance to draw start tile
+                // 30% chance to draw start tile
                 // only if there is grass underneath
                 if (rand() % 10 <= 3 && this->isStartDrawn == false && mapData.layerPath.at(checkpointTick) == 0) {
                     mapData.layerCheckpoints.push_back(this->tile_start);
                     this->isStartDrawn = true;
                 }
-                // if last 60 tiles then 30% chance to draw fin
-                // only if there is grass underneath
-                else if (rand() % 10 <= 9 && this->isFinDrawn == false && mapData.layerPath.at(checkpointTick) == 0 && this->checkpointTick >= mapData.layerGround.size() - 60) {
+                // if last 60 tiles then 90% chance to draw fin
+                // only if there is grass underneath and next to it
+                else if (rand() % 10 <= 9 && this->isFinDrawn == false && mapData.layerPath.at(checkpointTick) == 0 && mapData.layerPath.at(checkpointTick - 1) == 0 && mapData.layerPath.at(checkpointTick + 1) == 0 && this->checkpointTick >= mapData.layerGround.size() - 60) {
                     mapData.layerCheckpoints.push_back(this->tile_finish);
                     this->isFinDrawn = true;
                 }
@@ -172,9 +172,8 @@ void map::randomStartFin()
                 }
             }
 
-
-            }
         }
+    }
 }
 
 // draws map after a set json file
