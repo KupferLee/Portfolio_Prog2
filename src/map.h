@@ -16,6 +16,7 @@ public:
     void parse();
     void draw();
     void random();
+    void randomStartFin();
 
 protected:
     nlohmann::json levelMap;
@@ -23,11 +24,23 @@ protected:
     nlohmann::json tilesetDescription;
 
     int drawTick = 0;
+    int checkpointTick = 0;
     bool isStartDrawn = false;
     bool isFinDrawn = false;
 
+    // tiles as numbers
+    const int tile_empty = -1;
+    const int tile_grass = 0;
+    const int tile_water = 1;
+    const int tile_finish = 2;
+    const int tile_start = 3;
+    const int tile_sword = 4;
+    const int tile_chest = 5;
+    const int tile_potion = 6;
+    const int tile_gold = 7;
+
     void randomizeTiles();
-    void randomStartFin();
+
 
     //structs for tilemaps
     struct {
@@ -41,7 +54,7 @@ protected:
         std::vector<int> layerGround;
         std::vector<int> layerPath;
         std::vector<int> layerItems;
-        std::vector<int> startFin;
+        std::vector<int> layerCheckpoints;
         int mapWidth;
         int mapHeight;
     } mapData;

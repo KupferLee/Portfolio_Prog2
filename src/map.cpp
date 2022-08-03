@@ -94,7 +94,8 @@ void map::random()
         }
 
         // NOTE: tiles begin with 0
-        if (layer["name"] == "Path") {
+        if (layer["name"] == "Path")
+        {
             for (auto const &tileID: layer["data"]) {
 
                 // as soon as first row down start here
@@ -104,86 +105,76 @@ void map::random()
                     if (mapData.layerPath.at(drawTick - 30) == 0) {
                         // draw grass
                         if (rand() % 10 <= 6) {
-                            mapData.layerPath.push_back(0);
-                        }
-                        //draw start
-                        else if (rand() % 10 <= 5 && this->isStartDrawn == false) {
-                            mapData.layerPath.push_back(3);
-                            this->isStartDrawn = true;
-                        }
-                        // draw fin
-                        else if (rand() % 10 <= 1 && this->isFinDrawn == false &&
-                                 this->drawTick >= mapData.layerGround.size() - 60) {
-                            mapData.layerPath.push_back(2);
-                            this->isFinDrawn = true;
+                            mapData.layerPath.push_back(this->tile_grass);
                         }
                         // draw nothing
                         else {
-                            mapData.layerPath.push_back(-1);
+                            mapData.layerPath.push_back(this->tile_empty);
                         }
                     }
-
                     // if tile before was grass then chance for grass is higher
                     else if (mapData.layerPath.at(drawTick - 1) == 0) {
                         // draw grass
                         if (rand() % 10 <= 6) {
-                            mapData.layerPath.push_back(0);
+                            mapData.layerPath.push_back(this->tile_grass);
                         }
-
-                        //draw start
-                        else if (rand() % 10 <= 5 && this->isStartDrawn == false) {
-                            mapData.layerPath.push_back(3);
-                            this->isStartDrawn = true;
-                        }
-                        // draw fin
-                        else if (rand() % 10 <= 1 && this->isFinDrawn == false &&
-                                 this->drawTick >= mapData.layerGround.size() - 60) {
-                            mapData.layerPath.push_back(2);
-                            this->isFinDrawn = true;
-                        }
-                         
                         //draw nothing
                         else {
-                            mapData.layerPath.push_back(-1);
+                            mapData.layerPath.push_back(this->tile_empty);
                         }
                     }
 
-                    // if last tile wasnt grass then go on
+                    // if last tile wasnt grass then go on and draw no grass
                     else
                     {
-                        mapData.layerPath.push_back(-1);
-                        //this->randomizeTiles();
+                        mapData.layerPath.push_back(this->tile_empty);
                     }
 
                 }
-                // randomize first row of tiles
-                else if (rand() % 10 <= 4) {
-                    mapData.layerPath.push_back(0);
-                }
+                // first row of tiles all grass
                 else {
-                    mapData.layerPath.push_back(0);
+                    mapData.layerPath.push_back(this->tile_grass);
                 }
 
-            this->drawTick++;
-
-        }
-    }
-
-
-        if (layer["name"] == "Items") {
-            for (auto const &tileID: layer["data"]) {
-                mapData.layerItems.push_back(((int) tileID) - 1);
+                this->drawTick++;
 
             }
         }
-
     }
 }
 
 //set start and fin on grass tiles random
 void map::randomStartFin()
 {
+    for (auto const& layer : levelMap["layers"]) {
+        //this asks for the name of the layer
+        //then inserts its data into the vectors of the mapdata
 
+        if (layer["name"] == "Checkpoints") {
+            for (auto const &tileID: layer["data"]) {
+                this->checkpointTick++;
+
+                // 50% chance to draw start tile
+                // only if there is grass underneath
+                if (rand() % 10 <= 3 && this->isStartDrawn == false && mapData.layerPath.at(checkpointTick) == 0) {
+                    mapData.layerCheckpoints.push_back(this->tile_start);
+                    this->isStartDrawn = true;
+                }
+                // if last 60 tiles then 30% chance to draw fin
+                // only if there is grass underneath
+                else if (rand() % 10 <= 9 && this->isFinDrawn == false && mapData.layerPath.at(checkpointTick) == 0 && this->checkpointTick >= mapData.layerGround.size() - 60) {
+                    mapData.layerCheckpoints.push_back(this->tile_finish);
+                    this->isFinDrawn = true;
+                }
+
+                else {
+                    mapData.layerCheckpoints.push_back(this->tile_empty);
+                }
+            }
+
+
+            }
+        }
 }
 
 // draws map after a set json file
@@ -211,9 +202,9 @@ void map::draw()
 
     for (int y{}; y < mapData.mapHeight; y++) {
         for (int x{}; x < mapData.mapWidth; x++) {
-            if (mapData.layerItems[x + y * mapData.mapWidth] != -1)
+            if (mapData.layerCheckpoints[x + y * mapData.mapWidth] != -1)
                 DrawTexturePro(tileAtlasTexture,
-                               { (float)(mapData.layerItems[x + y * mapData.mapWidth] % this->tilemapData.tileMapWidth) * 16,(float)(mapData.layerPath[x + y * mapData.mapWidth] / this->tilemapData.tileMapWidth) * 16 ,16,16 },
+                               { (float)(mapData.layerCheckpoints[x + y * mapData.mapWidth] % this->tilemapData.tileMapWidth) * 16,(float)(mapData.layerCheckpoints[x + y * mapData.mapWidth] / this->tilemapData.tileMapWidth) * 16 ,16,16 },
                                { (float)(x * 16 * 2),(float)(y * 16 * 2),16 * 2,16 * 2},
                                {}, 0, WHITE);
         }

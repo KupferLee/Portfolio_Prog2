@@ -22,6 +22,7 @@ int main() {
 
     // loading the current json data into vectors so they only need to be parsed once
     current_map->random();
+    current_map->randomStartFin();
 
     // Main game loop
     while (!WindowShouldClose()) // Detect window close button or ESC key
