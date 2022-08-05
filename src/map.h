@@ -17,14 +17,20 @@ public:
     void draw();
     void random();
     void randomStartFin();
+    void randomItems();
 
 protected:
     nlohmann::json levelMap;
     Texture2D tileAtlasTexture;
     nlohmann::json tilesetDescription;
 
+    // ticks for checking which position inside of methods
     int drawTick = 0;
     int checkpointTick = 0;
+    int itemTick = 0;
+    int itemsMax = 7; // how many items there can be spawned at one map
+    int itemCurrent = 0; // how many items are currently spawned on the map
+
     bool isStartDrawn = false;
     bool isFinDrawn = false;
 
@@ -34,12 +40,11 @@ protected:
     const int tile_water = 1;
     const int tile_finish = 2;
     const int tile_start = 3;
-    const int tile_sword = 4;
+    const int tile_dagger = 4;
     const int tile_chest = 5;
     const int tile_potion = 6;
     const int tile_gold = 7;
 
-    void randomizeTiles();
 
 
     //structs for tilemaps

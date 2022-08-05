@@ -32,6 +32,7 @@ int main() {
     // loading the current json data into vectors so they only need to be parsed once
     current_map->random();
     current_map->randomStartFin();
+    current_map->randomItems();
 
     // to check if assigning the treasure chest worked
     std::cout << "DEBUG: OUTPUT TREASURE CHEST" << std::endl;

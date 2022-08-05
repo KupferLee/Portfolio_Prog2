@@ -53,28 +53,6 @@ void map::parse()
     }
 }
 
-void map::randomizeTiles() {
-    // draw grass
-    if (rand() % 10 <= 4) {
-        mapData.layerPath.push_back(0);
-    }
-    // draw start
-    else if (rand() % 10 <= 5 && this->isStartDrawn == false) {
-        mapData.layerPath.push_back(3);
-        this->isStartDrawn = true;
-    }
-    // draw finished
-    else if (rand() % 10 <= 1 && this->isFinDrawn == false &&
-               this->drawTick >= mapData.layerGround.size() - 60) {
-        mapData.layerPath.push_back(2);
-        this->isFinDrawn = true;
-    }
-    // draw nothing
-    else {
-        mapData.layerPath.push_back(-1);
-    }
-}
-
 // generates a random map
 // if there is already a grass tile the chance is higher that down or right will be another grass tile spawned
 //
@@ -162,7 +140,7 @@ void map::randomStartFin()
                 }
                 // if last 60 tiles then 90% chance to draw fin
                 // only if there is grass underneath and next to it
-                else if (rand() % 10 <= 9 && this->isFinDrawn == false && mapData.layerPath.at(checkpointTick) == 0 && mapData.layerPath.at(checkpointTick - 1) == 0 && mapData.layerPath.at(checkpointTick + 1) == 0 && this->checkpointTick >= mapData.layerGround.size() - 60) {
+                else if (rand() % 10 <= 9 && this->isFinDrawn == false && mapData.layerPath.at(checkpointTick) == this->tile_grass && mapData.layerPath.at(checkpointTick - 1) == tile_grass && mapData.layerPath.at(checkpointTick + 1) == tile_grass && this->checkpointTick >= mapData.layerGround.size() - 60) {
                     mapData.layerCheckpoints.push_back(this->tile_finish);
                     this->isFinDrawn = true;
                 }
@@ -176,9 +154,54 @@ void map::randomStartFin()
     }
 }
 
+void map::randomItems() {
+    for (auto const& layer : levelMap["layers"]) {
+
+
+        //this asks for the name of the layer
+        //then inserts its data into the vectors of the mapdata
+        if (layer["name"] == "Items") {
+
+            for (auto const &tileID: layer["data"]) {
+                this->itemTick++;
+                // wenn grass dann 10% chance dass ein item spawned
+                if (rand() % 10 <= 0 && mapData.layerPath.at(itemTick-1) == this->tile_grass && mapData.layerCheckpoints.at(itemTick-1) != this->tile_start && mapData.layerCheckpoints.at(itemTick-1) != this->tile_finish && this->itemCurrent < this->itemsMax)
+                {
+                    // 20% chance auf chest
+                    // 0 - 2
+                    if (rand() % 10 <= 1)
+                    {
+                        mapData.layerItems.push_back(this->tile_chest);
+                        this->itemCurrent++;
+                    }
+                    // 30% dagger
+                    // 7 - 9
+                    else if (rand() % 10 >= 7)
+                    {
+                        mapData.layerItems.push_back(this->tile_dagger);
+                        this->itemCurrent++;
+                    }
+                    else
+                    {
+                        mapData.layerItems.push_back(this->tile_empty);
+                    }
+
+                }
+                // sonst empty
+                else
+                {
+                    mapData.layerItems.push_back(this->tile_empty);
+                }
+            }
+        }
+    }
+
+}
+
 // draws map after a set json file
 void map::draw()
 {
+    // draw Ground
     for (int y{}; y < mapData.mapHeight; y++) {
         for (int x{}; x < mapData.mapWidth; x++) {
             if (mapData.layerGround[x + y * mapData.mapWidth] != -1)
@@ -189,6 +212,7 @@ void map::draw()
         }
     }
 
+    // Draw Path
     for (int y{}; y < mapData.mapHeight; y++) {
         for (int x{}; x < mapData.mapWidth; x++) {
             if (mapData.layerPath[x + y * mapData.mapWidth] != -1)
@@ -199,11 +223,23 @@ void map::draw()
         }
     }
 
+    // draw Start / Finish
     for (int y{}; y < mapData.mapHeight; y++) {
         for (int x{}; x < mapData.mapWidth; x++) {
             if (mapData.layerCheckpoints[x + y * mapData.mapWidth] != -1)
                 DrawTexturePro(tileAtlasTexture,
                                { (float)(mapData.layerCheckpoints[x + y * mapData.mapWidth] % this->tilemapData.tileMapWidth) * 16,(float)(mapData.layerCheckpoints[x + y * mapData.mapWidth] / this->tilemapData.tileMapWidth) * 16 ,16,16 },
+                               { (float)(x * 16 * 2),(float)(y * 16 * 2),16 * 2,16 * 2},
+                               {}, 0, WHITE);
+        }
+    }
+
+    // Draw Items
+    for (int y{}; y < mapData.mapHeight; y++) {
+        for (int x{}; x < mapData.mapWidth; x++) {
+            if (mapData.layerItems[x + y * mapData.mapWidth] != -1)
+                DrawTexturePro(tileAtlasTexture,
+                               { (float)(mapData.layerItems[x + y * mapData.mapWidth] % this->tilemapData.tileMapWidth) * 16,(float)(mapData.layerItems[x + y * mapData.mapWidth] / this->tilemapData.tileMapWidth) * 16,16,16 },
                                { (float)(x * 16 * 2),(float)(y * 16 * 2),16 * 2,16 * 2},
                                {}, 0, WHITE);
         }
