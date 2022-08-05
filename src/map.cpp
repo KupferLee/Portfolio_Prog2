@@ -164,8 +164,9 @@ void map::randomItems() {
 
             for (auto const &tileID: layer["data"]) {
                 this->itemTick++;
-                // wenn grass dann 10% chance dass ein item spawned
-                if (rand() % 10 <= 0 && mapData.layerPath.at(itemTick-1) == this->tile_grass && mapData.layerCheckpoints.at(itemTick-1) != this->tile_start && mapData.layerCheckpoints.at(itemTick-1) != this->tile_finish && this->itemCurrent < this->itemsMax)
+
+                // wenn grass dann 5% chance dass ein item spawned
+                if (rand() % 20 <= 1 && mapData.layerPath.at(itemTick-1) == this->tile_grass && mapData.layerCheckpoints.at(itemTick-1) != this->tile_start && mapData.layerCheckpoints.at(itemTick-1) != this->tile_finish && this->itemCurrent < this->itemsMax)
                 {
                     // 20% chance auf chest
                     // 0 - 2
