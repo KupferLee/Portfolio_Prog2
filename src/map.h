@@ -43,7 +43,8 @@ protected:
     const int tile_dagger = 4;
     const int tile_chest = 5;
     const int tile_potion = 6;
-    const int tile_gold = 7;
+    const int tile_apple = 7;
+    const int tile_crystal = 8;
 
 
 

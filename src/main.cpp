@@ -6,6 +6,7 @@
 #include "config.h"
 
 #include "map.h"
+#include "ui_inventory.h"
 #include "item_chest.h"
 #include "item_dagger.h"
 #include <iostream>
@@ -25,6 +26,7 @@ int main() {
     // Your own initialization code here
     Texture2D infoTexture = LoadTexture("assets/graphics/infografik.png");
     map* current_map = new map;
+    ui_inventory* inventory = new ui_inventory();
     item_chest* treasure_chest = new item_chest;
     item_dagger* weapon_dagger = new item_dagger;
 
@@ -49,6 +51,26 @@ int main() {
     {
         // Updates that are made by frame are coded here
 
+        inventory->update();
+
+
+        // maybe switch case referring to inventory->isBackpackOpen() to determine where user can act rn
+        switch (inventory->isBackpackOpen())
+        {
+            case true:
+            {
+                // user can move within the inventory
+                break;
+            }
+
+            case false:
+            {
+                // user can move on map
+                break;
+            }
+        }
+
+
 
         BeginDrawing();
             // You can draw on the screen between BeginDrawing() and EndDrawing()
@@ -66,6 +88,8 @@ int main() {
             }
             else
             {
+                // little backpack shall be only drawn when there is no other info screen currently open
+                inventory->draw();
                 DrawText("Press Enter for more information.", Game::ScreenWidth - 550, Game::ScreenHeight - 50, 30, BLACK);
             }
 
