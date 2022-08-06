@@ -10,60 +10,8 @@ ui_inventory::ui_inventory()
     this->inventory_base = LoadTexture("assets/graphics/gui/inventory.png");
     this->inventory_selection = LoadTexture("assets/graphics/gui/selection.png");
 
-    // assign all the slots coordinates relatively to inventory base
+    this->set_slots();
 
-    // first row
-    this->slots[0].x = GetScreenWidth()/2 - this->inventory_base.width/2*this->scale_factor + 2*scale_factor;
-    this->slots[0].y = GetScreenHeight()/2 - this->inventory_base.height/2*this->scale_factor + 2*scale_factor;
-
-    this->slots[1].x = GetScreenWidth()/2 - this->inventory_base.width/2*this->scale_factor + 2*scale_factor + 16*scale_factor*2;
-    this->slots[1].y = GetScreenHeight()/2 - this->inventory_base.height/2*this->scale_factor + 2*scale_factor;
-
-    this->slots[2].x = GetScreenWidth()/2 - this->inventory_base.width/2*this->scale_factor + 2*scale_factor + 16*scale_factor*4;
-    this->slots[2].y = GetScreenHeight()/2 - this->inventory_base.height/2*this->scale_factor + 2*scale_factor;
-    // special slot weapons
-    this->slots[3].x = GetScreenWidth()/2 - this->inventory_base.width/2*this->scale_factor + 2*scale_factor + 16*scale_factor*6;
-    this->slots[3].y = GetScreenHeight()/2 - this->inventory_base.height/2*this->scale_factor + 2*scale_factor;
-
-    // second row
-    this->slots[4].x = GetScreenWidth()/2 - this->inventory_base.width/2*this->scale_factor + 2*scale_factor + 16*scale_factor;
-    this->slots[4].y = GetScreenHeight()/2 - this->inventory_base.height/2*this->scale_factor + 2*scale_factor + 16*scale_factor;
-
-    this->slots[5].x = GetScreenWidth()/2 - this->inventory_base.width/2*this->scale_factor + 2*scale_factor + 16*scale_factor*3;
-    this->slots[5].y = GetScreenHeight()/2 - this->inventory_base.height/2*this->scale_factor + 2*scale_factor + 16*scale_factor;
-
-    //third row
-    this->slots[6].x = GetScreenWidth()/2 - this->inventory_base.width/2*this->scale_factor + 2*scale_factor;
-    this->slots[6].y = GetScreenHeight()/2 - this->inventory_base.height/2*this->scale_factor + 2*scale_factor + 16*scale_factor*2;
-
-    this->slots[7].x = GetScreenWidth()/2 - this->inventory_base.width/2*this->scale_factor + 2*scale_factor + 16*scale_factor*2;
-    this->slots[7].y = GetScreenHeight()/2 - this->inventory_base.height/2*this->scale_factor + 2*scale_factor + 16*scale_factor*2;
-
-    this->slots[8].x = GetScreenWidth()/2 - this->inventory_base.width/2*this->scale_factor + 2*scale_factor + 16*scale_factor*4;
-    this->slots[8].y = GetScreenHeight()/2 - this->inventory_base.height/2*this->scale_factor + 2*scale_factor + 16*scale_factor*2;
-    // special slot rings
-    this->slots[9].x = GetScreenWidth()/2 - this->inventory_base.width/2*this->scale_factor + 2*scale_factor + 16*scale_factor*6;
-    this->slots[9].y = GetScreenHeight()/2 - this->inventory_base.height/2*this->scale_factor + 2*scale_factor + 16*scale_factor*2;
-
-    // fourth row
-    this->slots[10].x = GetScreenWidth()/2 - this->inventory_base.width/2*this->scale_factor + 2*scale_factor + 16*scale_factor;
-    this->slots[10].y = GetScreenHeight()/2 - this->inventory_base.height/2*this->scale_factor + 2*scale_factor + 16*scale_factor*3;
-
-    this->slots[11].x = GetScreenWidth()/2 - this->inventory_base.width/2*this->scale_factor + 2*scale_factor + 16*scale_factor*3;
-    this->slots[11].y = GetScreenHeight()/2 - this->inventory_base.height/2*this->scale_factor + 2*scale_factor + 16*scale_factor*3;
-
-    // fifth row
-    this->slots[12].x = GetScreenWidth()/2 - this->inventory_base.width/2*this->scale_factor + 2*scale_factor;
-    this->slots[12].y = GetScreenHeight()/2 - this->inventory_base.height/2*this->scale_factor + 2*scale_factor + 16*scale_factor*4;
-
-    this->slots[13].x = GetScreenWidth()/2 - this->inventory_base.width/2*this->scale_factor + 2*scale_factor + 16*scale_factor*2;
-    this->slots[13].y = GetScreenHeight()/2 - this->inventory_base.height/2*this->scale_factor + 2*scale_factor + 16*scale_factor*4;
-
-    this->slots[14].x = GetScreenWidth()/2 - this->inventory_base.width/2*this->scale_factor + 2*scale_factor + 16*scale_factor*4;
-    this->slots[14].y = GetScreenHeight()/2 - this->inventory_base.height/2*this->scale_factor + 2*scale_factor + 16*scale_factor*4;
-    // special slot idk yet
-    this->slots[15].x = GetScreenWidth()/2 - this->inventory_base.width/2*this->scale_factor + 2*scale_factor + 16*scale_factor*6;
-    this->slots[15].y = GetScreenHeight()/2 - this->inventory_base.height/2*this->scale_factor + 2*scale_factor + 16*scale_factor*4;
 }
 
 void ui_inventory::update()
@@ -118,3 +66,60 @@ void ui_inventory::draw()
 }
 
 bool ui_inventory::isBackpackOpen() { return isOpen; }
+
+// assign all the slots coordinates relatively to inventory base
+void ui_inventory::set_slots() {
+
+    // first row
+    this->slots[0].x = GetScreenWidth()/2 - this->inventory_base.width/2*this->scale_factor + 2*scale_factor;
+    this->slots[0].y = GetScreenHeight()/2 - this->inventory_base.height/2*this->scale_factor + 2*scale_factor;
+
+    this->slots[1].x = GetScreenWidth()/2 - this->inventory_base.width/2*this->scale_factor + 2*scale_factor + 16*scale_factor*2;
+    this->slots[1].y = GetScreenHeight()/2 - this->inventory_base.height/2*this->scale_factor + 2*scale_factor;
+
+    this->slots[2].x = GetScreenWidth()/2 - this->inventory_base.width/2*this->scale_factor + 2*scale_factor + 16*scale_factor*4;
+    this->slots[2].y = GetScreenHeight()/2 - this->inventory_base.height/2*this->scale_factor + 2*scale_factor;
+    
+    this->slots[special_slot_weapons].x = GetScreenWidth()/2 - this->inventory_base.width/2*this->scale_factor + 2*scale_factor + 16*scale_factor*6;
+    this->slots[special_slot_weapons].y = GetScreenHeight()/2 - this->inventory_base.height/2*this->scale_factor + 2*scale_factor;
+
+    // second row
+    this->slots[4].x = GetScreenWidth()/2 - this->inventory_base.width/2*this->scale_factor + 2*scale_factor + 16*scale_factor;
+    this->slots[4].y = GetScreenHeight()/2 - this->inventory_base.height/2*this->scale_factor + 2*scale_factor + 16*scale_factor;
+
+    this->slots[5].x = GetScreenWidth()/2 - this->inventory_base.width/2*this->scale_factor + 2*scale_factor + 16*scale_factor*3;
+    this->slots[5].y = GetScreenHeight()/2 - this->inventory_base.height/2*this->scale_factor + 2*scale_factor + 16*scale_factor;
+
+    //third row
+    this->slots[6].x = GetScreenWidth()/2 - this->inventory_base.width/2*this->scale_factor + 2*scale_factor;
+    this->slots[6].y = GetScreenHeight()/2 - this->inventory_base.height/2*this->scale_factor + 2*scale_factor + 16*scale_factor*2;
+
+    this->slots[7].x = GetScreenWidth()/2 - this->inventory_base.width/2*this->scale_factor + 2*scale_factor + 16*scale_factor*2;
+    this->slots[7].y = GetScreenHeight()/2 - this->inventory_base.height/2*this->scale_factor + 2*scale_factor + 16*scale_factor*2;
+
+    this->slots[8].x = GetScreenWidth()/2 - this->inventory_base.width/2*this->scale_factor + 2*scale_factor + 16*scale_factor*4;
+    this->slots[8].y = GetScreenHeight()/2 - this->inventory_base.height/2*this->scale_factor + 2*scale_factor + 16*scale_factor*2;
+
+    this->slots[special_slot_rings].x = GetScreenWidth()/2 - this->inventory_base.width/2*this->scale_factor + 2*scale_factor + 16*scale_factor*6;
+    this->slots[special_slot_rings].y = GetScreenHeight()/2 - this->inventory_base.height/2*this->scale_factor + 2*scale_factor + 16*scale_factor*2;
+
+    // fourth row
+    this->slots[10].x = GetScreenWidth()/2 - this->inventory_base.width/2*this->scale_factor + 2*scale_factor + 16*scale_factor;
+    this->slots[10].y = GetScreenHeight()/2 - this->inventory_base.height/2*this->scale_factor + 2*scale_factor + 16*scale_factor*3;
+
+    this->slots[11].x = GetScreenWidth()/2 - this->inventory_base.width/2*this->scale_factor + 2*scale_factor + 16*scale_factor*3;
+    this->slots[11].y = GetScreenHeight()/2 - this->inventory_base.height/2*this->scale_factor + 2*scale_factor + 16*scale_factor*3;
+
+    // fifth row
+    this->slots[12].x = GetScreenWidth()/2 - this->inventory_base.width/2*this->scale_factor + 2*this->scale_factor;
+    this->slots[12].y = GetScreenHeight()/2 - this->inventory_base.height/2*this->scale_factor + 2*scale_factor + 16*scale_factor*4;
+
+    this->slots[13].x = GetScreenWidth()/2 - this->inventory_base.width/2*this->scale_factor + 2*scale_factor + 16*scale_factor*2;
+    this->slots[13].y = GetScreenHeight()/2 - this->inventory_base.height/2*this->scale_factor + 2*scale_factor + 16*scale_factor*4;
+
+    this->slots[14].x = GetScreenWidth()/2 - this->inventory_base.width/2*this->scale_factor + 2*scale_factor + 16*scale_factor*4;
+    this->slots[14].y = GetScreenHeight()/2 - this->inventory_base.height/2*this->scale_factor + 2*scale_factor + 16*scale_factor*4;
+    // special slot idk yet
+    this->slots[15].x = GetScreenWidth()/2 - this->inventory_base.width/2*this->scale_factor + 2*scale_factor + 16*scale_factor*6;
+    this->slots[15].y = GetScreenHeight()/2 - this->inventory_base.height/2*this->scale_factor + 2*scale_factor + 16*scale_factor*4;
+}
