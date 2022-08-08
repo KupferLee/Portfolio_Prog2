@@ -168,6 +168,47 @@ void map::randomItems() {
                 // wenn grass dann 5% chance dass ein item spawned
                 if (rand() % 20 <= 1 && mapData.layerPath.at(itemTick-1) == this->tile_grass && mapData.layerCheckpoints.at(itemTick-1) != this->tile_start && mapData.layerCheckpoints.at(itemTick-1) != this->tile_finish && this->itemCurrent < this->itemsMax)
                 {
+                    int number = rand() % 10;
+
+                    switch (number)
+                    {
+                        // dagger
+                        case 1:
+                            mapData.layerItems.push_back(this->tile_dagger);
+                            this->itemCurrent++;
+                            break;
+                        // chest
+                        case 2:
+                            mapData.layerItems.push_back(this->tile_chest);
+                            this->itemCurrent++;
+                            break;
+                        // potion
+                        case 3:
+                            mapData.layerItems.push_back(this->tile_potion);
+                            this->itemCurrent++;
+                            break;
+                        // golden apple
+                        case 4:
+                            mapData.layerItems.push_back(this->tile_apple);
+                            this->itemCurrent++;
+                            break;
+                        // crystal
+                        case 5:
+                            mapData.layerItems.push_back(this->tile_crystal);
+                            this->itemCurrent++;
+                            break;
+                        // ring
+                        case 6:
+                            mapData.layerItems.push_back(this->tile_ring);
+                            this->itemCurrent++;
+                            break;
+
+                        default:
+                            mapData.layerItems.push_back(this->tile_empty);
+                            break;
+
+                    }
+                    /*
                     // 20% chance auf chest
                     // 0 - 2
                     if (rand() % 10 <= 1)
@@ -186,6 +227,7 @@ void map::randomItems() {
                     {
                         mapData.layerItems.push_back(this->tile_empty);
                     }
+                     */
 
                 }
                 // sonst empty
