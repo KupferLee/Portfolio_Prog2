@@ -45,6 +45,7 @@ protected:
     const int tile_potion = 6;
     const int tile_apple = 7;
     const int tile_crystal = 8;
+    const int tile_ring = 9;
 
 
 

@@ -16,14 +16,18 @@ ui_inventory::ui_inventory()
 
 void ui_inventory::update()
 {
+    // navigate in the inventory
+    // right
     if (this->isOpen == true && IsKeyPressed(KEY_D) && this->current_slot <= 14)
     {
         this->current_slot++;
     }
+    //left
     if (this->isOpen == true && IsKeyPressed(KEY_A) && this->current_slot >= 1)
     {
         this->current_slot--;
     }
+    // TODO: up & down
 
     // when i pressed change inventory state
     if(IsKeyPressed(KEY_I) && this->isOpen == true)
@@ -34,6 +38,15 @@ void ui_inventory::update()
     else if (IsKeyPressed(KEY_I) && this->isOpen == false)
     {
         this->isOpen = true;
+    }
+
+    // use this to determine which item to get?
+    switch (current_slot)
+    {
+        case 0:
+            break;
+        case 1:
+            break;
     }
 }
 
@@ -62,7 +75,6 @@ void ui_inventory::draw()
                        {0, 0} ,0, WHITE);
     }
 
-
 }
 
 bool ui_inventory::isBackpackOpen() { return isOpen; }
@@ -79,7 +91,7 @@ void ui_inventory::set_slots() {
 
     this->slots[2].x = GetScreenWidth()/2 - this->inventory_base.width/2*this->scale_factor + 2*scale_factor + 16*scale_factor*4;
     this->slots[2].y = GetScreenHeight()/2 - this->inventory_base.height/2*this->scale_factor + 2*scale_factor;
-    
+
     this->slots[special_slot_weapons].x = GetScreenWidth()/2 - this->inventory_base.width/2*this->scale_factor + 2*scale_factor + 16*scale_factor*6;
     this->slots[special_slot_weapons].y = GetScreenHeight()/2 - this->inventory_base.height/2*this->scale_factor + 2*scale_factor;
 
