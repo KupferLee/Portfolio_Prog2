@@ -168,7 +168,7 @@ void map::randomItems() {
                 // wenn grass dann 5% chance dass ein item spawned
                 if (rand() % 20 <= 1 && mapData.layerPath.at(itemTick-1) == this->tile_grass && mapData.layerCheckpoints.at(itemTick-1) != this->tile_start && mapData.layerCheckpoints.at(itemTick-1) != this->tile_finish && this->itemCurrent < this->itemsMax)
                 {
-                    int number = rand() % 10;
+                    int number = rand() % 20;
 
                     switch (number)
                     {
