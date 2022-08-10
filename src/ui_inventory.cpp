@@ -18,18 +18,43 @@ ui_inventory::ui_inventory()
 
 }
 
-void ui_inventory::update()
-{
+void ui_inventory::update() {
     // navigate in the inventory
     // right
-    if (this->isOpen == true && this->isInfo == false && IsKeyPressed(KEY_D) && this->current_slot <= 14)
-    {
+    if (this->isOpen == true && this->isInfo == false && IsKeyPressed(KEY_D) && this->current_slot <= 14) {
         this->current_slot++;
     }
     //left
-    if (this->isOpen == true && this->isInfo == false && IsKeyPressed(KEY_A) && this->current_slot >= 1)
-    {
+    if (this->isOpen == true && this->isInfo == false && IsKeyPressed(KEY_A) && this->current_slot >= 1) {
         this->current_slot--;
+    }
+
+    // special slots
+    // down
+    // weapons to rings
+    if (this->isOpen == true && this->isInfo == false && this->current_slot == this->special_slot_weapons &&
+        IsKeyPressed(KEY_S)) {
+        this->current_slot = this->special_slot_rings;
+    }
+    // rings to x
+    else if (this->isOpen == true && this->isInfo == false && this->current_slot == this->special_slot_rings &&
+        IsKeyPressed(KEY_S))
+    {
+        this->current_slot = this->special_slot_x;
+    }
+
+    // up
+    // x to rings
+    if (this->isOpen == true && this->isInfo == false && this->current_slot == this->special_slot_x &&
+        IsKeyPressed(KEY_W))
+    {
+        this->current_slot = this->special_slot_rings;
+    }
+    // rings to weapons
+    else if (this->isOpen == true && this->isInfo == false && this->current_slot == this->special_slot_rings &&
+        IsKeyPressed(KEY_W))
+    {
+        this->current_slot = this->special_slot_weapons;
     }
 
     // TODO: up and down
