@@ -11,7 +11,7 @@ template <typename T, int size>
 class Inventory_Template
 {
 public:
-    T items_container[size];
+    T items_container[size] {};
 
     void setItem(T item, int slot)
     {

@@ -176,10 +176,10 @@ void inventory_ui::draw_items()
 
 void inventory_ui::draw_current_slot(int i)
 {
-    if (this->container_current_slot >= i)
+    if (this->container_current_slot > i)
     {
         DrawTexturePro(this->tileset,
-                       {(float)this->container.getItem(i-1)->getID()*16, 0, 16, 16},
+                       {(float)this->container.getItem(i)->getID()*16, 0, 16, 16},
                        {this->ui_slots[i].x, this->ui_slots[i].y, 16 * gui_scale_factor, 16 * gui_scale_factor},
                        {0, 0}, 0, WHITE);
     }
@@ -195,26 +195,6 @@ void inventory_ui::draw_text()
         DrawText(("Value: " + std::to_string(container.getItem(gui_current_slot-1)->getValue())).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 3, 30, WHITE);
         DrawText(("Description: " + container.getItem(gui_current_slot-1)->getDescription()).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 4, 30, WHITE);
     }
-
-
-    /*
-    if (this->gui_current_slot == this->gui_special_slot_weapons)
-    {
-        DrawText("Description: Its a pointy weapon.", this->ui_infos_position.x, this->ui_infos_position.y, 30, WHITE);
-        DrawText("Name: Dagger", this->ui_infos_position.x, this->ui_infos_position.y + 40, 30, WHITE);
-        DrawText("Weight: 1", this->ui_infos_position.x, this->ui_infos_position.y + 40 * 2, 30, WHITE);
-        DrawText("Value: 5", this->ui_infos_position.x, this->ui_infos_position.y + 40 * 3, 30, WHITE);
-        DrawText("Description: Its a pointy weapon.", this->ui_infos_position.x, this->ui_infos_position.y + 40 * 4, 30, WHITE);
-    }
-    else
-    {
-        DrawText("This is an hard-code example.", this->ui_infos_position.x, this->ui_infos_position.y, 30, WHITE);
-        DrawText("Name: empty", this->ui_infos_position.x, this->ui_infos_position.y + 40, 30, WHITE);
-        DrawText("Weight: empty", this->ui_infos_position.x, this->ui_infos_position.y + 40 * 2, 30, WHITE);
-        DrawText("Value: empty", this->ui_infos_position.x, this->ui_infos_position.y + 40 * 3, 30, WHITE);
-        DrawText("Description: empty", this->ui_infos_position.x, this->ui_infos_position.y + 40 * 4, 30, WHITE);
-    }
-    */
 }
 
 void inventory_ui::item_pickUp(item_base* item)
