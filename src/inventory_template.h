@@ -5,6 +5,8 @@
 #ifndef RAYLIBSTARTER_INVENTORY_TEMPLATE_H
 #define RAYLIBSTARTER_INVENTORY_TEMPLATE_H
 
+#include <iostream>
+
 template <typename T, int size>
 class Inventory_Template
 {
@@ -13,10 +15,15 @@ public:
 
     void setItem(T item, int slot)
     {
-        if (slot <= size)
+        if (slot < size)
         {
             // this gives error "Segmentation fault"
             items_container[slot] = item;
+            std::cout << "DEBUG: Item Set " << slot << std::endl;
+        }
+        else
+        {
+            std::cout << "ERROR: Items array full" << std::endl;
         }
     }
 

@@ -8,7 +8,7 @@ item_chest::item_chest()
 {
     this->value = 3;
     this->name = "Treasure Chest";
-    this->description = "This is a chest that contains a treasure. You cant open it tho.";
+    this->description = "This is a chest.";
     this->weight = 5;
     this->texture_id = 5;
 }

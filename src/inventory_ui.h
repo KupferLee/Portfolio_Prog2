@@ -44,6 +44,7 @@ protected:
     void slots_down();
 
     void draw_items();
+    void draw_current_slot(int i);
     void draw_text();
 
     // variables have gui in front of them so i can see if they are for the object container or for gui textures
@@ -54,6 +55,7 @@ protected:
     int gui_special_slot_weapons = 3;
     int gui_special_slot_rings = 9;
     int gui_special_slot_x = 15;
+    int gui_max_slots = 16;
     Vector2 ui_infos_position;
     Vector2 ui_slots[16]; // to determine x and y value for the ui_slots
 

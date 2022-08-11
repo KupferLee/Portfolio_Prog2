@@ -13,7 +13,7 @@ inventory_ui::inventory_ui()
     this->inventory_infos = LoadTexture("assets/graphics/gui/infos.png");
 
     this->ui_infos_position.x = 195; // GetScreenWidth()/2 - this->inventory_infos.width/2;
-    this->ui_infos_position.y = GetScreenHeight() / 2 - this->inventory_infos.height;
+    this->ui_infos_position.y = GetScreenHeight() / 2 - this->inventory_infos.height - 50;
 
     this->tileset = LoadTexture("assets/map/tileset.png");
 
@@ -40,7 +40,6 @@ void inventory_ui::update() {
         {
             std::cout << container.getItem(i-1)->getName() << std::endl;
         }
-
     }
 
 
@@ -167,18 +166,41 @@ void inventory_ui::draw()
 
 void inventory_ui::draw_items()
 {
-    // draw dagger on weapon slot
-    DrawTexturePro(this->tileset,
-                   {(float)this->dagger->getID()*16, 0, 16, 16},
-                   {this->ui_slots[this->gui_special_slot_weapons].x, this->ui_slots[this->gui_special_slot_weapons].y, 16 * gui_scale_factor, 16 * gui_scale_factor},
-                   {0, 0}, 0, WHITE);
+    // go through all slots and draw every single item slot
+    // currently slot 1 is always a chest
+    for (int i = 0; i < 16; i++)
+    {
+        this->draw_current_slot(i);
+    }
+}
+
+void inventory_ui::draw_current_slot(int i)
+{
+    if (this->container_current_slot >= i)
+    {
+        DrawTexturePro(this->tileset,
+                       {(float)this->container.getItem(i-1)->getID()*16, 0, 16, 16},
+                       {this->ui_slots[i].x, this->ui_slots[i].y, 16 * gui_scale_factor, 16 * gui_scale_factor},
+                       {0, 0}, 0, WHITE);
+    }
 }
 
 void inventory_ui::draw_text()
 {
+    if (gui_current_slot <= container_current_slot)
+    {
+        // print info accessing the container item
+        DrawText(("Name: " + container.getItem(gui_current_slot-1)->getName()).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40, 30, WHITE);
+        DrawText(("Weight: " + std::to_string(container.getItem(gui_current_slot-1)->getWeight())).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 2, 30, WHITE);
+        DrawText(("Value: " + std::to_string(container.getItem(gui_current_slot-1)->getValue())).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 3, 30, WHITE);
+        DrawText(("Description: " + container.getItem(gui_current_slot-1)->getDescription()).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 4, 30, WHITE);
+    }
+
+
+    /*
     if (this->gui_current_slot == this->gui_special_slot_weapons)
     {
-        DrawText("This is an hard-code example.", this->ui_infos_position.x, this->ui_infos_position.y, 30, WHITE);
+        DrawText("Description: Its a pointy weapon.", this->ui_infos_position.x, this->ui_infos_position.y, 30, WHITE);
         DrawText("Name: Dagger", this->ui_infos_position.x, this->ui_infos_position.y + 40, 30, WHITE);
         DrawText("Weight: 1", this->ui_infos_position.x, this->ui_infos_position.y + 40 * 2, 30, WHITE);
         DrawText("Value: 5", this->ui_infos_position.x, this->ui_infos_position.y + 40 * 3, 30, WHITE);
@@ -192,12 +214,12 @@ void inventory_ui::draw_text()
         DrawText("Value: empty", this->ui_infos_position.x, this->ui_infos_position.y + 40 * 3, 30, WHITE);
         DrawText("Description: empty", this->ui_infos_position.x, this->ui_infos_position.y + 40 * 4, 30, WHITE);
     }
+    */
 }
 
 void inventory_ui::item_pickUp(item_base* item)
 {
     container.setItem(item, this->container_current_slot);
-    std::cout << "DEBUG: Item Set " << container_current_slot << std::endl;
 
     this->container_current_slot++;
 
