@@ -7,7 +7,8 @@
 item_dagger::item_dagger()
 {
     this->name = "Dagger";
-    this->description = "Its a pointy weapon. You dont know how to use it tho.";
+    this->description = "Its a pointy weapon.";
     this->value = 5;
     this->weight = 1;
+    this->texture_id = 4;
 }

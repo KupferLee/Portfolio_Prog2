@@ -6,7 +6,7 @@
 #include "config.h"
 
 #include "map.h"
-#include "ui_inventory.h"
+#include "inventory_ui.h"
 #include "item_chest.h"
 #include "item_dagger.h"
 #include <iostream>
@@ -26,7 +26,7 @@ int main() {
     // Your own initialization code here
     Texture2D infoTexture = LoadTexture("assets/graphics/infografik.png");
     map* current_map = new map;
-    ui_inventory* inventory = new ui_inventory();
+    inventory_ui* inventory = new inventory_ui();
     item_chest* treasure_chest = new item_chest;
     item_dagger* weapon_dagger = new item_dagger;
 
@@ -86,11 +86,12 @@ int main() {
             {
                 DrawTexture(infoTexture, 0, 0, WHITE);
             }
-            else
+            else if (!IsKeyDown(KEY_E))
             {
                 // little backpack shall be only drawn when there is no other info screen currently open
+                DrawText("Press Enter for more information.", Game::ScreenWidth - 550, Game::ScreenHeight - 100, 30, BLACK);
+                DrawText("Press E to erase GUI.", Game::ScreenWidth - 550, Game::ScreenHeight - 50, 30, BLACK);
                 inventory->draw();
-                DrawText("Press Enter for more information.", Game::ScreenWidth - 550, Game::ScreenHeight - 50, 30, BLACK);
             }
 
 

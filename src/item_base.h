@@ -14,16 +14,15 @@ public:
     virtual std::string getName();
     virtual std::string getDescription();
     virtual int getWeight();
+    virtual int getID();
+    // TODO: make method that turns string to char for DrawText output
 
 protected:
     int weight = 0;
     std::string name = "empty";
     std::string description = "empty";
-    //char name[5] = {'e', 'm', 'p', 't', 'y'};
-    //char description[5] = {'e', 'm', 'p', 't', 'y'};
     int value = 0;
-
-    Texture2D texture;
+    int texture_id = -1; // were on the tileset is this item
 };
 
 

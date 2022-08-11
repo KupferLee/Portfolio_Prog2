@@ -14,3 +14,5 @@ std::string item_base::getDescription() { return this->description; }
 
 int item_base::getValue() { return this->value; }
 
+int item_base::getID() { return this->texture_id; }
+

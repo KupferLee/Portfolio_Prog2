@@ -10,4 +10,5 @@ item_chest::item_chest()
     this->name = "Treasure Chest";
     this->description = "This is a chest that contains a treasure. You cant open it tho.";
     this->weight = 5;
+    this->texture_id = 5;
 }
