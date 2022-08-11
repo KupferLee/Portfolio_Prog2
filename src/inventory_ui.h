@@ -45,7 +45,7 @@ protected:
 
     void draw_items();
     void draw_current_slot(int i);
-    void draw_text();
+    void draw_info();
 
     // variables have gui in front of them so i can see if they are for the object container or for gui textures
     bool gui_isOpen = false;

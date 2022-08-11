@@ -158,8 +158,7 @@ void inventory_ui::draw()
                        {0, 0} ,0, WHITE);
 
 
-
-        this->draw_text();
+        this->draw_info();
     }
 
 }
@@ -185,15 +184,15 @@ void inventory_ui::draw_current_slot(int i)
     }
 }
 
-void inventory_ui::draw_text()
+void inventory_ui::draw_info()
 {
     if (gui_current_slot <= container_current_slot)
     {
         // print info accessing the container item
-        DrawText(("Name: " + container.getItem(gui_current_slot-1)->getName()).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40, 30, WHITE);
-        DrawText(("Weight: " + std::to_string(container.getItem(gui_current_slot-1)->getWeight())).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 2, 30, WHITE);
-        DrawText(("Value: " + std::to_string(container.getItem(gui_current_slot-1)->getValue())).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 3, 30, WHITE);
-        DrawText(("Description: " + container.getItem(gui_current_slot-1)->getDescription()).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 4, 30, WHITE);
+        DrawText(("Name: " + container.getItem(gui_current_slot)->getName()).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40, 30, WHITE);
+        DrawText(("Weight: " + std::to_string(container.getItem(gui_current_slot)->getWeight())).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 2, 30, WHITE);
+        DrawText(("Value: " + std::to_string(container.getItem(gui_current_slot)->getValue())).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 3, 30, WHITE);
+        DrawText(("Description: " + container.getItem(gui_current_slot)->getDescription()).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 4, 30, WHITE);
     }
 }
 
