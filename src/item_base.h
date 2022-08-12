@@ -1,7 +1,3 @@
-//
-// Created by Lee on 04.08.2022.
-//
-
 #ifndef RAYLIBSTARTER_ITEM_BASE_H
 #define RAYLIBSTARTER_ITEM_BASE_H
 

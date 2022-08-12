@@ -1,7 +1,3 @@
-//
-// Created by Lee on 04.08.2022.
-//
-
 #include "item_base.h"
 
 // methods that return attributs of the object since that will be the same for every child object

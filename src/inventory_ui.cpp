@@ -1,7 +1,3 @@
-//
-// Created by Lee on 06.08.2022.
-//
-
 #include "inventory_ui.h"
 
 
@@ -35,12 +31,21 @@ void inventory_ui::update() {
     {
         this->item_pickUp(this->chest);
     }
-    else if (IsKeyPressed(KEY_B))
+    else if(IsKeyPressed(KEY_B))
     {
-        for (int i; i <= this->container_current_slot-1; i++)
-        {
-            std::cout << container.getItem(i-1)->getName() << std::endl;
-        }
+        this->item_pickUp(this->potion);
+    }
+    else if(IsKeyPressed(KEY_H))
+    {
+        this->item_pickUp(this->golden_apple);
+    }
+    else if(IsKeyPressed(KEY_J))
+    {
+        this->item_pickUp(this->crystal);
+    }
+    else if(IsKeyPressed(KEY_K))
+    {
+        this->item_pickUp(this->ring);
     }
 
 
@@ -192,6 +197,14 @@ void inventory_ui::draw_current_slot(int i)
                        {this->ui_slots[this->gui_special_slot_weapons].x, this->ui_slots[this->gui_special_slot_weapons].y, 16 * gui_scale_factor, 16 * gui_scale_factor},
                        {0, 0}, 0, WHITE);
     }
+    // only draw ring in ring slot if there is a ring in it
+    if (this->container.getItem(this->gui_special_slot_rings) == this->ring)
+    {
+        DrawTexturePro(this->tileset,
+                       {(float)this->container.getItem(this->gui_special_slot_rings)->getID()*16, 0, 16, 16},
+                       {this->ui_slots[this->gui_special_slot_rings].x, this->ui_slots[this->gui_special_slot_rings].y, 16 * gui_scale_factor, 16 * gui_scale_factor},
+                       {0, 0}, 0, WHITE);
+    }
 }
 
 void inventory_ui::draw_info()
@@ -216,6 +229,16 @@ void inventory_ui::draw_info()
         DrawText(("Description: " + container.getItem(this->gui_special_slot_weapons)->getDescription()).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 5, 30, WHITE);
 
     }
+    // draw info for ring if special slot selected and occupied
+    if (this->container.getItem(this->gui_special_slot_rings) == this->ring && this->gui_current_slot == this->gui_special_slot_rings)
+    {
+        DrawText(("Slot: " + std::to_string(this->gui_special_slot_rings)).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40, 30, WHITE);
+        DrawText(("Name: " + container.getItem(this->gui_special_slot_rings)->getName()).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 2, 30, WHITE);
+        DrawText(("Weight: " + std::to_string(container.getItem(this->gui_special_slot_rings)->getWeight())).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 3, 30, WHITE);
+        DrawText(("Value: " + std::to_string(container.getItem(this->gui_special_slot_rings)->getValue())).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 4, 30, WHITE);
+        DrawText(("Description: " + container.getItem(this->gui_special_slot_rings)->getDescription()).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 5, 30, WHITE);
+
+    }
     // draw no info since not occupied
     else
     {
@@ -226,7 +249,7 @@ void inventory_ui::draw_info()
 void inventory_ui::item_pickUp(item_base* item)
 {
     // only fill in the first 13 slots, not the 3 special ones
-    if (this->container_current_slot < 13 && item != dagger)
+    if (this->container_current_slot < 13 && item != dagger && item != ring)
     {
         container.setItem(item, this->container_current_slot);
 
@@ -236,6 +259,11 @@ void inventory_ui::item_pickUp(item_base* item)
     else if (item == dagger && container.getItem(gui_special_slot_weapons) == NULL)
     {
         container.setItem(item, this->gui_special_slot_weapons);
+    }
+    // if pick up ring and special slot ring empty fill in special slot
+    else if (item == ring) // && container.getItem(14 == NULL)
+    {
+        container.setItem(item, this->gui_special_slot_rings);
     }
     else
     {

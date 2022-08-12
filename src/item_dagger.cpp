@@ -1,7 +1,3 @@
-//
-// Created by Lee on 04.08.2022.
-//
-
 #include "item_dagger.h"
 
 item_dagger::item_dagger()

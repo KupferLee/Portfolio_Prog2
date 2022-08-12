@@ -1,7 +1,3 @@
-//
-// Created by Lee on 06.08.2022.
-//
-
 #ifndef RAYLIBSTARTER_INVENTORY_UI_H
 #define RAYLIBSTARTER_INVENTORY_UI_H
 
@@ -10,6 +6,10 @@
 #include "inventory_template.h"
 #include "item_dagger.h"
 #include "item_chest.h"
+#include "item_potion.h"
+#include "item_apple.h"
+#include "item_crystal.h"
+#include "item_ring.h"
 
 class inventory_ui {
 public:
@@ -24,6 +24,11 @@ protected:
     // container for item objects
     item_dagger* dagger = new item_dagger;
     item_chest* chest = new item_chest;
+    item_potion* potion = new item_potion;
+    item_apple* golden_apple = new item_apple;
+    item_crystal* crystal = new item_crystal;
+    item_ring* ring = new item_ring;
+
     Inventory_Template<item_base*, 16> container;
 
     int container_current_slot = 0;
