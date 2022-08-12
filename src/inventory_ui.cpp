@@ -60,41 +60,11 @@ void inventory_ui::update() {
     }
 
     // special ui_slots
-    // down
-    // weapons to rings
-    if (this->gui_isOpen == true && this->gui_isInfo == false && this->gui_current_slot == this->gui_special_slot_weapons &&
-        IsKeyPressed(KEY_S)) {
-        this->gui_current_slot = this->gui_special_slot_rings;
-    }
-    // rings to x
-    else if (this->gui_isOpen == true && this->gui_isInfo == false && this->gui_current_slot == this->gui_special_slot_rings &&
-             IsKeyPressed(KEY_S))
-    {
-        this->gui_current_slot = this->gui_special_slot_x;
-    }
-
-    // up
-    // x to rings
-    if (this->gui_isOpen == true && this->gui_isInfo == false && this->gui_current_slot == this->gui_special_slot_x &&
-        IsKeyPressed(KEY_W))
-    {
-        this->gui_current_slot = this->gui_special_slot_rings;
-    }
-    // rings to weapons
-    else if (this->gui_isOpen == true && this->gui_isInfo == false && this->gui_current_slot == this->gui_special_slot_rings &&
-             IsKeyPressed(KEY_W))
+    if (this->gui_isOpen == true && this->isInfoOpen() == false &&  IsKeyPressed(KEY_TAB))
     {
         this->gui_current_slot = this->gui_special_slot_weapons;
     }
 
-    // TODO: up and down
-    /*
-    // up
-    this->slots_up();
-
-    // down
-    this->slots_down();
-    */
 
     // when i pressed change inventory state
     if(IsKeyPressed(KEY_I) && this->gui_isOpen == true && this->gui_isInfo == false)

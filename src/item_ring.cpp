@@ -3,7 +3,7 @@
 item_ring::item_ring()
 {
     this->name = "Ring";
-    this->description = "It's magic makes you stronger. +5 Strength";
+    this->description = "+5 Strength";
     this->value = 7;
     this->weight = 1;
     this->texture_id = 9;
