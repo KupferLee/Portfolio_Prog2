@@ -26,6 +26,7 @@ inventory_ui::inventory_ui()
 void inventory_ui::update() {
 
     // set object items into inventory container
+    // TODO: dedicated equipment slots
     if (IsKeyPressed(KEY_M))
     {
         this->item_pickUp(this->dagger);
@@ -186,13 +187,18 @@ void inventory_ui::draw_current_slot(int i)
 
 void inventory_ui::draw_info()
 {
-    if (gui_current_slot <= container_current_slot)
+    if (gui_current_slot <= container_current_slot-1)
     {
         // print info accessing the container item
-        DrawText(("Name: " + container.getItem(gui_current_slot)->getName()).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40, 30, WHITE);
-        DrawText(("Weight: " + std::to_string(container.getItem(gui_current_slot)->getWeight())).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 2, 30, WHITE);
-        DrawText(("Value: " + std::to_string(container.getItem(gui_current_slot)->getValue())).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 3, 30, WHITE);
-        DrawText(("Description: " + container.getItem(gui_current_slot)->getDescription()).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 4, 30, WHITE);
+        DrawText(("Slot: " + std::to_string(this->gui_current_slot)).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40, 30, WHITE);
+        DrawText(("Name: " + container.getItem(gui_current_slot)->getName()).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 2, 30, WHITE);
+        DrawText(("Weight: " + std::to_string(container.getItem(gui_current_slot)->getWeight())).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 3, 30, WHITE);
+        DrawText(("Value: " + std::to_string(container.getItem(gui_current_slot)->getValue())).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 4, 30, WHITE);
+        DrawText(("Description: " + container.getItem(gui_current_slot)->getDescription()).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 5, 30, WHITE);
+    }
+    else
+    {
+        DrawText(("Slot: " + std::to_string(this->gui_current_slot)).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40, 30, WHITE);
     }
 }
 
@@ -223,48 +229,50 @@ void inventory_ui::set_slots() {
     this->ui_slots[2].x = GetScreenWidth() / 2 - this->inventory_base.width / 2 * this->gui_scale_factor + 2 * gui_scale_factor + 16 * gui_scale_factor * 4;
     this->ui_slots[2].y = GetScreenHeight() / 2 - this->inventory_base.height / 2 * this->gui_scale_factor + 2 * gui_scale_factor;
 
-    this->ui_slots[gui_special_slot_weapons].x = GetScreenWidth() / 2 - this->inventory_base.width / 2 * this->gui_scale_factor + 2 * gui_scale_factor + 16 * gui_scale_factor * 6;
-    this->ui_slots[gui_special_slot_weapons].y = GetScreenHeight() / 2 - this->inventory_base.height / 2 * this->gui_scale_factor + 2 * gui_scale_factor;
 
     // second row
-    this->ui_slots[4].x = GetScreenWidth() / 2 - this->inventory_base.width / 2 * this->gui_scale_factor + 2 * gui_scale_factor + 16 * gui_scale_factor;
+    this->ui_slots[3].x = GetScreenWidth() / 2 - this->inventory_base.width / 2 * this->gui_scale_factor + 2 * gui_scale_factor + 16 * gui_scale_factor;
+    this->ui_slots[3].y = GetScreenHeight() / 2 - this->inventory_base.height / 2 * this->gui_scale_factor + 2 * gui_scale_factor + 16 * gui_scale_factor;
+
+    this->ui_slots[4].x = GetScreenWidth() / 2 - this->inventory_base.width / 2 * this->gui_scale_factor + 2 * gui_scale_factor + 16 * gui_scale_factor * 3;
     this->ui_slots[4].y = GetScreenHeight() / 2 - this->inventory_base.height / 2 * this->gui_scale_factor + 2 * gui_scale_factor + 16 * gui_scale_factor;
 
-    this->ui_slots[5].x = GetScreenWidth() / 2 - this->inventory_base.width / 2 * this->gui_scale_factor + 2 * gui_scale_factor + 16 * gui_scale_factor * 3;
-    this->ui_slots[5].y = GetScreenHeight() / 2 - this->inventory_base.height / 2 * this->gui_scale_factor + 2 * gui_scale_factor + 16 * gui_scale_factor;
-
     //third row
-    this->ui_slots[6].x = GetScreenWidth() / 2 - this->inventory_base.width / 2 * this->gui_scale_factor + 2 * gui_scale_factor;
+    this->ui_slots[5].x = GetScreenWidth() / 2 - this->inventory_base.width / 2 * this->gui_scale_factor + 2 * gui_scale_factor;
+    this->ui_slots[5].y = GetScreenHeight() / 2 - this->inventory_base.height / 2 * this->gui_scale_factor + 2 * gui_scale_factor + 16 * gui_scale_factor * 2;
+
+    this->ui_slots[6].x = GetScreenWidth() / 2 - this->inventory_base.width / 2 * this->gui_scale_factor + 2 * gui_scale_factor + 16 * gui_scale_factor * 2;
     this->ui_slots[6].y = GetScreenHeight() / 2 - this->inventory_base.height / 2 * this->gui_scale_factor + 2 * gui_scale_factor + 16 * gui_scale_factor * 2;
 
-    this->ui_slots[7].x = GetScreenWidth() / 2 - this->inventory_base.width / 2 * this->gui_scale_factor + 2 * gui_scale_factor + 16 * gui_scale_factor * 2;
+    this->ui_slots[7].x = GetScreenWidth() / 2 - this->inventory_base.width / 2 * this->gui_scale_factor + 2 * gui_scale_factor + 16 * gui_scale_factor * 4;
     this->ui_slots[7].y = GetScreenHeight() / 2 - this->inventory_base.height / 2 * this->gui_scale_factor + 2 * gui_scale_factor + 16 * gui_scale_factor * 2;
 
-    this->ui_slots[8].x = GetScreenWidth() / 2 - this->inventory_base.width / 2 * this->gui_scale_factor + 2 * gui_scale_factor + 16 * gui_scale_factor * 4;
-    this->ui_slots[8].y = GetScreenHeight() / 2 - this->inventory_base.height / 2 * this->gui_scale_factor + 2 * gui_scale_factor + 16 * gui_scale_factor * 2;
+    // fourth row
+    this->ui_slots[8].x = GetScreenWidth() / 2 - this->inventory_base.width / 2 * this->gui_scale_factor + 2 * gui_scale_factor + 16 * gui_scale_factor;
+    this->ui_slots[8].y = GetScreenHeight() / 2 - this->inventory_base.height / 2 * this->gui_scale_factor + 2 * gui_scale_factor + 16 * gui_scale_factor * 3;
+
+    this->ui_slots[9].x = GetScreenWidth() / 2 - this->inventory_base.width / 2 * this->gui_scale_factor + 2 * gui_scale_factor + 16 * gui_scale_factor * 3;
+    this->ui_slots[9].y = GetScreenHeight() / 2 - this->inventory_base.height / 2 * this->gui_scale_factor + 2 * gui_scale_factor + 16 * gui_scale_factor * 3;
+
+    // fifth row
+    this->ui_slots[10].x = GetScreenWidth() / 2 - this->inventory_base.width / 2 * this->gui_scale_factor + 2 * this->gui_scale_factor;
+    this->ui_slots[10].y = GetScreenHeight() / 2 - this->inventory_base.height / 2 * this->gui_scale_factor + 2 * gui_scale_factor + 16 * gui_scale_factor * 4;
+
+    this->ui_slots[11].x = GetScreenWidth() / 2 - this->inventory_base.width / 2 * this->gui_scale_factor + 2 * gui_scale_factor + 16 * gui_scale_factor * 2;
+    this->ui_slots[11].y = GetScreenHeight() / 2 - this->inventory_base.height / 2 * this->gui_scale_factor + 2 * gui_scale_factor + 16 * gui_scale_factor * 4;
+
+    this->ui_slots[12].x = GetScreenWidth() / 2 - this->inventory_base.width / 2 * this->gui_scale_factor + 2 * gui_scale_factor + 16 * gui_scale_factor * 4;
+    this->ui_slots[12].y = GetScreenHeight() / 2 - this->inventory_base.height / 2 * this->gui_scale_factor + 2 * gui_scale_factor + 16 * gui_scale_factor * 4;
+
+    // special slots
+    this->ui_slots[gui_special_slot_weapons].x = GetScreenWidth() / 2 - this->inventory_base.width / 2 * this->gui_scale_factor + 2 * gui_scale_factor + 16 * gui_scale_factor * 6;
+    this->ui_slots[gui_special_slot_weapons].y = GetScreenHeight() / 2 - this->inventory_base.height / 2 * this->gui_scale_factor + 2 * gui_scale_factor;
 
     this->ui_slots[gui_special_slot_rings].x = GetScreenWidth() / 2 - this->inventory_base.width / 2 * this->gui_scale_factor + 2 * gui_scale_factor + 16 * gui_scale_factor * 6;
     this->ui_slots[gui_special_slot_rings].y = GetScreenHeight() / 2 - this->inventory_base.height / 2 * this->gui_scale_factor + 2 * gui_scale_factor + 16 * gui_scale_factor * 2;
 
-    // fourth row
-    this->ui_slots[10].x = GetScreenWidth() / 2 - this->inventory_base.width / 2 * this->gui_scale_factor + 2 * gui_scale_factor + 16 * gui_scale_factor;
-    this->ui_slots[10].y = GetScreenHeight() / 2 - this->inventory_base.height / 2 * this->gui_scale_factor + 2 * gui_scale_factor + 16 * gui_scale_factor * 3;
-
-    this->ui_slots[11].x = GetScreenWidth() / 2 - this->inventory_base.width / 2 * this->gui_scale_factor + 2 * gui_scale_factor + 16 * gui_scale_factor * 3;
-    this->ui_slots[11].y = GetScreenHeight() / 2 - this->inventory_base.height / 2 * this->gui_scale_factor + 2 * gui_scale_factor + 16 * gui_scale_factor * 3;
-
-    // fifth row
-    this->ui_slots[12].x = GetScreenWidth() / 2 - this->inventory_base.width / 2 * this->gui_scale_factor + 2 * this->gui_scale_factor;
-    this->ui_slots[12].y = GetScreenHeight() / 2 - this->inventory_base.height / 2 * this->gui_scale_factor + 2 * gui_scale_factor + 16 * gui_scale_factor * 4;
-
-    this->ui_slots[13].x = GetScreenWidth() / 2 - this->inventory_base.width / 2 * this->gui_scale_factor + 2 * gui_scale_factor + 16 * gui_scale_factor * 2;
-    this->ui_slots[13].y = GetScreenHeight() / 2 - this->inventory_base.height / 2 * this->gui_scale_factor + 2 * gui_scale_factor + 16 * gui_scale_factor * 4;
-
-    this->ui_slots[14].x = GetScreenWidth() / 2 - this->inventory_base.width / 2 * this->gui_scale_factor + 2 * gui_scale_factor + 16 * gui_scale_factor * 4;
-    this->ui_slots[14].y = GetScreenHeight() / 2 - this->inventory_base.height / 2 * this->gui_scale_factor + 2 * gui_scale_factor + 16 * gui_scale_factor * 4;
-    // special slot idk yet
-    this->ui_slots[15].x = GetScreenWidth() / 2 - this->inventory_base.width / 2 * this->gui_scale_factor + 2 * gui_scale_factor + 16 * gui_scale_factor * 6;
-    this->ui_slots[15].y = GetScreenHeight() / 2 - this->inventory_base.height / 2 * this->gui_scale_factor + 2 * gui_scale_factor + 16 * gui_scale_factor * 4;
+    this->ui_slots[gui_special_slot_x].x = GetScreenWidth() / 2 - this->inventory_base.width / 2 * this->gui_scale_factor + 2 * gui_scale_factor + 16 * gui_scale_factor * 6;
+    this->ui_slots[gui_special_slot_x].y = GetScreenHeight() / 2 - this->inventory_base.height / 2 * this->gui_scale_factor + 2 * gui_scale_factor + 16 * gui_scale_factor * 4;
 }
 
 void inventory_ui::slots_up()

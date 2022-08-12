@@ -52,8 +52,8 @@ protected:
     bool gui_isInfo = false;
     float gui_scale_factor = 6;
     int gui_current_slot = 0;
-    int gui_special_slot_weapons = 3;
-    int gui_special_slot_rings = 9;
+    int gui_special_slot_weapons = 13;
+    int gui_special_slot_rings = 14;
     int gui_special_slot_x = 15;
     int gui_max_slots = 16;
     Vector2 ui_infos_position;
