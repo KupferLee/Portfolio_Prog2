@@ -15,8 +15,6 @@ inventory_ui::inventory_ui()
 
     this->set_slots();
 
-
-
 }
 
 void inventory_ui::update() {
@@ -103,7 +101,7 @@ void inventory_ui::draw()
     // gui_isOpen determines which on the backpack sheet will be drawn and therefore if the icon seems open or not
     DrawTexturePro(this->backpack,
                    {(float)gui_isOpen * 16, 0, 16, 16},
-                   {(float)40, (float)GetScreenHeight() - 80, 16*this->gui_scale_factor, 16 * this->gui_scale_factor},
+                   {(float)40, (float)GetScreenHeight() - 125, 16*this->gui_scale_factor, 16 * this->gui_scale_factor},
                    {16*2, 16*2}, 0, WHITE);
 
     // draw the inventory itself if it is open
