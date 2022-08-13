@@ -7,8 +7,7 @@
 
 #include "map.h"
 #include "inventory_ui.h"
-#include "item_chest.h"
-#include "item_dagger.h"
+#include "character_player.h"
 #include <iostream>
 
 int main() {
@@ -27,8 +26,7 @@ int main() {
     Texture2D infoTexture = LoadTexture("assets/graphics/infografik.png");
     map* current_map = new map;
     inventory_ui* inventory = new inventory_ui();
-    item_chest* treasure_chest = new item_chest;
-    item_dagger* weapon_dagger = new item_dagger;
+    character_player* player = new character_player;
 
 
     // loading the current json data into vectors so they only need to be parsed once
@@ -36,15 +34,6 @@ int main() {
     current_map->randomStartFin();
     current_map->randomItems();
 
-    // to check if assigning the treasure chest worked
-    std::cout << "DEBUG: OUTPUT TREASURE CHEST" << std::endl;
-    std::cout << treasure_chest->getName() << " | " << "Value: " << treasure_chest->getValue() << " | " << treasure_chest->getDescription() << " | " << "Weight: " << treasure_chest->getWeight() << std::endl;
-    std::cout << "DEBUG: OUTPUT END TREASURE CHEST" << std::endl;
-
-    // to check if assigning the dagger worked
-    std::cout << "DEBUG: OUTPUT DAGGER" << std::endl;
-    std::cout << weapon_dagger->getName() << " | " << "Value: " << weapon_dagger->getValue() << " | " << weapon_dagger->getDescription() << " | " << "Weight: " << weapon_dagger->getWeight() << std::endl;
-    std::cout << "DEBUG: OUTPUT END DAGGER" << std::endl;
 
     // Main game loop
     while (!WindowShouldClose()) // Detect window close button or ESC key
@@ -52,6 +41,7 @@ int main() {
         // Updates that are made by frame are coded here
 
         inventory->update();
+        player->update();
 
 
         // maybe switch case referring to inventory->isBackpackOpen() to determine where user can act rn
@@ -81,6 +71,9 @@ int main() {
 
             // draw what is currently loaded within the map vectors
             current_map->draw();
+
+            // draw player
+            player->draw();
 
             if (IsKeyDown(KEY_ENTER))
             {

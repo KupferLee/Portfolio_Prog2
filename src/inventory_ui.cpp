@@ -3,10 +3,10 @@
 
 inventory_ui::inventory_ui()
 {
-    this->backpack = LoadTexture("assets/graphics/gui/backpack.png");
-    this->inventory_base = LoadTexture("assets/graphics/gui/inventory.png");
+    this->backpack = LoadTexture("assets/graphics/gui/backpack_darker.png");
+    this->inventory_base = LoadTexture("assets/graphics/gui/inventory_darker.png");
     this->inventory_selection = LoadTexture("assets/graphics/gui/selection.png");
-    this->inventory_infos = LoadTexture("assets/graphics/gui/infos.png");
+    this->inventory_infos = LoadTexture("assets/graphics/gui/infos_darker.png");
 
     this->ui_infos_position.x = 195; // GetScreenWidth()/2 - this->inventory_infos.width/2;
     this->ui_infos_position.y = GetScreenHeight() / 2 - this->inventory_infos.height - 50;
