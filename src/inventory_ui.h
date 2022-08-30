@@ -46,8 +46,6 @@ protected:
 
     void set_slots();
     void navigate_inventory();
-    void slots_up();
-    void slots_down();
 
     void draw_items();
     void draw_current_slot(int i);

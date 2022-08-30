@@ -231,19 +231,20 @@ void inventory_ui::navigate_inventory()
 {
 
     // navigate in the inventory
-    // first row
-    if (this->gui_isOpen == true && this->gui_isInfo == false && IsKeyPressed(KEY_D) && this->gui_current_slot < 12) {
-        this->gui_current_slot++;
-    }
-    //left
-    if (this->gui_isOpen == true && this->gui_isInfo == false && IsKeyPressed(KEY_A) && this->gui_current_slot > 0) {
-        this->gui_current_slot--;
-    }
-
-    // special ui_slots
-    if (this->gui_isOpen == true && this->isInfoOpen() == false &&  IsKeyPressed(KEY_TAB))
+    if (gui_isOpen == true && gui_isInfo == false)
     {
-        this->gui_current_slot = this->gui_special_slot_weapons;
+        if (IsKeyPressed(KEY_D) && gui_current_slot < 12)
+        {
+            gui_current_slot++;
+        }
+        else if (IsKeyPressed(KEY_A) && gui_current_slot > 0)
+        {
+            gui_current_slot--;
+        }
+        else if (IsKeyPressed(KEY_TAB))
+        {
+            gui_current_slot = gui_special_slot_weapons;
+        }
     }
 
 
