@@ -231,12 +231,12 @@ void inventory_ui::navigate_inventory()
 {
 
     // navigate in the inventory
-    // right
-    if (this->gui_isOpen == true && this->gui_isInfo == false && IsKeyPressed(KEY_D) && this->gui_current_slot < 13) {
+    // first row
+    if (this->gui_isOpen == true && this->gui_isInfo == false && IsKeyPressed(KEY_D) && this->gui_current_slot < 12) {
         this->gui_current_slot++;
     }
     //left
-    if (this->gui_isOpen == true && this->gui_isInfo == false && IsKeyPressed(KEY_A) && this->gui_current_slot >= 1) {
+    if (this->gui_isOpen == true && this->gui_isInfo == false && IsKeyPressed(KEY_A) && this->gui_current_slot > 0) {
         this->gui_current_slot--;
     }
 
