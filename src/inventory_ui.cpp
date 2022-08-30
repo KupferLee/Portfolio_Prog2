@@ -82,8 +82,8 @@ void inventory_ui::draw_current_slot(int i)
     {
         std::cout << "DEBUG: Item drawn" << std::endl;
 
-        DrawTexturePro(this->tileset,
-                       {(float)player->get_item_id(i), 0, 16, 16},
+        DrawTexturePro(player->get_texture(i),
+                       {0, 0, 16, 16},
                        {this->ui_slots[i]},
                        {0, 0}, 0, WHITE);
     }

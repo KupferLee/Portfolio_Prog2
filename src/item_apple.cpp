@@ -7,4 +7,5 @@ item_apple::item_apple()
     this->value = 8;
     this->weight = 1;
     this->texture_id = 7;
+    this->texture = LoadTexture("assets/graphics/gui/item_apple.png");
 }

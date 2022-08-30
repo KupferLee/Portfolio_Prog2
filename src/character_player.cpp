@@ -65,12 +65,12 @@ void character_player::item_pickUp(item_base* item)
 
         this->container_current_slot++;
     }
-        // if pick up weapon and special slot weapon empty fill in special slot
+    // if pick up weapon and special slot weapon empty fill in special slot
     else if (item == dagger && container.getItem(11) == NULL)
     {
         container.setItem(item, 11);
     }
-        // if pick up ring and special slot ring empty fill in special slot
+    // if pick up ring and special slot ring empty fill in special slot
     else if (item == ring  && container.getItem(12) == NULL)
     {
         container.setItem(item, 12);
@@ -84,7 +84,7 @@ void character_player::item_pickUp(item_base* item)
 
 int character_player::get_current_slot() { return container_current_slot; }
 
-int character_player::get_item_id(int slot) { return container.getItem(slot)->getID()*16; }
+Texture2D character_player::get_texture(int slot) { return container.getItem(slot)->getTexture(); }
 
 std::string character_player::get_item_name(int slot) { return container.getItem(slot)->getName(); }
 

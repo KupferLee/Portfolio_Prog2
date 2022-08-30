@@ -36,7 +36,7 @@ protected:
 
 public:
     int get_current_slot();
-    int get_item_id(int slot);
+    Texture2D get_texture(int slot);
     std::string get_item_name(int slot);
     int get_item_weight(int slot);
     int get_item_value(int slot);

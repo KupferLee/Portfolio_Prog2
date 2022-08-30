@@ -12,3 +12,5 @@ int item_base::getValue() { return this->value; }
 
 int item_base::getID() { return this->texture_id; }
 
+Texture2D item_base::getTexture() { return this->texture; }
+

@@ -7,4 +7,5 @@ item_chest::item_chest()
     this->description = "This is a chest.";
     this->weight = 5;
     this->texture_id = 5;
+    this->texture = LoadTexture("assets/graphics/gui/item_chest.png");
 }

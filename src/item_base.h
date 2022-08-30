@@ -11,6 +11,7 @@ public:
     virtual std::string getDescription();
     virtual int getWeight();
     virtual int getID();
+    virtual Texture2D getTexture();
     // TODO: make method that turns string to char for DrawText output
 
 protected:
@@ -19,6 +20,7 @@ protected:
     std::string description = "empty";
     int value = 0;
     int texture_id = -1; // were on the tileset is this item
+    Texture2D texture;
 };
 
 
