@@ -29,7 +29,7 @@ protected:
     item_crystal* crystal = new item_crystal;
     item_ring* ring = new item_ring;
 
-    Inventory_Template<item_base*, 16> container;
+    Inventory_Template<item_base*, 13> container;
 
     int container_current_slot = 0;
 
@@ -45,6 +45,7 @@ protected:
     Texture2D tileset;
 
     void set_slots();
+    void navigate_inventory();
     void slots_up();
     void slots_down();
 
@@ -57,12 +58,15 @@ protected:
     bool gui_isInfo = false;
     float gui_scale_factor = 6;
     int gui_current_slot = 0;
-    int gui_special_slot_weapons = 13;
-    int gui_special_slot_rings = 14;
-    int gui_special_slot_x = 15;
-    int gui_max_slots = 16;
-    Vector2 ui_infos_position;
-    Vector2 ui_slots[16]; // to determine x and y value for the ui_slots
+    int gui_special_slot_weapons = 10;
+    int gui_special_slot_rings = 11;
+    int gui_special_slot_x = 12;
+    int gui_max_slots = 13;
+    int slot_offset = 19 * gui_scale_factor;
+
+    Rectangle ui_infos_position;
+    Rectangle ui_slots[16]; // to determine x and y value for the ui_slots
+    Rectangle inventory_position;
 
 };
 
