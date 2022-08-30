@@ -20,7 +20,27 @@ protected:
     bool canMove = true;
     int strength = 15; // determines how many items can be put in inventory
 
-    Inventory_Template<item_base*, 13> inventory;
+    // item objects
+    item_dagger* dagger = new item_dagger;
+    item_chest* chest = new item_chest;
+    item_potion* potion = new item_potion;
+    item_apple* golden_apple = new item_apple;
+    item_crystal* crystal = new item_crystal;
+    item_ring* ring = new item_ring;
+
+    // container for item objects
+    Inventory_Template<item_base*, 13> container;
+    int container_current_slot = 0;
+    void item_pickUp(item_base* item);
+    //void item_drop();
+
+public:
+    int get_current_slot();
+    int get_item_id(int slot);
+    std::string get_item_name(int slot);
+    int get_item_weight(int slot);
+    int get_item_value(int slot);
+    std::string get_item_description(int slot);
 
 };
 

@@ -18,34 +18,6 @@ inventory_ui::inventory_ui()
 }
 
 void inventory_ui::update() {
-
-    // set object items into inventory container
-    // TODO: dedicated equipment slots
-    if (IsKeyPressed(KEY_M))
-    {
-        this->item_pickUp(this->dagger);
-    }
-    else if(IsKeyPressed(KEY_N))
-    {
-        this->item_pickUp(this->chest);
-    }
-    else if(IsKeyPressed(KEY_B))
-    {
-        this->item_pickUp(this->potion);
-    }
-    else if(IsKeyPressed(KEY_H))
-    {
-        this->item_pickUp(this->golden_apple);
-    }
-    else if(IsKeyPressed(KEY_J))
-    {
-        this->item_pickUp(this->crystal);
-    }
-    else if(IsKeyPressed(KEY_K))
-    {
-        this->item_pickUp(this->ring);
-    }
-
     navigate_inventory();
 
 }
@@ -104,13 +76,14 @@ void inventory_ui::draw_items()
 void inventory_ui::draw_current_slot(int i)
 {
     // draw every occupied slot
-    if (this->container_current_slot > i)
+    if (this->player->get_current_slot() > i)
     {
         DrawTexturePro(this->tileset,
-                       {(float)this->container.getItem(i)->getID()*16, 0, 16, 16},
+                       {(float)player->get_item_id(i), 0, 16, 16},
                        {this->ui_slots[i]},
                        {0, 0}, 0, WHITE);
     }
+    /*
     // only draw dagger in weapon slot if there is a dagger in it
     if (this->container.getItem(this->gui_special_slot_weapons) == this->dagger)
     {
@@ -127,20 +100,23 @@ void inventory_ui::draw_current_slot(int i)
                        {this->ui_slots[this->gui_special_slot_rings].x, this->ui_slots[this->gui_special_slot_rings].y, 16 * gui_scale_factor, 16 * gui_scale_factor},
                        {0, 0}, 0, WHITE);
     }
+     */
 }
 
 void inventory_ui::draw_info()
 {
     // draw info for current normal slot if occupied
-    if (gui_current_slot <= container_current_slot-1)
+    if (gui_current_slot <= player->get_current_slot()-1)
     {
         // print info accessing the container item
         DrawText(("Slot: " + std::to_string(this->gui_current_slot)).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40, 30, WHITE);
-        DrawText(("Name: " + container.getItem(gui_current_slot)->getName()).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 2, 30, WHITE);
-        DrawText(("Weight: " + std::to_string(container.getItem(gui_current_slot)->getWeight())).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 3, 30, WHITE);
-        DrawText(("Value: " + std::to_string(container.getItem(gui_current_slot)->getValue())).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 4, 30, WHITE);
-        DrawText(("Description: " + container.getItem(gui_current_slot)->getDescription()).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 5, 30, WHITE);
+        DrawText(("Name: " + player->get_item_name(gui_current_slot)).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 2, 30, WHITE);
+        DrawText(("Weight: " + std::to_string(player->get_item_weight(gui_current_slot))).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 3, 30, WHITE);
+        DrawText(("Value: " + std::to_string(player->get_item_value(gui_current_slot))).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 4, 30, WHITE);
+        DrawText(("Description: " + (player->get_item_description(gui_current_slot))).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 5, 30, WHITE);
     }
+
+    /*
     // draw info for weapon if special slot selected and occupied
     if (this->container.getItem(this->gui_special_slot_weapons) == this->dagger && this->gui_current_slot == this->gui_special_slot_weapons)
     {
@@ -161,41 +137,14 @@ void inventory_ui::draw_info()
         DrawText(("Description: " + container.getItem(this->gui_special_slot_rings)->getDescription()).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 5, 30, WHITE);
 
     }
+     */
+
     // draw no info since not occupied
     else
     {
         DrawText(("Slot: " + std::to_string(this->gui_current_slot)).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40, 30, WHITE);
     }
 }
-
-void inventory_ui::item_pickUp(item_base* item)
-{
-    // only fill in the first 13 slots, not the 3 special ones
-    if (this->container_current_slot < 13 && item != dagger && item != ring)
-    {
-        container.setItem(item, this->container_current_slot);
-
-        this->container_current_slot++;
-    }
-    // if pick up weapon and special slot weapon empty fill in special slot
-    else if (item == dagger && container.getItem(gui_special_slot_weapons) == NULL)
-    {
-        container.setItem(item, this->gui_special_slot_weapons);
-    }
-    // if pick up ring and special slot ring empty fill in special slot
-    else if (item == ring) // && container.getItem(14 == NULL)
-    {
-        container.setItem(item, this->gui_special_slot_rings);
-    }
-    else
-    {
-        std::cout << "ERROR: No item assigned." << std::endl;
-    }
-
-
-}
-
-void inventory_ui::item_drop() {}
 
 bool inventory_ui::isBackpackOpen() { return gui_isOpen; }
 

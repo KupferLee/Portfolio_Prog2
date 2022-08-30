@@ -3,13 +3,8 @@
 
 #include "raylib.h"
 #include <iostream>
-#include "inventory_template.h"
-#include "item_dagger.h"
-#include "item_chest.h"
-#include "item_potion.h"
-#include "item_apple.h"
-#include "item_crystal.h"
-#include "item_ring.h"
+#include "character_player.h"
+
 
 class inventory_ui {
 public:
@@ -21,21 +16,8 @@ public:
 
 protected:
 
-    // container for item objects
-    item_dagger* dagger = new item_dagger;
-    item_chest* chest = new item_chest;
-    item_potion* potion = new item_potion;
-    item_apple* golden_apple = new item_apple;
-    item_crystal* crystal = new item_crystal;
-    item_ring* ring = new item_ring;
-
-    Inventory_Template<item_base*, 13> container;
-
-    int container_current_slot = 0;
-
-    void item_pickUp(item_base* item);
-    void item_drop();
-
+    // player
+    character_player* player = new character_player;
 
     // GUI
     Texture2D backpack;

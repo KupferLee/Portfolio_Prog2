@@ -9,3 +9,4 @@ void character_base::draw()
                    {this->position.x, this->position.y, 32, 32},
                    {32, 32}, 0, WHITE);
 }
+
