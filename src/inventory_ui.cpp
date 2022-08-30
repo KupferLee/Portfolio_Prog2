@@ -140,7 +140,6 @@ void inventory_ui::draw()
 void inventory_ui::draw_items()
 {
     // go through all slots and draw every single item slot
-    // currently slot 1 is always a chest
     for (int i = 0; i < 16; i++)
     {
         this->draw_current_slot(i);

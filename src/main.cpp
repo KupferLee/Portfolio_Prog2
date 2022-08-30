@@ -41,7 +41,12 @@ int main() {
         // Updates that are made by frame are coded here
 
         inventory->update();
-        player->update();
+
+        if (!inventory->isBackpackOpen())
+        {
+            player->update();
+        }
+
 
 
         // maybe switch case referring to inventory->isBackpackOpen() to determine where user can act rn
@@ -74,6 +79,7 @@ int main() {
 
             // draw player
             player->draw();
+
 
             if (IsKeyDown(KEY_ENTER))
             {
