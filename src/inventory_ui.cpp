@@ -3,10 +3,10 @@
 
 inventory_ui::inventory_ui()
 {
-    this->backpack = LoadTexture("assets/graphics/gui/backpack_darker.png");
+    this->backpack = LoadTexture("assets/graphics/gui/backpack.png");
     this->inventory_base = LoadTexture("assets/graphics/gui/inventory_new.png");
     this->inventory_selection = LoadTexture("assets/graphics/gui/selection.png");
-    this->inventory_infos = LoadTexture("assets/graphics/gui/infos_darker.png");
+    this->inventory_infos = LoadTexture("assets/graphics/gui/infos.png");
 
     this->ui_infos_position.x = 195; // GetScreenWidth()/2 - this->inventory_infos.width/2;
     this->ui_infos_position.y = GetScreenHeight() / 2 - this->inventory_infos.height - 50;
@@ -30,7 +30,7 @@ void inventory_ui::draw()
     // gui_isOpen determines which on the backpack sheet will be drawn and therefore if the icon seems open or not
     DrawTexturePro(this->backpack,
                    {(float)gui_isOpen * 16, 0, 16, 16},
-                   {(float)40, (float)GetScreenHeight() - 125, 16*this->gui_scale_factor, 16 * this->gui_scale_factor},
+                   {(float)GetScreenWidth() - backpack.width/2*gui_scale_factor, (float)GetScreenHeight() - backpack.width/2*gui_scale_factor, 16*this->gui_scale_factor, 16 * this->gui_scale_factor},
                    {16*2, 16*2}, 0, WHITE);
 
     // draw the inventory itself if it is open
