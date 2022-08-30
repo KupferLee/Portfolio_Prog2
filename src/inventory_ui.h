@@ -3,6 +3,7 @@
 
 #include "raylib.h"
 #include <iostream>
+#include <memory>
 #include "character_player.h"
 
 
@@ -17,7 +18,8 @@ public:
 protected:
 
     // player
-    character_player* player = new character_player;
+    std::shared_ptr<character_player> player = std::make_shared<character_player>();
+    // character_player* player = new character_player;
 
     // GUI
     Texture2D backpack;
@@ -43,6 +45,9 @@ protected:
     int gui_special_slot_x = 12;
     int gui_max_slots = 13;
     int slot_offset = 19 * gui_scale_factor;
+
+    // to give it current player slot
+    int current_item_slot = 0;
 
     Rectangle ui_infos_position;
     Rectangle ui_slots[16]; // to determine x and y value for the ui_slots

@@ -59,7 +59,7 @@ void character_player::movement()
 void character_player::item_pickUp(item_base* item)
 {
     // only fill in the first 10 slots, not the 3 special ones
-    if (this->container_current_slot < 10 && item != dagger && item != ring)
+    if (this->container_current_slot < 10) // && item != dagger && item != ring
     {
         container.setItem(item, this->container_current_slot);
 
@@ -82,7 +82,7 @@ void character_player::item_pickUp(item_base* item)
 
 }
 
-int character_player::get_current_slot() { return this->container_current_slot; }
+int character_player::get_current_slot() { return container_current_slot; }
 
 int character_player::get_item_id(int slot) { return container.getItem(slot)->getID()*16; }
 

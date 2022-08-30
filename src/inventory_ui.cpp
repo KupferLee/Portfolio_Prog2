@@ -17,7 +17,9 @@ inventory_ui::inventory_ui()
 
 }
 
-void inventory_ui::update() {
+void inventory_ui::update()
+{
+
     navigate_inventory();
 
 }
@@ -78,6 +80,8 @@ void inventory_ui::draw_current_slot(int i)
     // draw every occupied slot
     if (this->player->get_current_slot() > i)
     {
+        std::cout << "DEBUG: Item drawn" << std::endl;
+
         DrawTexturePro(this->tileset,
                        {(float)player->get_item_id(i), 0, 16, 16},
                        {this->ui_slots[i]},
