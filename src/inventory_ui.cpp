@@ -52,8 +52,8 @@ void inventory_ui::draw()
         this->draw_items();
 
         // draw total weight info
-        DrawText(("Weight: " + std::to_string(player->get_total_weight())).c_str(), ui_weight_position[0].x, ui_weight_position[0].y, 25, GetColor(0xe54646ff));
-        DrawText(("Strength: " + std::to_string(player->get_total_strength())).c_str(), ui_weight_position[1].x, ui_weight_position[0].y +  30, 25, GetColor(0xe54646ff));
+        DrawText(("Weight: " + std::to_string(player->get_total_weight())).c_str(), ui_weight_position[0].x, ui_weight_position[0].y, 25, GetColor(0xfb5a5aff));
+        DrawText(("Strength: " + std::to_string(player->get_total_strength())).c_str(), ui_weight_position[1].x, ui_weight_position[0].y +  30, 25, GetColor(0xfb5a5aff));
     }
 
     // draw the info panel if you want
