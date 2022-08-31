@@ -80,31 +80,27 @@ void inventory_ui::draw_current_slot(int i)
     // draw every occupied slot
     if (this->player->get_current_slot() > i)
     {
-        std::cout << "DEBUG: Item drawn" << std::endl;
-
         DrawTexturePro(player->get_texture(i),
                        {0, 0, 16, 16},
                        {this->ui_slots[i]},
                        {0, 0}, 0, WHITE);
     }
-    /*
     // only draw dagger in weapon slot if there is a dagger in it
-    if (this->container.getItem(this->gui_special_slot_weapons) == this->dagger)
+    if (this->player->get_weapons_occupied() == true) //
     {
-        DrawTexturePro(this->tileset,
-                       {(float)this->container.getItem(this->gui_special_slot_weapons)->getID()*16, 0, 16, 16},
-                       {this->ui_slots[this->gui_special_slot_weapons].x, this->ui_slots[this->gui_special_slot_weapons].y, 16 * gui_scale_factor, 16 * gui_scale_factor},
+        DrawTexturePro(this->player->get_texture(10),
+                       {0, 0, 16, 16},
+                       {this->ui_slots[10].x, this->ui_slots[10].y, 16 * gui_scale_factor, 16 * gui_scale_factor},
                        {0, 0}, 0, WHITE);
     }
     // only draw ring in ring slot if there is a ring in it
-    if (this->container.getItem(this->gui_special_slot_rings) == this->ring)
+    if (this->player->get_rings_occupied() == true)
     {
-        DrawTexturePro(this->tileset,
-                       {(float)this->container.getItem(this->gui_special_slot_rings)->getID()*16, 0, 16, 16},
-                       {this->ui_slots[this->gui_special_slot_rings].x, this->ui_slots[this->gui_special_slot_rings].y, 16 * gui_scale_factor, 16 * gui_scale_factor},
+        DrawTexturePro(this->player->get_texture(11),
+                       {0, 0, 16, 16},
+                       {this->ui_slots[11].x, this->ui_slots[11].y, 16 * gui_scale_factor, 16 * gui_scale_factor},
                        {0, 0}, 0, WHITE);
     }
-     */
 }
 
 void inventory_ui::draw_info()
@@ -119,30 +115,30 @@ void inventory_ui::draw_info()
         DrawText(("Value: " + std::to_string(player->get_item_value(gui_current_slot))).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 4, 30, WHITE);
         DrawText(("Description: " + (player->get_item_description(gui_current_slot))).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 5, 30, WHITE);
     }
-
-    /*
     // draw info for weapon if special slot selected and occupied
-    if (this->container.getItem(this->gui_special_slot_weapons) == this->dagger && this->gui_current_slot == this->gui_special_slot_weapons)
+    if (player->get_weapons_occupied() == true && this->gui_current_slot == this->gui_special_slot_weapons)
     {
         DrawText(("Slot: " + std::to_string(this->gui_special_slot_weapons)).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40, 30, WHITE);
-        DrawText(("Name: " + container.getItem(this->gui_special_slot_weapons)->getName()).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 2, 30, WHITE);
-        DrawText(("Weight: " + std::to_string(container.getItem(this->gui_special_slot_weapons)->getWeight())).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 3, 30, WHITE);
-        DrawText(("Value: " + std::to_string(container.getItem(this->gui_special_slot_weapons)->getValue())).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 4, 30, WHITE);
-        DrawText(("Description: " + container.getItem(this->gui_special_slot_weapons)->getDescription()).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 5, 30, WHITE);
+        DrawText(("Name: " + player->get_item_name(10)).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 2, 30, WHITE);
+        DrawText(("Weight: " + std::to_string(player->get_item_weight(gui_special_slot_weapons))).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 3, 30, WHITE);
+        DrawText(("Value: " + std::to_string(player->get_item_value(gui_current_slot))).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 4, 30, WHITE);
+        DrawText(("Description: " + player->get_item_description(gui_current_slot)).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 5, 30, WHITE);
 
     }
     // draw info for ring if special slot selected and occupied
-    if (this->container.getItem(this->gui_special_slot_rings) == this->ring && this->gui_current_slot == this->gui_special_slot_rings)
-    {
-        DrawText(("Slot: " + std::to_string(this->gui_special_slot_rings)).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40, 30, WHITE);
-        DrawText(("Name: " + container.getItem(this->gui_special_slot_rings)->getName()).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 2, 30, WHITE);
-        DrawText(("Weight: " + std::to_string(container.getItem(this->gui_special_slot_rings)->getWeight())).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 3, 30, WHITE);
-        DrawText(("Value: " + std::to_string(container.getItem(this->gui_special_slot_rings)->getValue())).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 4, 30, WHITE);
-        DrawText(("Description: " + container.getItem(this->gui_special_slot_rings)->getDescription()).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 5, 30, WHITE);
+    if (player->get_rings_occupied() == true && this->gui_current_slot == this->special_slot_rings) {
+        DrawText(("Slot: " + std::to_string(this->special_slot_rings)).c_str(), this->ui_infos_position.x,
+                 this->ui_infos_position.y + 40, 30, WHITE);
+        DrawText(("Name: " + player->get_item_name(special_slot_rings)).c_str(), this->ui_infos_position.x,
+                 this->ui_infos_position.y + 40 * 2, 30, WHITE);
+        DrawText(("Weight: " + std::to_string(player->get_item_weight(special_slot_rings))).c_str(),
+                 this->ui_infos_position.x, this->ui_infos_position.y + 40 * 3, 30, WHITE);
+        DrawText(("Value: " + std::to_string(player->get_item_value(special_slot_rings))).c_str(),
+                 this->ui_infos_position.x, this->ui_infos_position.y + 40 * 4, 30, WHITE);
+        DrawText(("Description: " + player->get_item_description(gui_special_slot_weapons)).c_str(),
+                 this->ui_infos_position.x, this->ui_infos_position.y + 40 * 5, 30, WHITE);
 
     }
-     */
-
     // draw no info since not occupied
     else
     {
@@ -176,8 +172,8 @@ void inventory_ui::set_slots()
 
     // special slots
     this->ui_slots[gui_special_slot_weapons] = {(float)this->ui_slots[0].x, (float)this->ui_slots[5].y + 23*gui_scale_factor};
-    this->ui_slots[gui_special_slot_rings] = {(float)this->ui_slots[gui_special_slot_weapons].x + this->slot_offset, (float)this->ui_slots[gui_special_slot_weapons].y};
-    this->ui_slots[gui_special_slot_x] = {(float)this->ui_slots[gui_special_slot_rings].x + this->slot_offset, (float)this->ui_slots[gui_special_slot_weapons].y};
+    this->ui_slots[special_slot_rings] = {(float)this->ui_slots[gui_special_slot_weapons].x + this->slot_offset, (float)this->ui_slots[gui_special_slot_weapons].y};
+    this->ui_slots[gui_special_slot_x] = {(float)this->ui_slots[special_slot_rings].x + this->slot_offset, (float)this->ui_slots[gui_special_slot_weapons].y};
 }
 
 void inventory_ui::navigate_inventory()

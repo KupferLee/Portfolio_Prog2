@@ -34,6 +34,9 @@ protected:
     void item_pickUp(item_base* item);
     //void item_drop();
 
+    bool is_weapons_occupied;
+    bool is_rings_occupied;
+
 public:
     int get_current_slot();
     Texture2D get_texture(int slot);
@@ -41,6 +44,9 @@ public:
     int get_item_weight(int slot);
     int get_item_value(int slot);
     std::string get_item_description(int slot);
+
+    bool get_weapons_occupied();
+    bool get_rings_occupied();
 
 };
 

@@ -43,7 +43,7 @@ protected:
     float gui_scale_factor = 6;
     int gui_current_slot = 0;
     int gui_special_slot_weapons = 10;
-    int gui_special_slot_rings = 11;
+    int special_slot_rings = 11;
     int gui_special_slot_x = 12;
     int gui_max_slots = 13;
     int slot_offset = 19 * gui_scale_factor;

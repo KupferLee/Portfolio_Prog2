@@ -14,9 +14,15 @@ character_player::character_player()
 
 void character_player::update()
 {
-    if (IsKeyPressed(KEY_K))
+    if (IsKeyPressed(KEY_M))
     {
-        this->item_pickUp(crystal);
+        item_pickUp(crystal);
+        item_pickUp(golden_apple);
+        item_pickUp(potion);
+        item_pickUp(chest);
+
+        item_pickUp(dagger);
+        item_pickUp(ring);
     }
 
     this->movement();
@@ -59,21 +65,23 @@ void character_player::movement()
 void character_player::item_pickUp(item_base* item)
 {
     // only fill in the first 10 slots, not the 3 special ones
-    if (this->container_current_slot < 10) // && item != dagger && item != ring
+    if (this->container_current_slot < 10 && item != dagger && item != ring)
     {
         container.setItem(item, this->container_current_slot);
 
         this->container_current_slot++;
     }
     // if pick up weapon and special slot weapon empty fill in special slot
-    else if (item == dagger && container.getItem(11) == NULL)
+    else if (item == dagger && container.getItem(10) == NULL)
     {
-        container.setItem(item, 11);
+        container.setItem(item, 10);
+        is_weapons_occupied = true;
     }
     // if pick up ring and special slot ring empty fill in special slot
-    else if (item == ring  && container.getItem(12) == NULL)
+    else if (item == ring  && container.getItem(11) == NULL)
     {
-        container.setItem(item, 12);
+        container.setItem(item, 11);
+        is_rings_occupied = true;
     }
     else
     {
@@ -82,6 +90,7 @@ void character_player::item_pickUp(item_base* item)
 
 }
 
+// return item attributes
 int character_player::get_current_slot() { return this->container_current_slot; }
 
 Texture2D character_player::get_texture(int slot) { return container.getItem(slot)->getTexture(); }
@@ -93,3 +102,8 @@ int character_player::get_item_weight(int slot) { return container.getItem(slot)
 int character_player::get_item_value(int slot) { return container.getItem(slot)->getValue(); }
 
 std::string character_player::get_item_description(int slot) { return container.getItem(slot)->getDescription(); }
+
+bool character_player::get_weapons_occupied() { return is_weapons_occupied; }
+
+bool character_player::get_rings_occupied() { return is_rings_occupied; }
+
