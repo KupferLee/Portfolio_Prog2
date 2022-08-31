@@ -23,10 +23,11 @@ void character_player::update()
 
         item_pickUp(dagger);
         item_pickUp(ring);
+
+        calculate_weight();
     }
 
     movement();
-    calculate_weight();
 }
 
 
@@ -93,9 +94,19 @@ void character_player::item_pickUp(item_base* item)
 
 void character_player::calculate_weight()
 {
+    // count through normal items and add weight
     for (int i = 0; i < container_current_slot; i++)
     {
         this->total_weight = total_weight + container.getItem(i)->getWeight();
+    }
+    // count weapons and rings and x special if they are assigned
+    if (container.getItem(10) == dagger)
+    {
+        this->total_weight = total_weight + container.getItem(10)->getWeight();
+    }
+    if (container.getItem(11) == ring)
+    {
+        this->total_weight = total_weight + container.getItem(11)->getWeight();
     }
 }
 
