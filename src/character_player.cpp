@@ -27,6 +27,15 @@ void character_player::update()
         calculate_weight();
     }
 
+    if(container.getItem(11) == ring)
+    {
+        this->strength = base_strength + ring->get_strength();
+    }
+    else
+    {
+        this->strength = base_strength;
+    }
+
     // disable movement when total weight is more than player strength
     if (total_weight < strength)
     {
@@ -136,4 +145,6 @@ bool character_player::get_weapons_occupied() { return is_weapons_occupied; }
 bool character_player::get_rings_occupied() { return is_rings_occupied; }
 
 int character_player::get_total_weight() { return total_weight; }
+
+int character_player::get_total_strength() { return this->strength; }
 

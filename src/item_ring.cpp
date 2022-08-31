@@ -12,3 +12,5 @@ item_ring::item_ring()
     // if worn gives a player +5 strength
     this->plus_strength = 5;
 }
+
+int item_ring::get_strength() { return this-> plus_strength; }

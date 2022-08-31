@@ -19,7 +19,8 @@ protected:
     void calculate_weight();
 
     bool canMove = true;
-    int strength = 15; // determines how many items can be put in inventory
+    int base_strength = 15; // determines how much weight can be put in inventory
+    int strength = 0;
     int total_weight = 0;
 
     // item objects
@@ -51,6 +52,7 @@ public:
     bool get_rings_occupied();
 
     int get_total_weight();
+    int get_total_strength();
 
 };
 

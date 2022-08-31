@@ -7,6 +7,8 @@ class item_ring : public item_base {
 public:
     item_ring();
 
+    int get_strength();
+
 protected:
     int plus_strength = 0;
 };
