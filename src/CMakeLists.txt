@@ -9,7 +9,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-add_executable(${PROJECT_NAME} main.cpp map.cpp map.h item_base.cpp item_base.h item_chest.cpp item_chest.h item_dagger.cpp item_dagger.h inventory_ui.cpp inventory_ui.h inventory_template.h item_potion.cpp item_potion.h item_apple.cpp item_apple.h item_crystal.cpp item_crystal.h item_ring.cpp item_ring.h character_base.cpp character_base.h character_player.cpp character_player.h)
+add_executable(${PROJECT_NAME} main.cpp map.cpp map.h item_base.cpp item_base.h item_chest.cpp item_chest.h item_dagger.cpp item_dagger.h inventory_ui.cpp inventory_ui.h inventory_template.h item_potion.cpp item_potion.h item_apple.cpp item_apple.h item_crystal.cpp item_crystal.h item_ring.cpp item_ring.h character_base.cpp character_base.h character_player.cpp character_player.h item_armor.cpp item_armor.h)
 
 # Add config.h.in file
 configure_file(config.h.in config.h)

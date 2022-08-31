@@ -6,6 +6,15 @@
 #define RAYLIBSTARTER_CHARACTER_PLAYER_H
 
 #include "character_base.h"
+#include "item_base.h"
+#include "inventory_template.h"
+#include "item_dagger.h"
+#include "item_chest.h"
+#include "item_potion.h"
+#include "item_apple.h"
+#include "item_crystal.h"
+#include "item_ring.h"
+#include "item_armor.h"
 
 
 class character_player : public character_base {
@@ -19,7 +28,7 @@ protected:
     void calculate_weight();
 
     bool canMove = true;
-    int base_strength = 15; // determines how much weight can be put in inventory
+    int base_strength = 20; // determines how much weight can be put in inventory
     int strength = 0;
     int total_weight = 0;
 
@@ -30,6 +39,7 @@ protected:
     item_apple* golden_apple = new item_apple;
     item_crystal* crystal = new item_crystal;
     item_ring* ring = new item_ring;
+    item_armor* armor = new item_armor;
 
     // container for item objects
     Inventory_Template<item_base*, 13> container;
@@ -39,6 +49,7 @@ protected:
 
     bool is_weapons_occupied;
     bool is_rings_occupied;
+    bool is_armor_occupied;
 
 public:
     int get_current_slot();
@@ -50,6 +61,7 @@ public:
 
     bool get_weapons_occupied();
     bool get_rings_occupied();
+    bool get_armor_occupied();
 
     int get_total_weight();
     int get_total_strength();

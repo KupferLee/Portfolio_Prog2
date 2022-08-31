@@ -162,7 +162,7 @@ void map::randomItems() {
                 this->itemTick++;
 
                 // wenn grass dann 5% chance dass ein item spawned
-                if (rand() % 20 <= 1 && mapData.layerPath.at(itemTick-1) == this->tile_grass && mapData.layerCheckpoints.at(itemTick-1) != this->tile_start && mapData.layerCheckpoints.at(itemTick-1) != this->tile_finish && this->itemCurrent < this->itemsMax)
+                if (rand() % 20 <= 1 && mapData.layerPath.at(itemTick-1) == this->tile_grass && mapData.layerCheckpoints.at(itemTick-1) != this->tile_start && mapData.layerCheckpoints.at(itemTick-1) != this->tile_finish && this->item_current < this->itemsMax)
                 {
                     int number = rand() % 20;
 
@@ -171,32 +171,37 @@ void map::randomItems() {
                         // dagger
                         case 1:
                             mapData.layerItems.push_back(this->tile_dagger);
-                            this->itemCurrent++;
+                            this->item_current++;
                             break;
                         // chest
                         case 2:
                             mapData.layerItems.push_back(this->tile_chest);
-                            this->itemCurrent++;
+                            this->item_current++;
                             break;
                         // potion
                         case 3:
                             mapData.layerItems.push_back(this->tile_potion);
-                            this->itemCurrent++;
+                            this->item_current++;
                             break;
                         // golden apple
                         case 4:
                             mapData.layerItems.push_back(this->tile_apple);
-                            this->itemCurrent++;
+                            this->item_current++;
                             break;
                         // crystal
                         case 5:
                             mapData.layerItems.push_back(this->tile_crystal);
-                            this->itemCurrent++;
+                            this->item_current++;
                             break;
                         // ring
                         case 6:
                             mapData.layerItems.push_back(this->tile_ring);
-                            this->itemCurrent++;
+                            this->item_current++;
+                            break;
+                        // chestplate
+                        case 7:
+                            mapData.layerItems.push_back(this->tile_armor);
+                            this->item_current++;
                             break;
 
                         default:

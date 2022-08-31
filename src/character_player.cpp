@@ -23,6 +23,7 @@ void character_player::update()
 
         item_pickUp(dagger);
         item_pickUp(ring);
+        item_pickUp(armor);
 
         calculate_weight();
     }
@@ -41,7 +42,6 @@ void character_player::update()
     {
         movement();
     }
-
 }
 
 
@@ -81,7 +81,7 @@ void character_player::movement()
 void character_player::item_pickUp(item_base* item)
 {
     // only fill in the first 10 slots, not the 3 special ones
-    if (this->container_current_slot < 10 && item != dagger && item != ring)
+    if (this->container_current_slot < 10 && item != dagger && item != ring && item != armor)
     {
         container.setItem(item, this->container_current_slot);
 
@@ -98,6 +98,11 @@ void character_player::item_pickUp(item_base* item)
     {
         container.setItem(item, 11);
         is_rings_occupied = true;
+    }
+    else if (item == armor && container.getItem(12) == NULL)
+    {
+        container.setItem(item, 12);
+        is_armor_occupied = true;
     }
     else
     {
@@ -116,7 +121,7 @@ void character_player::calculate_weight()
     {
         this->total_weight = total_weight + container.getItem(i)->getWeight();
     }
-    // count weapons and rings and x special if they are assigned
+    // count weapons and rings and armor special if they are assigned
     if (container.getItem(10) == dagger)
     {
         this->total_weight = total_weight + container.getItem(10)->getWeight();
@@ -124,6 +129,10 @@ void character_player::calculate_weight()
     if (container.getItem(11) == ring)
     {
         this->total_weight = total_weight + container.getItem(11)->getWeight();
+    }
+    if (container.getItem(12) == armor)
+    {
+        this->total_weight = total_weight + container.getItem(12)->getWeight();
     }
 }
 
@@ -143,6 +152,8 @@ std::string character_player::get_item_description(int slot) { return container.
 bool character_player::get_weapons_occupied() { return is_weapons_occupied; }
 
 bool character_player::get_rings_occupied() { return is_rings_occupied; }
+
+bool character_player::get_armor_occupied() { return is_armor_occupied; }
 
 int character_player::get_total_weight() { return total_weight; }
 

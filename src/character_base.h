@@ -3,15 +3,7 @@
 
 
 #include "raylib.h"
-#include "inventory_template.h"
-#include "item_base.h"
-#include "inventory_template.h"
-#include "item_dagger.h"
-#include "item_chest.h"
-#include "item_potion.h"
-#include "item_apple.h"
-#include "item_crystal.h"
-#include "item_ring.h"
+
 
 class character_base {
 protected:

@@ -24,8 +24,12 @@ protected:
     int drawTick = 0;
     int checkpointTick = 0;
     int itemTick = 0;
-    int itemsMax = 7; // how many items there can be spawned at one map
-    int itemCurrent = 0; // how many items are currently spawned on the map
+    int itemsMax = 10; // how many items there can be spawned at one map
+    int item_current = 0; // how many items are currently spawned on the map
+
+    bool is_dagger = false;
+    bool is_ring = false;
+    bool is_chestplate = false;
 
     bool isStartDrawn = false;
     bool isFinDrawn = false;
@@ -42,6 +46,7 @@ protected:
     const int tile_apple = 7;
     const int tile_crystal = 8;
     const int tile_ring = 9;
+    const int tile_armor = 10;
 
 
 
