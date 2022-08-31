@@ -27,6 +27,7 @@ int main() {
     map* current_map = new map;
     inventory_ui* inventory = new inventory_ui();
     character_player* player = new character_player;
+    inventory->player = player;
 
 
     // loading the current json data into vectors so they only need to be parsed once

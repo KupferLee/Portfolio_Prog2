@@ -82,7 +82,7 @@ void character_player::item_pickUp(item_base* item)
 
 }
 
-int character_player::get_current_slot() { return container_current_slot; }
+int character_player::get_current_slot() { return this->container_current_slot; }
 
 Texture2D character_player::get_texture(int slot) { return container.getItem(slot)->getTexture(); }
 

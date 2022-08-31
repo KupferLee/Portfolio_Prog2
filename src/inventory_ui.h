@@ -14,12 +14,14 @@ public:
     void draw();
     bool isBackpackOpen();
     bool isInfoOpen();
+    character_player* player = new character_player;
+    // std::shared_ptr<character_player> player = {};
 
 protected:
 
     // player
-    std::shared_ptr<character_player> player = std::make_shared<character_player>();
-    // character_player* player = new character_player;
+
+
 
     // GUI
     Texture2D backpack;
