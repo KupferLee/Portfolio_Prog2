@@ -51,7 +51,7 @@ void inventory_ui::draw()
         // draw items within the inventory
         this->draw_items();
         // draw total weight info
-        DrawText(("Total Weight: " + std::to_string(player->get_total_weight())).c_str(), ui_slots[12].x + 21*gui_scale_factor, ui_slots[12].y+4*gui_scale_factor, 25, WHITE);
+        DrawText(("Total Weight: " + std::to_string(player->get_total_weight())).c_str(), ui_weight_position.x, ui_weight_position.y, 25, WHITE);
     }
 
     // draw the info panel if you want
@@ -176,6 +176,7 @@ void inventory_ui::set_slots()
     this->ui_slots[gui_special_slot_weapons] = {(float)this->ui_slots[0].x, (float)this->ui_slots[5].y + 23*gui_scale_factor};
     this->ui_slots[special_slot_rings] = {(float)this->ui_slots[gui_special_slot_weapons].x + this->slot_offset, (float)this->ui_slots[gui_special_slot_weapons].y};
     this->ui_slots[gui_special_slot_x] = {(float)this->ui_slots[special_slot_rings].x + this->slot_offset, (float)this->ui_slots[gui_special_slot_weapons].y};
+    this->ui_weight_position = { ui_slots[12].x + 21*gui_scale_factor, ui_slots[12].y+4*gui_scale_factor };
 }
 
 void inventory_ui::navigate_inventory()
