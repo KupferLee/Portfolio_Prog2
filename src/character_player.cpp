@@ -27,7 +27,12 @@ void character_player::update()
         calculate_weight();
     }
 
-    movement();
+    // disable movement when total weight is more than player strength
+    if (total_weight < strength)
+    {
+        movement();
+    }
+
 }
 
 
