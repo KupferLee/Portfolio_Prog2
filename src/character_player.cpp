@@ -25,7 +25,8 @@ void character_player::update()
         item_pickUp(ring);
     }
 
-    this->movement();
+    movement();
+    calculate_weight();
 }
 
 
@@ -90,6 +91,14 @@ void character_player::item_pickUp(item_base* item)
 
 }
 
+void character_player::calculate_weight()
+{
+    for (int i = 0; i < container_current_slot; i++)
+    {
+        this->total_weight = total_weight + container.getItem(i)->getWeight();
+    }
+}
+
 // return item attributes
 int character_player::get_current_slot() { return this->container_current_slot; }
 
@@ -106,4 +115,6 @@ std::string character_player::get_item_description(int slot) { return container.
 bool character_player::get_weapons_occupied() { return is_weapons_occupied; }
 
 bool character_player::get_rings_occupied() { return is_rings_occupied; }
+
+int character_player::get_total_weight() { return total_weight; }
 

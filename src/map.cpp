@@ -204,26 +204,6 @@ void map::randomItems() {
                             break;
 
                     }
-                    /*
-                    // 20% chance auf chest
-                    // 0 - 2
-                    if (rand() % 10 <= 1)
-                    {
-                        mapData.layerItems.push_back(this->tile_chest);
-                        this->itemCurrent++;
-                    }
-                    // 30% dagger
-                    // 7 - 9
-                    else if (rand() % 10 >= 7)
-                    {
-                        mapData.layerItems.push_back(this->tile_dagger);
-                        this->itemCurrent++;
-                    }
-                    else
-                    {
-                        mapData.layerItems.push_back(this->tile_empty);
-                    }
-                     */
 
                 }
                 // sonst empty

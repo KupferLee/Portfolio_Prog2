@@ -16,9 +16,11 @@ public:
 protected:
 
     void movement();
+    void calculate_weight();
 
     bool canMove = true;
     int strength = 15; // determines how many items can be put in inventory
+    int total_weight = 0;
 
     // item objects
     item_dagger* dagger = new item_dagger;
@@ -47,6 +49,8 @@ public:
 
     bool get_weapons_occupied();
     bool get_rings_occupied();
+
+    int get_total_weight();
 
 };
 
