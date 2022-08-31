@@ -50,6 +50,8 @@ void inventory_ui::draw()
 
         // draw items within the inventory
         this->draw_items();
+        // draw total weight info
+        DrawText(("Total Weight: " + std::to_string(player->get_total_weight())).c_str(), ui_slots[12].x + 21*gui_scale_factor, ui_slots[12].y+4*gui_scale_factor, 25, WHITE);
     }
 
     // draw the info panel if you want
@@ -101,9 +103,6 @@ void inventory_ui::draw_current_slot(int i)
                        {this->ui_slots[11].x, this->ui_slots[11].y, 16 * gui_scale_factor, 16 * gui_scale_factor},
                        {0, 0}, 0, WHITE);
     }
-
-    // draw total weight info
-    DrawText(("Total Weight: " + std::to_string(player->get_total_weight())).c_str(), ui_slots[12].x + 17*gui_scale_factor, ui_slots[12].y, 30, WHITE);
 }
 
 void inventory_ui::draw_info()

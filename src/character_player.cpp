@@ -99,6 +99,9 @@ void character_player::item_pickUp(item_base* item)
 
 void character_player::calculate_weight()
 {
+    // first reset total weight
+    this->total_weight = 0;
+
     // count through normal items and add weight
     for (int i = 0; i < container_current_slot; i++)
     {

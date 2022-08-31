@@ -48,6 +48,7 @@ protected:
     int gui_max_slots = 13;
     int slot_offset = 19 * gui_scale_factor;
 
+    Vector2 ui_weight_position;
     Rectangle ui_infos_position;
     Rectangle ui_slots[16]; // to determine x and y value for the ui_slots
     Rectangle inventory_position;
