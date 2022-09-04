@@ -1,3 +1,5 @@
+This Code is based on raylibstarter-mininal by Christoph Hahn (https://github.com/chfhhd/raylibstarter-minimal) and further advanced by Lee Ellermann as part of an university exam. It is meant as an portfolio of different tasks.
+
 ```
                 | (_) |       | |           | |           
  _ __ __ _ _   _| |_| |__  ___| |_ __ _ _ __| |_ ___ _ __ 

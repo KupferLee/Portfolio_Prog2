@@ -13,7 +13,6 @@ public:
     {
         if (slot < size)
         {
-            // this gives error "Segmentation fault"
             items_container[slot] = item;
             std::cout << "DEBUG: Item Set " << slot << std::endl;
         }
