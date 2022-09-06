@@ -80,11 +80,6 @@ void character_player::update()
     }
 }
 
-void character_player::render_gui()
-{
-    draw_sort_buttons();
-}
-
 void character_player::movement()
 {
     //W A S D
@@ -244,7 +239,7 @@ void character_player::sort_by_name()
 // sort gui
 void character_player::update_sort_buttons()
 {
-    if (IsKeyPressed(KEY_TAB) && is_sort_open == true)
+    if (IsKeyPressed(KEY_TAB) && is_sort_open == true|| IsKeyPressed(KEY_I) && is_sort_open == true)
     {
         is_sort_open = false;
     }
@@ -266,6 +261,7 @@ void character_player::update_sort_buttons()
     }
 
 }
+// gets used in inventory_ui.cpp to make sure it only gets drawn when inventory is open
 void character_player::draw_sort_buttons()
 {
     if (is_sort_open)

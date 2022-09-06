@@ -64,7 +64,6 @@ protected:
     int current_button = 0;
     bool is_sort_open = false;
 
-    void draw_sort_buttons();
     void update_sort_buttons();
 
 public:
@@ -84,8 +83,8 @@ public:
 
     void set_move(bool move);
 
-    void render_gui();
     bool get_sort_open();
+    void draw_sort_buttons();
 
 };
 

@@ -61,6 +61,8 @@ void inventory_ui::draw()
         // draw total weight info
         DrawText(("Weight: " + std::to_string(player->get_total_weight())).c_str(), ui_weight_position[0].x, ui_weight_position[0].y, 25, GetColor(0xfb5a5aff));
         DrawText(("Strength: " + std::to_string(player->get_total_strength())).c_str(), ui_weight_position[1].x, ui_weight_position[0].y +  30, 25, GetColor(0xfb5a5aff));
+
+        player->draw_sort_buttons();
     }
 
     // draw the info panel if you want
@@ -221,19 +223,50 @@ void inventory_ui::navigate_inventory()
 {
 
     // navigate in the inventory
-    if (gui_isOpen == true && gui_isInfo == false)
+    if (gui_isOpen == true && gui_isInfo == false && player->get_sort_open() == false)
     {
-        if (IsKeyPressed(KEY_D) && gui_current_slot < 12)
+        if (IsKeyPressed(KEY_D) && gui_current_slot < 12 && gui_current_slot != 4 && gui_current_slot != 9 && gui_current_slot != 12)
         {
             gui_current_slot++;
         }
-        else if (IsKeyPressed(KEY_A) && gui_current_slot > 0)
+        else if (IsKeyPressed(KEY_A) && gui_current_slot > 0  && gui_current_slot != 5 && gui_current_slot != 10 && gui_current_slot != 0)
         {
             gui_current_slot--;
         }
-        else if (IsKeyPressed(KEY_TAB))
+
+        else if (IsKeyPressed(KEY_S) && gui_current_slot <= 4)
         {
-            gui_current_slot = special_slot_weapons;
+            gui_current_slot += 5;
+        }
+        else if (IsKeyPressed(KEY_W) && gui_current_slot > 4)
+        {
+            gui_current_slot -= 5;
+        }
+
+        else if (IsKeyPressed(KEY_S) && gui_current_slot == 5)
+        {
+            gui_current_slot = 10;
+        }
+        else if (IsKeyPressed(KEY_S) && gui_current_slot == 6)
+        {
+            gui_current_slot = 11;
+        }
+        else if (IsKeyPressed(KEY_S) && gui_current_slot == 7)
+        {
+            gui_current_slot = 12;
+        }
+
+        else if (IsKeyPressed(KEY_S) && gui_current_slot == 10)
+        {
+            gui_current_slot = 5;
+        }
+        else if (IsKeyPressed(KEY_S) && gui_current_slot == 11)
+        {
+            gui_current_slot = 6;
+        }
+        else if (IsKeyPressed(KEY_S) && gui_current_slot == 12)
+        {
+            gui_current_slot = 7;
         }
     }
 
