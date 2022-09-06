@@ -80,10 +80,12 @@ void map::random()
                         // draw grass
                         if (rand() % 10 <= 6) {
                             mapData.layerPath.push_back(this->tile_grass);
+                            mapData.layerCollision.push_back(false);
                         }
                         // draw nothing
                         else {
                             mapData.layerPath.push_back(this->tile_empty);
+                            mapData.layerCollision.push_back(true);
                         }
                     }
                     // if tile before was grass then chance for grass is higher
@@ -91,10 +93,12 @@ void map::random()
                         // draw grass
                         if (rand() % 10 <= 6) {
                             mapData.layerPath.push_back(this->tile_grass);
+                            mapData.layerCollision.push_back(false);
                         }
                         //draw nothing
                         else {
                             mapData.layerPath.push_back(this->tile_empty);
+                            mapData.layerCollision.push_back(true);
                         }
                     }
 
@@ -102,6 +106,7 @@ void map::random()
                     else
                     {
                         mapData.layerPath.push_back(this->tile_empty);
+                        mapData.layerCollision.push_back(true);
                     }
 
                 }
@@ -115,7 +120,26 @@ void map::random()
             }
         }
     }
+
+    // create hitboxes
+    for (int i = 0; i < mapData.layerCollision.size(); i++) {
+        if (mapData.layerCollision[i]) {
+            Rectangle createdRectangle = { i % this->mapData.mapWidth * 32.0f + 32, (i / this->mapData.mapWidth * 32.0f) + 32, 32, 32 };
+            collisionRectangles.push_back(createdRectangle);
+        }
+    }
 }
+
+void map::drawCollision()
+{
+    for (int i = 0; i < collisionRectangles.size(); i++) {
+        DrawRectangleRec(collisionRectangles[i], BLACK);
+    }
+}
+
+Rectangle map::getRectangle(int i) { return collisionRectangles.at(i); }
+
+int map::sizeCollsion() { return mapData.layerCollision.size(); }
 
 //set start and fin on grass tiles random
 void map::randomStartFin()
@@ -253,7 +277,7 @@ void map::draw()
             if (mapData.layerCheckpoints[x + y * mapData.mapWidth] != -1)
                 DrawTexturePro(tileAtlasTexture,
                                { (float)(mapData.layerCheckpoints[x + y * mapData.mapWidth] % this->tilemapData.tileMapWidth) * 16,(float)(mapData.layerCheckpoints[x + y * mapData.mapWidth] / this->tilemapData.tileMapWidth) * 16 ,16,16 },
-                               { (float)(x * 16 * 2),(float)(y * 16 * 2),16 * 2,16 * 2},
+                               { (float)(x * 16 * 2),(float)(y * 16 * 2),16 * 2,16 * 2 },
                                {}, 0, WHITE);
         }
     }

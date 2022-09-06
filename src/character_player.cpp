@@ -20,6 +20,8 @@ character_player::character_player()
     this->sort_select_position[0] = {(float)sort_base_position.x + 9 * 6, (float)sort_base_position.y + 4 * 6, (float)sort_select.width * 6, (float)sort_select.height * 6};
     this->sort_select_position[1] = {(float)sort_select_position[0].x, (float)sort_select_position[0].y + (sort_select.height + 1) * 6, (float)sort_select.width * 6, (float)sort_select.height * 6};
     this->sort_select_position[2] = {(float)sort_select_position[0].x, (float)sort_select_position[1].y + (sort_select.height + 1) * 6, (float)sort_select.width * 6, (float)sort_select.height * 6};
+
+    // collsion
 }
 
 void character_player::update()
@@ -62,6 +64,18 @@ void character_player::update()
 
         current_button = 0;
         is_sort_open = false;
+
+        for (int i = 0; i < current_map.sizeCollsion(); i ++)
+        {
+            if (this->hitbox.x == current_map.getRectangle(i).x && this->hitbox.y == current_map.getRectangle(i).y)
+            {
+                can_move = false;
+            }
+            else
+            {
+                can_move = true;
+            }
+        }
     }
 
     if(container.getItem(11) == ring)
@@ -83,7 +97,7 @@ void character_player::update()
 void character_player::movement()
 {
     //W A S D
-    if (this->can_move == true)
+    if (this->can_move == true && this->is_collision == false)
     {
         // up
         if (IsKeyDown(KEY_W))
@@ -109,6 +123,8 @@ void character_player::movement()
             this->position.x = this->position.x + this->movement_speed;
             this->facing_direction = down;
         }
+
+        this->hitbox = {position.x - 32, position.y - 32, 32, 32};
     }
 }
 

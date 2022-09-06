@@ -3,6 +3,7 @@
 
 
 #include "raylib.h"
+#include "map.h"
 
 
 class character_base {
@@ -11,8 +12,9 @@ protected:
 
     int movement_speed;
     enum direction {down, up};
-    direction facing_direction;
-
+    direction facing_direction = down;
+    Rectangle hitbox;
+    bool is_collision = false;
     Texture2D texture;
 
 

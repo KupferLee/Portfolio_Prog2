@@ -98,7 +98,12 @@ int main() {
                 DrawText("Press Q for more information.", Game::ScreenWidth - 750, Game::ScreenHeight - 100, 30, BLACK);
                 DrawText("Press E to erase GUI.", Game::ScreenWidth - 750, Game::ScreenHeight - 50, 30, BLACK);
                 inventory->draw();
-                // player->render_gui();
+            }
+
+            // Draw Collision
+            if ( IsKeyDown(KEY_H))
+            {
+                current_map->drawCollision();
             }
 
 

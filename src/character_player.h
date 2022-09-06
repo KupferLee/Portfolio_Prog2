@@ -66,6 +66,10 @@ protected:
 
     void update_sort_buttons();
 
+    // collision
+
+    map current_map = map();
+
 public:
     int get_current_slot();
     Texture2D get_texture(int slot);

@@ -8,12 +8,15 @@
 class map {
 public:
     map();
-    ~map();
     void parse();
     void draw();
     void random();
     void randomStartFin();
     void randomItems();
+
+    void drawCollision();
+    Rectangle getRectangle(int i);
+    int sizeCollsion();
 
 protected:
     nlohmann::json levelMap;
@@ -63,9 +66,14 @@ protected:
         std::vector<int> layerPath;
         std::vector<int> layerItems;
         std::vector<int> layerCheckpoints;
+        std::vector<bool> layerCollision;
         int mapWidth;
         int mapHeight;
     } mapData;
+
+    std::vector<Rectangle> collisionRectangles;
+
+
 };
 
 
