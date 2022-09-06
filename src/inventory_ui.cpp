@@ -64,7 +64,7 @@ void inventory_ui::draw()
     }
 
     // draw the info panel if you want
-    if (gui_isInfo == true)
+    if (gui_isInfo == true && player->get_sort_open() == false)
     {
         DrawTexturePro(this->inventory_infos,
                        {0, 0, (float)this->inventory_infos.width, (float)this->inventory_infos.height},

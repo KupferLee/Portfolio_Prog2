@@ -84,6 +84,7 @@ public:
     void set_move(bool move);
 
     void render_gui();
+    bool get_sort_open();
 
 };
 

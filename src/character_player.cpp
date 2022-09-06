@@ -280,3 +280,5 @@ int character_player::get_total_strength() { return this->strength; }
 
 void character_player::set_move(bool move) { can_move = move; }
 
+bool character_player::get_sort_open() { return is_sort_open; }
+
