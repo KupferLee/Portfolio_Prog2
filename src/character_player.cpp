@@ -52,7 +52,7 @@ void character_player::update()
         }
         else if (current_button == 1)
         {
-            sort_by_value();
+            sort_by_name();
         }
 
         current_button = 0;
@@ -194,15 +194,16 @@ void character_player::sort_by_weight()
 
 }
 
-void character_player::sort_by_value()
+void character_player::sort_by_name()
 {
     // go through all set item slots
     for (int i = 0; i < container_current_slot; i++)
     {
         // actual sort algorithm
+        // this currently sorts by value lol
         for (int i = 0; i < container_current_slot - 1; i++)
         {
-            if (container.getItem(i)->getValue() < container.getItem(i + 1)->getValue())
+            if (container.getItem(i)->getName() > container.getItem(i + 1)->getName())
             {
                 // set item from i in extra slot
                 container.setItem(container.getItem(i), 13);

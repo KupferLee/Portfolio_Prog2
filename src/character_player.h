@@ -53,7 +53,7 @@ protected:
 
     // sort algorithm
     void sort_by_weight();
-    void sort_by_value();
+    void sort_by_name();
 
     Texture2D sort_buttons;
     Texture2D sort_select;
