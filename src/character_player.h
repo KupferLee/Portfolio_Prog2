@@ -54,11 +54,12 @@ protected:
     // sort algorithm
     void sort_by_weight();
     void sort_by_name();
+    void sort_by_value();
 
     Texture2D sort_buttons;
     Texture2D sort_select;
     Rectangle sort_base_position;
-    Rectangle sort_select_position[2];
+    Rectangle sort_select_position[3];
 
     int current_button = 0;
     bool is_sort_open = false;

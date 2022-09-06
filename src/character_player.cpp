@@ -17,8 +17,9 @@ character_player::character_player()
 
     // slots get assigned here because the position depends on the texture measurements
     this->sort_base_position = {(float)GetScreenWidth()/2 - sort_buttons.width/2*6, (float)GetScreenHeight()/2 - sort_buttons.height/2*6, (float)sort_buttons.width*6, (float)sort_buttons.height*6};
-    this->sort_select_position[0] = {(float)sort_base_position.x + 9 * 6, (float)sort_base_position.y + 9 * 6, (float)sort_select.width * 6, (float)sort_select.height * 6};
-    this->sort_select_position[1] = {(float)sort_select_position[0].x, (float)sort_select_position[0].y + (sort_select.height + 8) * 6, (float)sort_select.width * 6, (float)sort_select.height * 6};
+    this->sort_select_position[0] = {(float)sort_base_position.x + 9 * 6, (float)sort_base_position.y + 4 * 6, (float)sort_select.width * 6, (float)sort_select.height * 6};
+    this->sort_select_position[1] = {(float)sort_select_position[0].x, (float)sort_select_position[0].y + (sort_select.height + 1) * 6, (float)sort_select.width * 6, (float)sort_select.height * 6};
+    this->sort_select_position[2] = {(float)sort_select_position[0].x, (float)sort_select_position[1].y + (sort_select.height + 1) * 6, (float)sort_select.width * 6, (float)sort_select.height * 6};
 }
 
 void character_player::update()
@@ -51,6 +52,10 @@ void character_player::update()
             sort_by_weight();
         }
         else if (current_button == 1)
+        {
+            sort_by_value();
+        }
+        else if (current_button == 2)
         {
             sort_by_name();
         }
@@ -194,6 +199,26 @@ void character_player::sort_by_weight()
 
 }
 
+void character_player::sort_by_value()
+{
+    for (int i = 0; i < container_current_slot; i++)
+    {
+        // actual sort algorithm
+        for (int i = 0; i < container_current_slot - 1; i++)
+        {
+            if (container.getItem(i)->getValue() < container.getItem(i + 1)->getValue())
+            {
+                // set item from i in extra slot
+                container.setItem(container.getItem(i), 13);
+                // set item from i + 1 in i
+                container.setItem(container.getItem(i+ 1), i);
+                // set item from extra slot in i + 1
+                container.setItem(container.getItem(13), i + 1);
+            }
+        }
+    }
+}
+
 void character_player::sort_by_name()
 {
     // go through all set item slots
@@ -234,7 +259,7 @@ void character_player::update_sort_buttons()
         {
             current_button--;
         }
-        else if (IsKeyPressed(KEY_S) && current_button < 1)
+        else if (IsKeyPressed(KEY_S) && current_button < 2)
         {
             current_button++;
         }
