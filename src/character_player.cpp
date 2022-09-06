@@ -80,7 +80,7 @@ void character_player::update()
 
     if(container.getItem(11) == ring)
     {
-        this->strength = base_strength + ring->get_strength();
+        this->strength = base_strength + ring->Get_Strength();
     }
     else
     {
@@ -170,20 +170,20 @@ void character_player::calculate_weight()
     // count through normal items and add weight
     for (int i = 0; i < container_current_slot; i++)
     {
-        this->total_weight = total_weight + container.getItem(i)->getWeight();
+        this->total_weight = total_weight + container.getItem(i)->Get_Weight();
     }
     // count weapons and rings and armor special if they are assigned
     if (container.getItem(10) == dagger)
     {
-        this->total_weight = total_weight + container.getItem(10)->getWeight();
+        this->total_weight = total_weight + container.getItem(10)->Get_Weight();
     }
     if (container.getItem(11) == ring)
     {
-        this->total_weight = total_weight + container.getItem(11)->getWeight();
+        this->total_weight = total_weight + container.getItem(11)->Get_Weight();
     }
     if (container.getItem(12) == armor)
     {
-        this->total_weight = total_weight + container.getItem(12)->getWeight();
+        this->total_weight = total_weight + container.getItem(12)->Get_Weight();
     }
 }
 
@@ -196,7 +196,7 @@ void character_player::sort_by_weight()
         // actual sort algorithm
         for (int i = 0; i < container_current_slot - 1; i++)
         {
-            if (container.getItem(i)->getWeight() > container.getItem(i + 1)->getWeight())
+            if (container.getItem(i)->Get_Weight() > container.getItem(i + 1)->Get_Weight())
             {
                 // set item from i in extra slot
                 container.setItem(container.getItem(i), 13);
@@ -218,7 +218,7 @@ void character_player::sort_by_value()
         // actual sort algorithm
         for (int i = 0; i < container_current_slot - 1; i++)
         {
-            if (container.getItem(i)->getValue() < container.getItem(i + 1)->getValue())
+            if (container.getItem(i)->Get_Value() < container.getItem(i + 1)->Get_Value())
             {
                 // set item from i in extra slot
                 container.setItem(container.getItem(i), 13);
@@ -242,7 +242,7 @@ void character_player::sort_by_name()
         // this currently sorts by value lol
         for (int i = 0; i < container_current_slot - 1; i++)
         {
-            if (container.getItem(i)->getName() > container.getItem(i + 1)->getName())
+            if (container.getItem(i)->Get_Name() > container.getItem(i + 1)->Get_Name())
             {
                 // set item from i in extra slot
                 container.setItem(container.getItem(i), 13);
@@ -302,15 +302,15 @@ void character_player::draw_sort_buttons()
 // return item attributes
 int character_player::get_current_slot() { return this->container_current_slot; }
 
-Texture2D character_player::get_texture(int slot) { return container.getItem(slot)->getTexture(); }
+Texture2D character_player::get_texture(int slot) { return container.getItem(slot)->Get_Texture(); }
 
-std::string character_player::get_item_name(int slot) { return container.getItem(slot)->getName(); }
+std::string character_player::get_item_name(int slot) { return container.getItem(slot)->Get_Name(); }
 
-int character_player::get_item_weight(int slot) { return container.getItem(slot)->getWeight(); }
+int character_player::get_item_weight(int slot) { return container.getItem(slot)->Get_Weight(); }
 
-int character_player::get_item_value(int slot) { return container.getItem(slot)->getValue(); }
+int character_player::get_item_value(int slot) { return container.getItem(slot)->Get_Value(); }
 
-std::string character_player::get_item_description(int slot) { return container.getItem(slot)->getDescription(); }
+std::string character_player::get_item_description(int slot) { return container.getItem(slot)->Get_Description(); }
 
 bool character_player::get_weapons_occupied() { return is_weapons_occupied; }
 

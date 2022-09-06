@@ -13,4 +13,4 @@ item_ring::item_ring()
     this->plus_strength = 5;
 }
 
-int item_ring::get_strength() { return this-> plus_strength; }
+int item_ring::Get_Strength() { return this-> plus_strength; }

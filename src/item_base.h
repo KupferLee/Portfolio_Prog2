@@ -6,12 +6,12 @@
 
 class item_base {
 public:
-    virtual int getValue();
-    virtual std::string getName();
-    virtual std::string getDescription();
-    virtual int getWeight();
-    virtual int getID();
-    virtual Texture2D getTexture();
+    virtual int Get_Value();
+    virtual std::string Get_Name();
+    virtual std::string Get_Description();
+    virtual int Get_Weight();
+    virtual int Get_ID();
+    virtual Texture2D Get_Texture();
     // TODO: make method that turns string to char for DrawText output
 
 protected:

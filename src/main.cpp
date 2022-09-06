@@ -24,16 +24,16 @@ int main() {
 
     // Your own initialization code here
     Texture2D infoTexture = LoadTexture("assets/graphics/infografik.png");
-    map* current_map = new map;
-    inventory_ui* inventory = new inventory_ui();
-    character_player* player = new character_player;
-    inventory->player = player;
+    map* Map = new map;
+    inventory_ui* Inventory = new inventory_ui();
+    character_player* Player = new character_player;
+    Inventory->player = Player;
 
 
     // loading the current json data into vectors so they only need to be parsed once
-    current_map->Randomize();
-    current_map->RandomStartFin();
-    current_map->RandomItems();
+    Map->Randomize();
+    Map->RandomStartFin();
+    Map->RandomItems();
 
 
     // Main game loop
@@ -41,27 +41,27 @@ int main() {
     {
         // Updates that are made by frame are coded here
 
-        inventory->update();
+        Inventory->update();
 
-        if (inventory->isBackpackOpen())
+        if (Inventory->isBackpackOpen())
         {
-            player->set_move(false);
+            Player->set_move(false);
         }
         else
         {
-            player->set_move(true);
+            Player->set_move(true);
         }
 
-        player->update();
+        Player->update();
 
 
 
-        // maybe switch case referring to inventory->isBackpackOpen() to determine where user can act rn
-        switch (inventory->isBackpackOpen())
+        // maybe switch case referring to Inventory->isBackpackOpen() to determine where user can act rn
+        switch (Inventory->isBackpackOpen())
         {
             case true:
             {
-                // user can move within the inventory
+                // user can move within the Inventory
                 break;
             }
 
@@ -82,10 +82,10 @@ int main() {
             DrawText("If you see this, this is not working!", 10, 10, 30, DARKBLUE);
 
             // draw what is currently loaded within the map vectors
-        current_map->Draw();
+        Map->Draw();
 
-            // draw player
-            player->draw();
+            // draw Player
+            Player->draw();
 
 
             if (IsKeyDown(KEY_Q))
@@ -97,13 +97,13 @@ int main() {
                 // little backpack shall be only drawn when there is no other info screen currently open
                 DrawText("Press Q for more information.", Game::ScreenWidth - 750, Game::ScreenHeight - 100, 30, BLACK);
                 DrawText("Press E to erase GUI.", Game::ScreenWidth - 750, Game::ScreenHeight - 50, 30, BLACK);
-                inventory->draw();
+                Inventory->draw();
             }
 
             // Draw Collision
             if ( IsKeyDown(KEY_H))
             {
-                current_map->Draw_Collision();
+                Map->Draw_Collision();
             }
 
 
