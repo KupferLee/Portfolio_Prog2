@@ -59,14 +59,14 @@ void inventory_ui::Draw()
         this->draw_items();
 
         // draw total weight info
-        DrawText(("Weight: " + std::to_string(Player->get_total_weight())).c_str(), ui_weight_position[0].x, ui_weight_position[0].y, 25, GetColor(0xfb5a5aff));
-        DrawText(("Strength: " + std::to_string(Player->get_total_strength())).c_str(), ui_weight_position[1].x, ui_weight_position[0].y + 30, 25, GetColor(0xfb5a5aff));
+        DrawText(("Weight: " + std::to_string(Player->Get_Total_Weight())).c_str(), ui_weight_position[0].x, ui_weight_position[0].y, 25, GetColor(0xfb5a5aff));
+        DrawText(("Strength: " + std::to_string(Player->Get_Total_Strength())).c_str(), ui_weight_position[1].x, ui_weight_position[0].y + 30, 25, GetColor(0xfb5a5aff));
 
-        Player->draw_sort_buttons();
+        Player->Draw_Sort_Buttons();
     }
 
     // draw the info panel if you want
-    if (gui_isInfo == true && Player->get_sort_open() == false)
+    if (gui_isInfo == true && Player->Get_Sort_Open() == false)
     {
         DrawTexturePro(this->inventory_infos,
                        {0, 0, (float)this->inventory_infos.width, (float)this->inventory_infos.height},
@@ -95,34 +95,34 @@ void inventory_ui::draw_items()
 void inventory_ui::draw_current_slot(int i)
 {
     // draw every occupied slot
-    if (this->Player->get_current_slot() > i)
+    if (this->Player->Get_Current_Slot() > i)
     {
-        DrawTexturePro(Player->get_texture(i),
+        DrawTexturePro(Player->Get_Texture(i),
                        {0, 0, 16, 16},
                        {this->ui_slots[i]},
                        {0, 0}, 0, WHITE);
     }
     // only draw dagger in weapon slot if there is a dagger in it
-    if (this->Player->get_weapons_occupied() == true) //
+    if (this->Player->Get_Weapons_Occupied() == true) //
     {
-        DrawTexturePro(this->Player->get_texture(10),
+        DrawTexturePro(this->Player->Get_Texture(10),
                        {0, 0, 16, 16},
                        {this->ui_slots[10].x, this->ui_slots[10].y, 16 * gui_scale_factor, 16 * gui_scale_factor},
                        {0, 0}, 0, WHITE);
     }
     // only draw ring in ring slot if there is a ring in it
-    if (this->Player->get_rings_occupied() == true)
+    if (this->Player->Get_Rings_Occupied() == true)
     {
-        DrawTexturePro(this->Player->get_texture(11),
+        DrawTexturePro(this->Player->Get_Texture(11),
                        {0, 0, 16, 16},
                        {this->ui_slots[11].x, this->ui_slots[11].y, 16 * gui_scale_factor, 16 * gui_scale_factor},
                        {0, 0}, 0, WHITE);
     }
 
     // only draw armor if slot is occupied
-    if (this->Player->get_armor_occupied() == true)
+    if (this->Player->Get_Armor_Occupied() == true)
     {
-        DrawTexturePro(this->Player->get_texture(12),
+        DrawTexturePro(this->Player->Get_Texture(12),
                        {0, 0, 16, 16},
                        {this->ui_slots[12].x, this->ui_slots[12].y, 16 * gui_scale_factor, 16 * gui_scale_factor},
                        {0, 0}, 0, WHITE);
@@ -132,50 +132,50 @@ void inventory_ui::draw_current_slot(int i)
 void inventory_ui::draw_info()
 {
     // draw info for current normal slot if occupied
-    if (gui_current_slot <= Player->get_current_slot() - 1)
+    if (gui_current_slot <= Player->Get_Current_Slot() - 1)
     {
         // print info accessing the container item
         DrawText(("Slot: " + std::to_string(this->gui_current_slot)).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40, 30, WHITE);
-        DrawText(("Name: " + Player->get_item_name(gui_current_slot)).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 2, 30, WHITE);
-        DrawText(("Weight: " + std::to_string(Player->get_item_weight(gui_current_slot))).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 3, 30, WHITE);
-        DrawText(("Value: " + std::to_string(Player->get_item_value(gui_current_slot))).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 4, 30, WHITE);
-        DrawText(("Description: " + (Player->get_item_description(gui_current_slot))).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 5, 30, WHITE);
+        DrawText(("Name: " + Player->Get_Item_Name(gui_current_slot)).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 2, 30, WHITE);
+        DrawText(("Weight: " + std::to_string(Player->Get_Item_Weight(gui_current_slot))).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 3, 30, WHITE);
+        DrawText(("Value: " + std::to_string(Player->Get_Item_Value(gui_current_slot))).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 4, 30, WHITE);
+        DrawText(("Description: " + (Player->Get_Item_Description(gui_current_slot))).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 5, 30, WHITE);
     }
     // draw info for weapon if special slot selected and occupied
-    if (Player->get_weapons_occupied() == true && this->gui_current_slot == this->special_slot_weapons)
+    if (Player->Get_Weapons_Occupied() == true && this->gui_current_slot == this->special_slot_weapons)
     {
         DrawText(("Slot: " + std::to_string(this->special_slot_weapons)).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40, 30, WHITE);
-        DrawText(("Name: " + Player->get_item_name(10)).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 2, 30, WHITE);
-        DrawText(("Weight: " + std::to_string(Player->get_item_weight(special_slot_weapons))).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 3, 30, WHITE);
-        DrawText(("Value: " + std::to_string(Player->get_item_value(gui_current_slot))).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 4, 30, WHITE);
-        DrawText(("Description: " + Player->get_item_description(gui_current_slot)).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 5, 30, WHITE);
+        DrawText(("Name: " + Player->Get_Item_Name(10)).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 2, 30, WHITE);
+        DrawText(("Weight: " + std::to_string(Player->Get_Item_Weight(special_slot_weapons))).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 3, 30, WHITE);
+        DrawText(("Value: " + std::to_string(Player->Get_Item_Value(gui_current_slot))).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 4, 30, WHITE);
+        DrawText(("Description: " + Player->Get_Item_Description(gui_current_slot)).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 5, 30, WHITE);
 
     }
     // draw info for ring if special slot selected and occupied
-    if (Player->get_rings_occupied() == true && this->gui_current_slot == this->special_slot_rings) {
+    if (Player->Get_Rings_Occupied() == true && this->gui_current_slot == this->special_slot_rings) {
         DrawText(("Slot: " + std::to_string(this->special_slot_rings)).c_str(), this->ui_infos_position.x,
                  this->ui_infos_position.y + 40, 30, WHITE);
-        DrawText(("Name: " + Player->get_item_name(special_slot_rings)).c_str(), this->ui_infos_position.x,
+        DrawText(("Name: " + Player->Get_Item_Name(special_slot_rings)).c_str(), this->ui_infos_position.x,
                  this->ui_infos_position.y + 40 * 2, 30, WHITE);
-        DrawText(("Weight: " + std::to_string(Player->get_item_weight(special_slot_rings))).c_str(),
+        DrawText(("Weight: " + std::to_string(Player->Get_Item_Weight(special_slot_rings))).c_str(),
                  this->ui_infos_position.x, this->ui_infos_position.y + 40 * 3, 30, WHITE);
-        DrawText(("Value: " + std::to_string(Player->get_item_value(special_slot_rings))).c_str(),
+        DrawText(("Value: " + std::to_string(Player->Get_Item_Value(special_slot_rings))).c_str(),
                  this->ui_infos_position.x, this->ui_infos_position.y + 40 * 4, 30, WHITE);
-        DrawText(("Description: " + Player->get_item_description(special_slot_rings)).c_str(),
+        DrawText(("Description: " + Player->Get_Item_Description(special_slot_rings)).c_str(),
                  this->ui_infos_position.x, this->ui_infos_position.y + 40 * 5, 30, WHITE);
 
     }
-    if (Player->get_armor_occupied() == true && this->gui_current_slot == this->special_slot_armor)
+    if (Player->Get_Armor_Occupied() == true && this->gui_current_slot == this->special_slot_armor)
     {
         DrawText(("Slot: " + std::to_string(this->special_slot_armor)).c_str(), this->ui_infos_position.x,
                  this->ui_infos_position.y + 40, 30, WHITE);
-        DrawText(("Name: " + Player->get_item_name(special_slot_armor)).c_str(), this->ui_infos_position.x,
+        DrawText(("Name: " + Player->Get_Item_Name(special_slot_armor)).c_str(), this->ui_infos_position.x,
                  this->ui_infos_position.y + 40 * 2, 30, WHITE);
-        DrawText(("Weight: " + std::to_string(Player->get_item_weight(special_slot_armor))).c_str(),
+        DrawText(("Weight: " + std::to_string(Player->Get_Item_Weight(special_slot_armor))).c_str(),
                  this->ui_infos_position.x, this->ui_infos_position.y + 40 * 3, 30, WHITE);
-        DrawText(("Value: " + std::to_string(Player->get_item_value(special_slot_armor))).c_str(),
+        DrawText(("Value: " + std::to_string(Player->Get_Item_Value(special_slot_armor))).c_str(),
                  this->ui_infos_position.x, this->ui_infos_position.y + 40 * 4, 30, WHITE);
-        DrawText(("Description: " + Player->get_item_description(special_slot_armor)).c_str(),
+        DrawText(("Description: " + Player->Get_Item_Description(special_slot_armor)).c_str(),
                  this->ui_infos_position.x, this->ui_infos_position.y + 40 * 5, 30, WHITE);
     }
     // draw no info since not occupied
@@ -223,7 +223,7 @@ void inventory_ui::navigate_inventory()
 {
 
     // navigate in the inventory
-    if (gui_isOpen == true && gui_isInfo == false && Player->get_sort_open() == false)
+    if (gui_isOpen == true && gui_isInfo == false && Player->Get_Sort_Open() == false)
     {
         if (IsKeyPressed(KEY_D) && gui_current_slot < 12 && gui_current_slot != 4 && gui_current_slot != 9 && gui_current_slot != 12)
         {

@@ -1,6 +1,6 @@
 #include "character_base.h"
 
-Vector2 character_base::getPosition() { return this->position; }
+Vector2 character_base::get_position() { return this->position; }
 
 void character_base::draw()
 {

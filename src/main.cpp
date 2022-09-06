@@ -45,14 +45,14 @@ int main() {
 
         if (Inventory->is_backpack_open())
         {
-            Player->set_move(false);
+            Player->Set_Can_Move(false);
         }
         else
         {
-            Player->set_move(true);
+            Player->Set_Can_Move(true);
         }
 
-        Player->update();
+        Player->Update();
 
 
 

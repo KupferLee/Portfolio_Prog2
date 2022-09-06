@@ -24,42 +24,42 @@ character_player::character_player()
     // collsion
 }
 
-void character_player::update()
+void character_player::Update()
 {
-    update_sort_buttons();
+    Update_Sort_Buttons();
 
     if (IsKeyPressed(KEY_M))
     {
-        item_pickUp(crystal);
-        item_pickUp(golden_apple);
-        item_pickUp(potion);
-        item_pickUp(chest);
-        item_pickUp(golden_apple);
-        item_pickUp(crystal);
-        item_pickUp(golden_apple);
-        item_pickUp(chest);
-        item_pickUp(potion);
-        item_pickUp(crystal);
+        Item_Pickup(crystal);
+        Item_Pickup(golden_apple);
+        Item_Pickup(potion);
+        Item_Pickup(chest);
+        Item_Pickup(golden_apple);
+        Item_Pickup(crystal);
+        Item_Pickup(golden_apple);
+        Item_Pickup(chest);
+        Item_Pickup(potion);
+        Item_Pickup(crystal);
 
-        item_pickUp(dagger);
-        item_pickUp(ring);
-        item_pickUp(armor);
+        Item_Pickup(dagger);
+        Item_Pickup(ring);
+        Item_Pickup(armor);
 
-        calculate_weight();
+        Calculate_Weight();
     }
     else if (is_sort_open == true && IsKeyPressed(KEY_ENTER))
     {
         if (current_button == 0)
         {
-            sort_by_weight();
+            Sort_By_Weight();
         }
         else if (current_button == 1)
         {
-            sort_by_value();
+            Sort_By_Value();
         }
         else if (current_button == 2)
         {
-            sort_by_name();
+            Sort_By_Name();
         }
 
         current_button = 0;
@@ -90,11 +90,11 @@ void character_player::update()
     // disable movement when total weight is more than Player strength
     if (total_weight < strength)
     {
-        movement();
+        Movement_Controls();
     }
 }
 
-void character_player::movement()
+void character_player::Movement_Controls()
 {
     //W A S D
     if (this->can_move == true && this->is_collision == false)
@@ -129,7 +129,7 @@ void character_player::movement()
 }
 
 
-void character_player::item_pickUp(item_base* item)
+void character_player::Item_Pickup(item_base* item)
 {
     // only fill in the first 10 slots, not the 3 special ones
     if (this->container_current_slot < 10 && item != dagger && item != ring && item != armor)
@@ -162,7 +162,7 @@ void character_player::item_pickUp(item_base* item)
 
 }
 
-void character_player::calculate_weight()
+void character_player::Calculate_Weight()
 {
     // first reset total weight
     this->total_weight = 0;
@@ -188,7 +188,7 @@ void character_player::calculate_weight()
 }
 
 // sort algorithm
-void character_player::sort_by_weight()
+void character_player::Sort_By_Weight()
 {
     // go through all set item slots
     for (int i = 0; i < container_current_slot; i++)
@@ -211,7 +211,7 @@ void character_player::sort_by_weight()
     std::cout << "DEBUG: Items are sorted by weight now." << std::endl;
 }
 
-void character_player::sort_by_value()
+void character_player::Sort_By_Value()
 {
     for (int i = 0; i < container_current_slot; i++)
     {
@@ -233,7 +233,7 @@ void character_player::sort_by_value()
     std::cout << "DEBUG: Items are sorted by value now." << std::endl;
 }
 
-void character_player::sort_by_name()
+void character_player::Sort_By_Name()
 {
     // go through all set item slots
     for (int i = 0; i < container_current_slot; i++)
@@ -258,7 +258,7 @@ void character_player::sort_by_name()
 }
 
 // sort gui
-void character_player::update_sort_buttons()
+void character_player::Update_Sort_Buttons()
 {
     if (IsKeyPressed(KEY_TAB) && is_sort_open == true|| IsKeyPressed(KEY_I) && is_sort_open == true)
     {
@@ -283,7 +283,7 @@ void character_player::update_sort_buttons()
 
 }
 // gets used in inventory_ui.cpp to make sure it only gets drawn when inventory is open
-void character_player::draw_sort_buttons()
+void character_player::Draw_Sort_Buttons()
 {
     if (is_sort_open)
     {
@@ -300,29 +300,29 @@ void character_player::draw_sort_buttons()
 }
 
 // return item attributes
-int character_player::get_current_slot() { return this->container_current_slot; }
+int character_player::Get_Current_Slot() { return this->container_current_slot; }
 
-Texture2D character_player::get_texture(int slot) { return container.getItem(slot)->Get_Texture(); }
+Texture2D character_player::Get_Texture(int slot) { return container.getItem(slot)->Get_Texture(); }
 
-std::string character_player::get_item_name(int slot) { return container.getItem(slot)->Get_Name(); }
+std::string character_player::Get_Item_Name(int slot) { return container.getItem(slot)->Get_Name(); }
 
-int character_player::get_item_weight(int slot) { return container.getItem(slot)->Get_Weight(); }
+int character_player::Get_Item_Weight(int slot) { return container.getItem(slot)->Get_Weight(); }
 
-int character_player::get_item_value(int slot) { return container.getItem(slot)->Get_Value(); }
+int character_player::Get_Item_Value(int slot) { return container.getItem(slot)->Get_Value(); }
 
-std::string character_player::get_item_description(int slot) { return container.getItem(slot)->Get_Description(); }
+std::string character_player::Get_Item_Description(int slot) { return container.getItem(slot)->Get_Description(); }
 
-bool character_player::get_weapons_occupied() { return is_weapons_occupied; }
+bool character_player::Get_Weapons_Occupied() { return is_weapons_occupied; }
 
-bool character_player::get_rings_occupied() { return is_rings_occupied; }
+bool character_player::Get_Rings_Occupied() { return is_rings_occupied; }
 
-bool character_player::get_armor_occupied() { return is_armor_occupied; }
+bool character_player::Get_Armor_Occupied() { return is_armor_occupied; }
 
-int character_player::get_total_weight() { return total_weight; }
+int character_player::Get_Total_Weight() { return total_weight; }
 
-int character_player::get_total_strength() { return this->strength; }
+int character_player::Get_Total_Strength() { return this->strength; }
 
-void character_player::set_move(bool move) { can_move = move; }
+void character_player::Set_Can_Move(bool move) { can_move = move; }
 
-bool character_player::get_sort_open() { return is_sort_open; }
+bool character_player::Get_Sort_Open() { return is_sort_open; }
 

@@ -20,12 +20,12 @@
 class character_player : public character_base {
 public:
     character_player();
-    void update();
+    void Update();
 
 protected:
 
-    void movement();
-    void calculate_weight();
+    void Movement_Controls();
+    void Calculate_Weight();
 
     bool can_move = true;
     int base_strength = 20; // determines how much weight can be put in inventory
@@ -44,7 +44,7 @@ protected:
     // container for item objects
     Inventory_Template<item_base*, 14> container;
     int container_current_slot = 0;
-    void item_pickUp(item_base* item);
+    void Item_Pickup(item_base* item);
     //void item_drop();
 
     bool is_weapons_occupied;
@@ -52,9 +52,9 @@ protected:
     bool is_armor_occupied;
 
     // sort algorithm
-    void sort_by_weight();
-    void sort_by_name();
-    void sort_by_value();
+    void Sort_By_Weight();
+    void Sort_By_Name();
+    void Sort_By_Value();
 
     Texture2D sort_buttons;
     Texture2D sort_select;
@@ -64,31 +64,31 @@ protected:
     int current_button = 0;
     bool is_sort_open = false;
 
-    void update_sort_buttons();
+    void Update_Sort_Buttons();
 
     // collision
 
     map current_map = map();
 
 public:
-    int get_current_slot();
-    Texture2D get_texture(int slot);
-    std::string get_item_name(int slot);
-    int get_item_weight(int slot);
-    int get_item_value(int slot);
-    std::string get_item_description(int slot);
+    int Get_Current_Slot();
+    Texture2D Get_Texture(int slot);
+    std::string Get_Item_Name(int slot);
+    int Get_Item_Weight(int slot);
+    int Get_Item_Value(int slot);
+    std::string Get_Item_Description(int slot);
 
-    bool get_weapons_occupied();
-    bool get_rings_occupied();
-    bool get_armor_occupied();
+    bool Get_Weapons_Occupied();
+    bool Get_Rings_Occupied();
+    bool Get_Armor_Occupied();
 
-    int get_total_weight();
-    int get_total_strength();
+    int Get_Total_Weight();
+    int Get_Total_Strength();
 
-    void set_move(bool move);
+    void Set_Can_Move(bool move);
 
-    bool get_sort_open();
-    void draw_sort_buttons();
+    bool Get_Sort_Open();
+    void Draw_Sort_Buttons();
 
 };
 

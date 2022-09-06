@@ -15,13 +15,13 @@ protected:
     direction facing_direction = down;
     Rectangle hitbox;
     bool is_collision = false;
+    bool can_move = true;
     Texture2D texture;
 
 
 public:
-    virtual Vector2 getPosition();
+    virtual Vector2 get_position();
     void draw();
-    //void update();
 
 };
 
