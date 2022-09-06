@@ -19,10 +19,6 @@ public:
 
 protected:
 
-    // player
-
-
-
     // GUI
     Texture2D backpack;
     Texture2D inventory_base;
@@ -52,6 +48,13 @@ protected:
     Rectangle ui_infos_position;
     Rectangle ui_slots[16]; // to determine x and y value for the ui_slots
     Rectangle inventory_position;
+
+    // tutorial
+    Texture2D tutorial_base;
+
+    bool is_tutorial = true;
+
+    void draw_tutorial();
 
 };
 

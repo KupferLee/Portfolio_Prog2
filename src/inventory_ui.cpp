@@ -11,6 +11,8 @@ inventory_ui::inventory_ui()
     this->ui_infos_position.x = 195; // GetScreenWidth()/2 - this->inventory_infos.width/2;
     this->ui_infos_position.y = GetScreenHeight() / 2 - this->inventory_infos.height - 50;
 
+    this->tutorial_base = LoadTexture("assets/graphics/gui/tutorial.png");
+
     this->tileset = LoadTexture("assets/map/tileset.png");
 
     this->set_slots();
@@ -21,6 +23,11 @@ void inventory_ui::update()
 {
 
     navigate_inventory();
+
+    if (IsKeyPressed(KEY_ENTER))
+    {
+        is_tutorial = false;
+    }
 
 }
 
@@ -68,6 +75,10 @@ void inventory_ui::draw()
         this->draw_info();
     }
 
+    if (is_tutorial == true)
+    {
+        draw_tutorial();
+    }
 }
 
 void inventory_ui::draw_items()
@@ -246,4 +257,21 @@ void inventory_ui::navigate_inventory()
     {
         this->gui_isInfo = false;
     }
+}
+
+void inventory_ui::draw_tutorial()
+{
+    DrawTexturePro(this->tutorial_base,
+                   {0, 0, (float)this->tutorial_base.width, (float)this->tutorial_base.height},
+                   {(float)GetScreenWidth()/2 - this->tutorial_base.width/2*this->gui_scale_factor, (float)GetScreenHeight() / 2 - this->tutorial_base.height / 2 * this->gui_scale_factor, (float)this->tutorial_base.width * this->gui_scale_factor, (float)this->tutorial_base.height * this->gui_scale_factor},
+                   {0, 0} ,0, WHITE);
+
+    DrawText("Move with WASD", ui_infos_position.x, ui_infos_position.y, 30, WHITE);
+    DrawText("Open Inventory with I", ui_infos_position.x, ui_infos_position.y + 40, 30, WHITE);
+    DrawText("Get Infos with SPACE", ui_infos_position.x, ui_infos_position.y + 80, 30, WHITE);
+    DrawText("Add several Items with M", ui_infos_position.x, ui_infos_position.y + 120, 30, WHITE);
+    DrawText("Sort Items with TAB", ui_infos_position.x, ui_infos_position.y + 160, 30, WHITE);
+    DrawText("Erase GUI temporary with E", ui_infos_position.x, ui_infos_position.y + 200, 30, WHITE);
+
+    DrawText("Close Tutorial with ENTER", ui_infos_position.x, ui_infos_position.y + 280, 30, WHITE);
 }
