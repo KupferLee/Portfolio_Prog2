@@ -15,8 +15,9 @@ character_player::character_player()
     this->sort_buttons = LoadTexture("assets/graphics/gui/sort_buttons.png");
     this->sort_select = LoadTexture("assets/graphics/gui/sort_button_select.png");
 
+    // slots get assigned here because the position depends on the texture measurements
     this->sort_base_position = {(float)GetScreenWidth()/2 - sort_buttons.width/2*6, (float)GetScreenHeight()/2 - sort_buttons.height/2*6, (float)sort_buttons.width*6, (float)sort_buttons.height*6};
-    this->sort_select_position[0] = {(float)sort_base_position.x + 8 * 6, (float)sort_base_position.y + 8 * 6, (float)sort_select.width * 6, (float)sort_select.height * 6};
+    this->sort_select_position[0] = {(float)sort_base_position.x + 9 * 6, (float)sort_base_position.y + 9 * 6, (float)sort_select.width * 6, (float)sort_select.height * 6};
     this->sort_select_position[1] = {(float)sort_select_position[0].x, (float)sort_select_position[0].y + (sort_select.height + 8) * 6, (float)sort_select.width * 6, (float)sort_select.height * 6};
 }
 
