@@ -47,6 +47,14 @@ void character_player::Update()
 
         Calculate_Weight();
     }
+    else if (IsKeyPressed(KEY_N))
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            container_current_slot = 0;
+            container.setItem(NULL, i);
+        }
+    }
     else if (is_sort_open == true && IsKeyPressed(KEY_ENTER))
     {
         if (current_button == 0)
