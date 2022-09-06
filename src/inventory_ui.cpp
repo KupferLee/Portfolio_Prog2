@@ -188,6 +188,7 @@ bool inventory_ui::isBackpackOpen() { return gui_isOpen; }
 bool inventory_ui::isInfoOpen() { return gui_isInfo; }
 
 // assign all the ui_slots coordinates relatively to inventory base
+// they get assigned in .cpp instead of .h because they are dependend on the texture width
 void inventory_ui::set_slots()
 {
     // base

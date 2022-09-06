@@ -6,14 +6,24 @@
 
 character_player::character_player()
 {
+    // player
     this->texture = LoadTexture("assets/graphics/characters/player_32.png");
-
     this->position = {32, 32};
     this->movement_speed = 3;
+
+    // sort gui
+    this->sort_buttons = LoadTexture("assets/graphics/gui/sort_buttons.png");
+    this->sort_select = LoadTexture("assets/graphics/gui/sort_button_select.png");
+
+    this->sort_base_position = {(float)GetScreenWidth()/2 - sort_buttons.width/2*6, (float)GetScreenHeight()/2 - sort_buttons.height/2*6, (float)sort_buttons.width*6, (float)sort_buttons.height*6};
+    this->sort_select_position[0] = {(float)sort_base_position.x + 8 * 6, (float)sort_base_position.y + 8 * 6, (float)sort_select.width * 6, (float)sort_select.height * 6};
+    this->sort_select_position[1] = {(float)sort_select_position[0].x, (float)sort_select_position[0].y + (sort_select.height + 8) * 6, (float)sort_select.width * 6, (float)sort_select.height * 6};
 }
 
 void character_player::update()
 {
+    update_sort_buttons();
+
     if (IsKeyPressed(KEY_M))
     {
         item_pickUp(crystal);
@@ -33,13 +43,19 @@ void character_player::update()
 
         calculate_weight();
     }
-    else if (IsKeyPressed(KEY_N))
+    else if (is_sort_open == true && IsKeyPressed(KEY_ENTER))
     {
-        sort_by_weight();
-    }
-    else if (IsKeyPressed(KEY_B))
-    {
-        sort_by_value();
+        if (current_button == 0)
+        {
+            sort_by_weight();
+        }
+        else if (current_button == 1)
+        {
+            sort_by_value();
+        }
+
+        current_button = 0;
+        is_sort_open = false;
     }
 
     if(container.getItem(11) == ring)
@@ -58,6 +74,10 @@ void character_player::update()
     }
 }
 
+void character_player::render_gui()
+{
+    draw_sort_buttons();
+}
 
 void character_player::movement()
 {
@@ -191,6 +211,47 @@ void character_player::sort_by_value()
                 container.setItem(container.getItem(13), i + 1);
             }
         }
+    }
+}
+
+// sort gui
+void character_player::update_sort_buttons()
+{
+    if (IsKeyPressed(KEY_TAB) && is_sort_open == true)
+    {
+        is_sort_open = false;
+    }
+    else if (IsKeyPressed(KEY_TAB) && is_sort_open == false)
+    {
+        is_sort_open = true;
+    }
+
+    if (is_sort_open)
+    {
+        if (IsKeyPressed(KEY_W) && current_button > 0)
+        {
+            current_button--;
+        }
+        else if (IsKeyPressed(KEY_S) && current_button < 1)
+        {
+            current_button++;
+        }
+    }
+
+}
+void character_player::draw_sort_buttons()
+{
+    if (is_sort_open)
+    {
+        DrawTexturePro(sort_buttons,
+                       {0, 0, (float)sort_buttons.width, (float)sort_buttons.height},
+                       {sort_base_position},
+                       {0, 0}, 0, WHITE);
+
+        DrawTexturePro(sort_select,
+                       {0, 0, (float)sort_select.width, (float)sort_select.height},
+                       {sort_select_position[current_button]},
+                       {0, 0}, 0, WHITE);
     }
 }
 

@@ -55,6 +55,17 @@ protected:
     void sort_by_weight();
     void sort_by_value();
 
+    Texture2D sort_buttons;
+    Texture2D sort_select;
+    Rectangle sort_base_position;
+    Rectangle sort_select_position[2];
+
+    int current_button = 0;
+    bool is_sort_open = false;
+
+    void draw_sort_buttons();
+    void update_sort_buttons();
+
 public:
     int get_current_slot();
     Texture2D get_texture(int slot);
@@ -71,6 +82,8 @@ public:
     int get_total_strength();
 
     void set_move(bool move);
+
+    void render_gui();
 
 };
 

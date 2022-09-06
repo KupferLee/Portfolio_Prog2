@@ -88,16 +88,17 @@ int main() {
             player->draw();
 
 
-            if (IsKeyDown(KEY_ENTER))
+            if (IsKeyDown(KEY_Q))
             {
                 DrawTexture(infoTexture, 0, 0, WHITE);
             }
             else if (!IsKeyDown(KEY_E))
             {
                 // little backpack shall be only drawn when there is no other info screen currently open
-                DrawText("Press Enter for more information.", Game::ScreenWidth - 750, Game::ScreenHeight - 100, 30, BLACK);
+                DrawText("Press Q for more information.", Game::ScreenWidth - 750, Game::ScreenHeight - 100, 30, BLACK);
                 DrawText("Press E to erase GUI.", Game::ScreenWidth - 750, Game::ScreenHeight - 50, 30, BLACK);
                 inventory->draw();
+                player->render_gui();
             }
 
 
