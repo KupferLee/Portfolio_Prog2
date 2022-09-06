@@ -16,8 +16,6 @@ protected:
     Texture2D texture;
 
 
-
-
 public:
     virtual Vector2 getPosition();
     void draw();

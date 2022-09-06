@@ -20,12 +20,22 @@ void character_player::update()
         item_pickUp(golden_apple);
         item_pickUp(potion);
         item_pickUp(chest);
+        item_pickUp(golden_apple);
+        item_pickUp(crystal);
+        item_pickUp(golden_apple);
+        item_pickUp(chest);
+        item_pickUp(potion);
+        item_pickUp(crystal);
 
         item_pickUp(dagger);
         item_pickUp(ring);
         item_pickUp(armor);
 
         calculate_weight();
+    }
+    else if (IsKeyPressed(KEY_N))
+    {
+        sortItems();
     }
 
     if(container.getItem(11) == ring)
@@ -48,7 +58,7 @@ void character_player::update()
 void character_player::movement()
 {
     //W A S D
-    if (this->canMove == true)
+    if (this->can_move == true)
     {
         // up
         if (IsKeyDown(KEY_W))
@@ -136,6 +146,24 @@ void character_player::calculate_weight()
     }
 }
 
+// sort algorithm
+void character_player::sortItems()
+{
+    for (int i = 0; i < container_current_slot - 1; i++)
+    {
+        if (container.getItem(i)->getWeight() > container.getItem(i + 1)->getWeight())
+        {
+            // set item from i in extra slot
+            container.setItem(container.getItem(i), 13);
+            // set item from i + 1 in i
+            container.setItem(container.getItem(i+ 1), i);
+            // set item from extra slot in i + 1
+            container.setItem(container.getItem(13), i + 1);
+        }
+    }
+}
+
+
 // return item attributes
 int character_player::get_current_slot() { return this->container_current_slot; }
 
@@ -158,4 +186,6 @@ bool character_player::get_armor_occupied() { return is_armor_occupied; }
 int character_player::get_total_weight() { return total_weight; }
 
 int character_player::get_total_strength() { return this->strength; }
+
+void character_player::set_move(bool move) { can_move = move; }
 

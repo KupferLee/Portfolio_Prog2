@@ -27,7 +27,7 @@ protected:
     void movement();
     void calculate_weight();
 
-    bool canMove = true;
+    bool can_move = true;
     int base_strength = 20; // determines how much weight can be put in inventory
     int strength = 0;
     int total_weight = 0;
@@ -42,7 +42,7 @@ protected:
     item_armor* armor = new item_armor;
 
     // container for item objects
-    Inventory_Template<item_base*, 13> container;
+    Inventory_Template<item_base*, 14> container;
     int container_current_slot = 0;
     void item_pickUp(item_base* item);
     //void item_drop();
@@ -50,6 +50,9 @@ protected:
     bool is_weapons_occupied;
     bool is_rings_occupied;
     bool is_armor_occupied;
+
+    // sort algorithm
+    void sortItems();
 
 public:
     int get_current_slot();
@@ -65,6 +68,8 @@ public:
 
     int get_total_weight();
     int get_total_strength();
+
+    void set_move(bool move);
 
 };
 

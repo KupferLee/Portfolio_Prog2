@@ -43,10 +43,16 @@ int main() {
 
         inventory->update();
 
-        if (!inventory->isBackpackOpen())
+        if (inventory->isBackpackOpen())
         {
-            player->update();
+            player->set_move(false);
         }
+        else
+        {
+            player->set_move(true);
+        }
+
+        player->update();
 
 
 
