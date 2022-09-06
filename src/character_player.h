@@ -52,7 +52,8 @@ protected:
     bool is_armor_occupied;
 
     // sort algorithm
-    void sortItems();
+    void sort_by_weight();
+    void sort_by_value();
 
 public:
     int get_current_slot();

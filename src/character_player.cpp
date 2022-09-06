@@ -35,7 +35,11 @@ void character_player::update()
     }
     else if (IsKeyPressed(KEY_N))
     {
-        sortItems();
+        sort_by_weight();
+    }
+    else if (IsKeyPressed(KEY_B))
+    {
+        sort_by_value();
     }
 
     if(container.getItem(11) == ring)
@@ -147,22 +151,48 @@ void character_player::calculate_weight()
 }
 
 // sort algorithm
-void character_player::sortItems()
+void character_player::sort_by_weight()
 {
-    for (int i = 0; i < container_current_slot - 1; i++)
+    // go through all set item slots
+    for (int i = 0; i < container_current_slot; i++)
     {
-        if (container.getItem(i)->getWeight() > container.getItem(i + 1)->getWeight())
+        // actual sort algorithm
+        for (int i = 0; i < container_current_slot - 1; i++)
         {
-            // set item from i in extra slot
-            container.setItem(container.getItem(i), 13);
-            // set item from i + 1 in i
-            container.setItem(container.getItem(i+ 1), i);
-            // set item from extra slot in i + 1
-            container.setItem(container.getItem(13), i + 1);
+            if (container.getItem(i)->getWeight() > container.getItem(i + 1)->getWeight())
+            {
+                // set item from i in extra slot
+                container.setItem(container.getItem(i), 13);
+                // set item from i + 1 in i
+                container.setItem(container.getItem(i+ 1), i);
+                // set item from extra slot in i + 1
+                container.setItem(container.getItem(13), i + 1);
+            }
+        }
+    }
+
+}
+
+void character_player::sort_by_value()
+{
+    // go through all set item slots
+    for (int i = 0; i < container_current_slot; i++)
+    {
+        // actual sort algorithm
+        for (int i = 0; i < container_current_slot - 1; i++)
+        {
+            if (container.getItem(i)->getValue() < container.getItem(i + 1)->getValue())
+            {
+                // set item from i in extra slot
+                container.setItem(container.getItem(i), 13);
+                // set item from i + 1 in i
+                container.setItem(container.getItem(i + 1), i);
+                // set item from extra slot in i + 1
+                container.setItem(container.getItem(13), i + 1);
+            }
         }
     }
 }
-
 
 // return item attributes
 int character_player::get_current_slot() { return this->container_current_slot; }
