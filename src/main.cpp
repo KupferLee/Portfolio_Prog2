@@ -31,9 +31,9 @@ int main() {
 
 
     // loading the current json data into vectors so they only need to be parsed once
-    current_map->random();
-    current_map->randomStartFin();
-    current_map->randomItems();
+    current_map->Randomize();
+    current_map->RandomStartFin();
+    current_map->RandomItems();
 
 
     // Main game loop
@@ -82,7 +82,7 @@ int main() {
             DrawText("If you see this, this is not working!", 10, 10, 30, DARKBLUE);
 
             // draw what is currently loaded within the map vectors
-            current_map->draw();
+        current_map->Draw();
 
             // draw player
             player->draw();
@@ -103,7 +103,7 @@ int main() {
             // Draw Collision
             if ( IsKeyDown(KEY_H))
             {
-                current_map->drawCollision();
+                current_map->Draw_Collision();
             }
 
 

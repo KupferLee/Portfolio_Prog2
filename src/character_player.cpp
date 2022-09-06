@@ -65,9 +65,9 @@ void character_player::update()
         current_button = 0;
         is_sort_open = false;
 
-        for (int i = 0; i < current_map.sizeCollsion(); i ++)
+        for (int i = 0; i < current_map.Get_Size_Collsion(); i ++)
         {
-            if (this->hitbox.x == current_map.getRectangle(i).x && this->hitbox.y == current_map.getRectangle(i).y)
+            if (this->hitbox.x == current_map.Get_Rectangle(i).x && this->hitbox.y == current_map.Get_Rectangle(i).y)
             {
                 can_move = false;
             }

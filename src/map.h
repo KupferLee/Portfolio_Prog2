@@ -8,39 +8,38 @@
 class map {
 public:
     map();
-    void parse();
-    void draw();
-    void random();
-    void randomStartFin();
-    void randomItems();
+    void Parse();
+    void Draw();
+    void Randomize();
+    void RandomStartFin();
+    void RandomItems();
 
-    void drawCollision();
-    Rectangle getRectangle(int i);
-    int sizeCollsion();
+    void Draw_Collision();
+    Rectangle Get_Rectangle(int i);
+    int Get_Size_Collsion();
 
 protected:
-    nlohmann::json levelMap;
-    Texture2D tileAtlasTexture;
-    nlohmann::json tilesetDescription;
+    nlohmann::json Level_Map;
+    Texture2D Tileatlas_Texture;
+    nlohmann::json Tileset_Description;
 
     // ticks for checking which position inside of methods
-    int drawTick = 0;
-    int checkpointTick = 0;
-    int itemTick = 0;
-    int itemsMax = 10; // how many items there can be spawned at one map
+    int draw_tick = 0;
+    int checkpoint_tick = 0;
+    int item_tick = 0;
+    int items_max = 10; // how many items there can be spawned at one map
     int item_current = 0; // how many items are currently spawned on the map
 
     bool is_dagger = false;
     bool is_ring = false;
     bool is_chestplate = false;
 
-    bool isStartDrawn = false;
-    bool isFinDrawn = false;
+    bool is_start_drawn = false;
+    bool is_fin_drawn = false;
 
     // tiles as numbers
     const int tile_empty = -1;
     const int tile_grass = 0;
-    const int tile_water = 1;
     const int tile_finish = 2;
     const int tile_start = 3;
     const int tile_dagger = 4;
@@ -56,22 +55,22 @@ protected:
     //structs for tilemaps
     struct {
         Texture2D tilemap;
-        int tileWidht;
-        int tileMapWidth;
-        int rowLength;
-    } tilemapData;
+        int tile_widht;
+        int tile_map_width;
+        int row_length;
+    } tilemap_data;
 
     struct {
-        std::vector<int> layerGround;
-        std::vector<int> layerPath;
-        std::vector<int> layerItems;
-        std::vector<int> layerCheckpoints;
-        std::vector<bool> layerCollision;
-        int mapWidth;
-        int mapHeight;
-    } mapData;
+        std::vector<int> layer_ground;
+        std::vector<int> layer_path;
+        std::vector<int> layer_items;
+        std::vector<int> layer_checkpoints;
+        std::vector<bool> layer_collision;
+        int map_width;
+        int map_height;
+    } map_data;
 
-    std::vector<Rectangle> collisionRectangles;
+    std::vector<Rectangle> hitboxes;
 
 
 };
