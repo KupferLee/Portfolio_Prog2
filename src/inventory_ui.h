@@ -10,12 +10,11 @@
 class inventory_ui {
 public:
     inventory_ui();
-    void update();
-    void draw();
-    bool isBackpackOpen();
-    bool isInfoOpen();
-    character_player* player = new character_player;
-    // std::shared_ptr<character_player> player = {};
+    void Update();
+    void Draw();
+    bool is_backpack_open();
+    bool is_info_open();
+    character_player* Player = new character_player;
 
 protected:
 

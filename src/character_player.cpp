@@ -6,7 +6,7 @@
 
 character_player::character_player()
 {
-    // player
+    // Player
     this->texture = LoadTexture("assets/graphics/characters/player_32.png");
     this->position = {32, 32};
     this->movement_speed = 3;
@@ -87,7 +87,7 @@ void character_player::update()
         this->strength = base_strength;
     }
 
-    // disable movement when total weight is more than player strength
+    // disable movement when total weight is more than Player strength
     if (total_weight < strength)
     {
         movement();

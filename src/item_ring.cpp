@@ -9,7 +9,7 @@ item_ring::item_ring()
     this->texture_id = 9;
     this->texture = LoadTexture("assets/graphics/gui/item_ring.png");
 
-    // if worn gives a player +5 strength
+    // if worn gives a Player +5 strength
     this->plus_strength = 5;
 }
 

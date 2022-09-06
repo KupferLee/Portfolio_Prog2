@@ -27,7 +27,7 @@ int main() {
     map* Map = new map;
     inventory_ui* Inventory = new inventory_ui();
     character_player* Player = new character_player;
-    Inventory->player = Player;
+    Inventory->Player = Player;
 
 
     // loading the current json data into vectors so they only need to be parsed once
@@ -41,9 +41,9 @@ int main() {
     {
         // Updates that are made by frame are coded here
 
-        Inventory->update();
+        Inventory->Update();
 
-        if (Inventory->isBackpackOpen())
+        if (Inventory->is_backpack_open())
         {
             Player->set_move(false);
         }
@@ -56,8 +56,8 @@ int main() {
 
 
 
-        // maybe switch case referring to Inventory->isBackpackOpen() to determine where user can act rn
-        switch (Inventory->isBackpackOpen())
+        // maybe switch case referring to Inventory->is_backpack_open() to determine where user can act rn
+        switch (Inventory->is_backpack_open())
         {
             case true:
             {
@@ -97,7 +97,7 @@ int main() {
                 // little backpack shall be only drawn when there is no other info screen currently open
                 DrawText("Press Q for more information.", Game::ScreenWidth - 750, Game::ScreenHeight - 100, 30, BLACK);
                 DrawText("Press E to erase GUI.", Game::ScreenWidth - 750, Game::ScreenHeight - 50, 30, BLACK);
-                Inventory->draw();
+                Inventory->Draw();
             }
 
             // Draw Collision
