@@ -192,6 +192,7 @@ void character_player::sort_by_weight()
         }
     }
 
+    std::cout << "DEBUG: Items are sorted by weight now." << std::endl;
 }
 
 void character_player::sort_by_value()
@@ -212,6 +213,8 @@ void character_player::sort_by_value()
             }
         }
     }
+
+    std::cout << "DEBUG: Items are sorted by value now." << std::endl;
 }
 
 void character_player::sort_by_name()
@@ -234,6 +237,8 @@ void character_player::sort_by_name()
             }
         }
     }
+
+    std::cout << "DEBUG: Items are sorted by name now." << std::endl;
 }
 
 // sort gui
