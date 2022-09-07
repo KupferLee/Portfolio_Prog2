@@ -29,7 +29,6 @@ int main() {
     character_player* Player = new character_player;
     Inventory->Player = Player;
 
-
     // loading the current json data into vectors so they only need to be parsed once
     Map->Randomize();
     Map->RandomStartFin();
@@ -43,44 +42,36 @@ int main() {
 
         Inventory->Update();
 
-        if (Inventory->is_backpack_open())
-        {
-            Player->Set_Can_Move(false);
-        }
-        else
-        {
-            Player->Set_Can_Move(true);
-        }
+
 
         Player->Update();
 
-        for (int i = 0; i < Map->Get_Size_Collsion(); i ++)
-        {
-            if (Player->Check_Collision(Map->Get_Rectangle(i)))
-            {
-                Player->Set_Can_Move(false);
-                std::cout << "DEBUG: Hitbox found." << std::endl;
-            }
-            //else
-            {
-                //Player->Set_Can_Move(true);
-            }
-        }
 
 
-
-        // maybe switch case referring to Inventory->is_backpack_open() to determine where user can act rn
         switch (Inventory->is_backpack_open())
         {
             case true:
             {
-                // user can move within the Inventory
+                Player->Set_Can_Move(false);
                 break;
             }
 
             case false:
             {
-                // user can move on map
+                for (int i = 0; i < Map->Get_Size_Collsion(); i ++)
+                {
+                    // Fehler ist da wo ich nach Hitboxen frage
+                    if (Player->Check_Collision(Map->Get_Rectangle(i)))
+                    {
+                        Player->Set_Can_Move(false);
+                        std::cout << "DEBUG: Hitbox found." << std::endl;
+                    }
+                    else
+                    {
+                        Player->Set_Can_Move(true);
+                    }
+                }
+
                 break;
             }
         }
