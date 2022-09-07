@@ -54,6 +54,19 @@ int main() {
 
         Player->Update();
 
+        for (int i = 0; i < Map->Get_Size_Collsion(); i ++)
+        {
+            if (Player->Check_Collision(Map->Get_Rectangle(i)))
+            {
+                Player->Set_Can_Move(false);
+                std::cout << "DEBUG: Hitbox found." << std::endl;
+            }
+            //else
+            {
+                //Player->Set_Can_Move(true);
+            }
+        }
+
 
 
         // maybe switch case referring to Inventory->is_backpack_open() to determine where user can act rn
@@ -85,7 +98,7 @@ int main() {
         Map->Draw();
 
             // draw Player
-            Player->draw();
+        Player->Draw();
 
 
             if (IsKeyDown(KEY_Q))

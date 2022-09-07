@@ -28,22 +28,32 @@ void character_player::Update()
 {
     Update_Sort_Buttons();
 
+    /*
+    for (int i = 0; i < Map.Get_Size_Collsion(); i++)
+    {
+        if( Check_Collision(Map.Get_Rectangle(i)) )
+        {
+            is_collision = true;
+        }
+    }
+    */
+
     if (IsKeyPressed(KEY_M))
     {
-        Item_Pickup(crystal);
-        Item_Pickup(golden_apple);
-        Item_Pickup(potion);
-        Item_Pickup(chest);
-        Item_Pickup(golden_apple);
-        Item_Pickup(crystal);
-        Item_Pickup(golden_apple);
-        Item_Pickup(chest);
-        Item_Pickup(potion);
-        Item_Pickup(crystal);
+        Item_Pickup(Crystal);
+        Item_Pickup(Golden_Apple);
+        Item_Pickup(Potion);
+        Item_Pickup(Chest);
+        Item_Pickup(Golden_Apple);
+        Item_Pickup(Crystal);
+        Item_Pickup(Golden_Apple);
+        Item_Pickup(Chest);
+        Item_Pickup(Potion);
+        Item_Pickup(Crystal);
 
-        Item_Pickup(dagger);
-        Item_Pickup(ring);
-        Item_Pickup(armor);
+        Item_Pickup(Dagger);
+        Item_Pickup(Ring);
+        Item_Pickup(Armor);
 
         Calculate_Weight();
     }
@@ -51,8 +61,8 @@ void character_player::Update()
     {
         for (int i = 0; i < 10; i++)
         {
-            container_current_slot = 0;
-            container.setItem(NULL, i);
+            inventory_slot = 0;
+            Inventory.setItem(NULL, i);
         }
     }
     else if (is_sort_open == true && IsKeyPressed(KEY_ENTER))
@@ -72,23 +82,11 @@ void character_player::Update()
 
         current_button = 0;
         is_sort_open = false;
-
-        for (int i = 0; i < current_map.Get_Size_Collsion(); i ++)
-        {
-            if (this->hitbox.x == current_map.Get_Rectangle(i).x && this->hitbox.y == current_map.Get_Rectangle(i).y)
-            {
-                can_move = false;
-            }
-            else
-            {
-                can_move = true;
-            }
-        }
     }
 
-    if(container.getItem(11) == ring)
+    if(Inventory.getItem(11) == Ring)
     {
-        this->strength = base_strength + ring->Get_Strength();
+        this->strength = base_strength + Ring->Get_Strength();
     }
     else
     {
@@ -137,30 +135,31 @@ void character_player::Movement_Controls()
 }
 
 
+// Inventory
 void character_player::Item_Pickup(item_base* item)
 {
     // only fill in the first 10 slots, not the 3 special ones
-    if (this->container_current_slot < 10 && item != dagger && item != ring && item != armor)
+    if (this->inventory_slot < 10 && item != Dagger && item != Ring && item != Armor)
     {
-        container.setItem(item, this->container_current_slot);
+        Inventory.setItem(item, this->inventory_slot);
 
-        this->container_current_slot++;
+        this->inventory_slot++;
     }
     // if pick up weapon and special slot weapon empty fill in special slot
-    else if (item == dagger && container.getItem(10) == NULL)
+    else if (item == Dagger && Inventory.getItem(10) == NULL)
     {
-        container.setItem(item, 10);
+        Inventory.setItem(item, 10);
         is_weapons_occupied = true;
     }
     // if pick up ring and special slot ring empty fill in special slot
-    else if (item == ring  && container.getItem(11) == NULL)
+    else if (item == Ring && Inventory.getItem(11) == NULL)
     {
-        container.setItem(item, 11);
+        Inventory.setItem(item, 11);
         is_rings_occupied = true;
     }
-    else if (item == armor && container.getItem(12) == NULL)
+    else if (item == Armor && Inventory.getItem(12) == NULL)
     {
-        container.setItem(item, 12);
+        Inventory.setItem(item, 12);
         is_armor_occupied = true;
     }
     else
@@ -176,22 +175,22 @@ void character_player::Calculate_Weight()
     this->total_weight = 0;
 
     // count through normal items and add weight
-    for (int i = 0; i < container_current_slot; i++)
+    for (int i = 0; i < inventory_slot; i++)
     {
-        this->total_weight = total_weight + container.getItem(i)->Get_Weight();
+        this->total_weight = total_weight + Inventory.getItem(i)->Get_Weight();
     }
-    // count weapons and rings and armor special if they are assigned
-    if (container.getItem(10) == dagger)
+    // count weapons and rings and Armor special if they are assigned
+    if (Inventory.getItem(10) == Dagger)
     {
-        this->total_weight = total_weight + container.getItem(10)->Get_Weight();
+        this->total_weight = total_weight + Inventory.getItem(10)->Get_Weight();
     }
-    if (container.getItem(11) == ring)
+    if (Inventory.getItem(11) == Ring)
     {
-        this->total_weight = total_weight + container.getItem(11)->Get_Weight();
+        this->total_weight = total_weight + Inventory.getItem(11)->Get_Weight();
     }
-    if (container.getItem(12) == armor)
+    if (Inventory.getItem(12) == Armor)
     {
-        this->total_weight = total_weight + container.getItem(12)->Get_Weight();
+        this->total_weight = total_weight + Inventory.getItem(12)->Get_Weight();
     }
 }
 
@@ -199,19 +198,19 @@ void character_player::Calculate_Weight()
 void character_player::Sort_By_Weight()
 {
     // go through all set item slots
-    for (int i = 0; i < container_current_slot; i++)
+    for (int i = 0; i < inventory_slot; i++)
     {
         // actual sort algorithm
-        for (int i = 0; i < container_current_slot - 1; i++)
+        for (int i = 0; i < inventory_slot - 1; i++)
         {
-            if (container.getItem(i)->Get_Weight() > container.getItem(i + 1)->Get_Weight())
+            if (Inventory.getItem(i)->Get_Weight() > Inventory.getItem(i + 1)->Get_Weight())
             {
                 // set item from i in extra slot
-                container.setItem(container.getItem(i), 13);
+                Inventory.setItem(Inventory.getItem(i), 13);
                 // set item from i + 1 in i
-                container.setItem(container.getItem(i+ 1), i);
+                Inventory.setItem(Inventory.getItem(i + 1), i);
                 // set item from extra slot in i + 1
-                container.setItem(container.getItem(13), i + 1);
+                Inventory.setItem(Inventory.getItem(13), i + 1);
             }
         }
     }
@@ -221,19 +220,19 @@ void character_player::Sort_By_Weight()
 
 void character_player::Sort_By_Value()
 {
-    for (int i = 0; i < container_current_slot; i++)
+    for (int i = 0; i < inventory_slot; i++)
     {
         // actual sort algorithm
-        for (int i = 0; i < container_current_slot - 1; i++)
+        for (int i = 0; i < inventory_slot - 1; i++)
         {
-            if (container.getItem(i)->Get_Value() < container.getItem(i + 1)->Get_Value())
+            if (Inventory.getItem(i)->Get_Value() < Inventory.getItem(i + 1)->Get_Value())
             {
                 // set item from i in extra slot
-                container.setItem(container.getItem(i), 13);
+                Inventory.setItem(Inventory.getItem(i), 13);
                 // set item from i + 1 in i
-                container.setItem(container.getItem(i+ 1), i);
+                Inventory.setItem(Inventory.getItem(i + 1), i);
                 // set item from extra slot in i + 1
-                container.setItem(container.getItem(13), i + 1);
+                Inventory.setItem(Inventory.getItem(13), i + 1);
             }
         }
     }
@@ -244,20 +243,20 @@ void character_player::Sort_By_Value()
 void character_player::Sort_By_Name()
 {
     // go through all set item slots
-    for (int i = 0; i < container_current_slot; i++)
+    for (int i = 0; i < inventory_slot; i++)
     {
         // actual sort algorithm
         // this currently sorts by value lol
-        for (int i = 0; i < container_current_slot - 1; i++)
+        for (int i = 0; i < inventory_slot - 1; i++)
         {
-            if (container.getItem(i)->Get_Name() > container.getItem(i + 1)->Get_Name())
+            if (Inventory.getItem(i)->Get_Name() > Inventory.getItem(i + 1)->Get_Name())
             {
                 // set item from i in extra slot
-                container.setItem(container.getItem(i), 13);
+                Inventory.setItem(Inventory.getItem(i), 13);
                 // set item from i + 1 in i
-                container.setItem(container.getItem(i + 1), i);
+                Inventory.setItem(Inventory.getItem(i + 1), i);
                 // set item from extra slot in i + 1
-                container.setItem(container.getItem(13), i + 1);
+                Inventory.setItem(Inventory.getItem(13), i + 1);
             }
         }
     }
@@ -308,17 +307,17 @@ void character_player::Draw_Sort_Buttons()
 }
 
 // return item attributes
-int character_player::Get_Current_Slot() { return this->container_current_slot; }
+int character_player::Get_Current_Slot() { return this->inventory_slot; }
 
-Texture2D character_player::Get_Texture(int slot) { return container.getItem(slot)->Get_Texture(); }
+Texture2D character_player::Get_Texture(int slot) { return Inventory.getItem(slot)->Get_Texture(); }
 
-std::string character_player::Get_Item_Name(int slot) { return container.getItem(slot)->Get_Name(); }
+std::string character_player::Get_Item_Name(int slot) { return Inventory.getItem(slot)->Get_Name(); }
 
-int character_player::Get_Item_Weight(int slot) { return container.getItem(slot)->Get_Weight(); }
+int character_player::Get_Item_Weight(int slot) { return Inventory.getItem(slot)->Get_Weight(); }
 
-int character_player::Get_Item_Value(int slot) { return container.getItem(slot)->Get_Value(); }
+int character_player::Get_Item_Value(int slot) { return Inventory.getItem(slot)->Get_Value(); }
 
-std::string character_player::Get_Item_Description(int slot) { return container.getItem(slot)->Get_Description(); }
+std::string character_player::Get_Item_Description(int slot) { return Inventory.getItem(slot)->Get_Description(); }
 
 bool character_player::Get_Weapons_Occupied() { return is_weapons_occupied; }
 
@@ -333,4 +332,6 @@ int character_player::Get_Total_Strength() { return this->strength; }
 void character_player::Set_Can_Move(bool move) { can_move = move; }
 
 bool character_player::Get_Sort_Open() { return is_sort_open; }
+
+
 

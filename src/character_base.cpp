@@ -2,7 +2,7 @@
 
 Vector2 character_base::get_position() { return this->position; }
 
-void character_base::draw()
+void character_base::Draw()
 {
     if (IsKeyDown(KEY_H))
     {
@@ -15,3 +15,17 @@ void character_base::draw()
                    {32, 32}, 0, WHITE);
 
 }
+
+bool character_base::Check_Collision(Rectangle obstacle)
+{
+    if (CheckCollisionRecs(hitbox, obstacle))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+Rectangle character_base::Get_Hitbox() {return this->hitbox; }

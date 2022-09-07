@@ -102,7 +102,7 @@ void inventory_ui::draw_current_slot(int i)
                        {this->ui_slots[i]},
                        {0, 0}, 0, WHITE);
     }
-    // only draw dagger in weapon slot if there is a dagger in it
+    // only draw Dagger in weapon slot if there is a Dagger in it
     if (this->Player->Get_Weapons_Occupied() == true) //
     {
         DrawTexturePro(this->Player->Get_Texture(10),
@@ -119,7 +119,7 @@ void inventory_ui::draw_current_slot(int i)
                        {0, 0}, 0, WHITE);
     }
 
-    // only draw armor if slot is occupied
+    // only draw Armor if slot is occupied
     if (this->Player->Get_Armor_Occupied() == true)
     {
         DrawTexturePro(this->Player->Get_Texture(12),
@@ -134,7 +134,7 @@ void inventory_ui::draw_info()
     // draw info for current normal slot if occupied
     if (gui_current_slot <= Player->Get_Current_Slot() - 1)
     {
-        // print info accessing the container item
+        // print info accessing the Inventory item
         DrawText(("Slot: " + std::to_string(this->gui_current_slot)).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40, 30, WHITE);
         DrawText(("Name: " + Player->Get_Item_Name(gui_current_slot)).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 2, 30, WHITE);
         DrawText(("Weight: " + std::to_string(Player->Get_Item_Weight(gui_current_slot))).c_str(), this->ui_infos_position.x, this->ui_infos_position.y + 40 * 3, 30, WHITE);

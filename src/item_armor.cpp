@@ -8,7 +8,7 @@ item_armor::item_armor()
 {
     this->value = 5;
     this->name = "Armor";
-    this->description = "A heavy armor.";
+    this->description = "A heavy Armor.";
     this->weight = 8;
     this->texture_id = 10;
     this->texture = LoadTexture("assets/graphics/gui/item_armor.png");

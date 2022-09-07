@@ -68,7 +68,7 @@ protected:
         std::vector<bool> layer_collision;
         int map_width;
         int map_height;
-    } map_data;
+    } map_data{};
 
     std::vector<Rectangle> hitboxes;
 

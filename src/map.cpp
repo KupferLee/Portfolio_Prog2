@@ -121,7 +121,7 @@ void map::Randomize()
         }
     }
 
-    // create hitboxes
+    // create visible hitboxes
     for (int i = 0; i < map_data.layer_collision.size(); i++) {
         if (map_data.layer_collision[i]) {
             Rectangle createdRectangle = {i % this->map_data.map_width * 32.0f + 32, (i / this->map_data.map_width * 32.0f) + 32, 32, 32 };
@@ -137,7 +137,7 @@ void map::Draw_Collision()
     }
 }
 
-Rectangle map::Get_Rectangle(int i) { return hitboxes.at(i); }
+Rectangle map::Get_Rectangle(int i) { if (i < hitboxes.size()) { return hitboxes.at(i); } }
 
 int map::Get_Size_Collsion() { return map_data.layer_collision.size(); }
 
@@ -192,17 +192,17 @@ void map::RandomItems() {
 
                     switch (number)
                     {
-                        // dagger
+                        // Dagger
                         case 1:
                             map_data.layer_items.push_back(this->tile_dagger);
                             this->item_current++;
                             break;
-                        // chest
+                        // Chest
                         case 2:
                             map_data.layer_items.push_back(this->tile_chest);
                             this->item_current++;
                             break;
-                        // potion
+                        // Potion
                         case 3:
                             map_data.layer_items.push_back(this->tile_potion);
                             this->item_current++;
@@ -212,7 +212,7 @@ void map::RandomItems() {
                             map_data.layer_items.push_back(this->tile_apple);
                             this->item_current++;
                             break;
-                        // crystal
+                        // Crystal
                         case 5:
                             map_data.layer_items.push_back(this->tile_crystal);
                             this->item_current++;

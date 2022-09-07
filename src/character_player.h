@@ -33,18 +33,18 @@ protected:
     int total_weight = 0;
 
     // item objects
-    item_dagger* dagger = new item_dagger;
-    item_chest* chest = new item_chest;
-    item_potion* potion = new item_potion;
-    item_apple* golden_apple = new item_apple;
-    item_crystal* crystal = new item_crystal;
-    item_ring* ring = new item_ring;
-    item_armor* armor = new item_armor;
+    item_dagger* Dagger = new item_dagger;
+    item_chest* Chest = new item_chest;
+    item_potion* Potion = new item_potion;
+    item_apple* Golden_Apple = new item_apple;
+    item_crystal* Crystal = new item_crystal;
+    item_ring* Ring = new item_ring;
+    item_armor* Armor = new item_armor;
 
-    // container for item objects
-    Inventory_Template<item_base*, 14> container;
-    int container_current_slot = 0;
-    void Item_Pickup(item_base* item);
+    // Inventory for item objects
+    Inventory_Template<item_base*, 14> Inventory;
+    int inventory_slot = 0;
+    void Item_Pickup(item_base* Item);
     //void item_drop();
 
     bool is_weapons_occupied;
@@ -67,8 +67,7 @@ protected:
     void Update_Sort_Buttons();
 
     // collision
-
-    map current_map = map();
+    map Map = map();
 
 public:
     int Get_Current_Slot();

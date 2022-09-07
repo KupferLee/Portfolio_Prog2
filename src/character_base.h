@@ -19,9 +19,13 @@ protected:
     Texture2D texture;
 
 
+
 public:
     virtual Vector2 get_position();
-    void draw();
+    void Draw();
+    // collision
+    bool Check_Collision(Rectangle obstacle);
+    Rectangle Get_Hitbox();
 
 };
 

@@ -32,7 +32,7 @@ protected:
     void draw_current_slot(int i);
     void draw_info();
 
-    // variables have gui in front of them so i can see if they are for the object container or for gui textures
+    // variables have gui in front of them so i can see if they are for the object Inventory or for gui textures
     bool gui_isOpen = false;
     bool gui_isInfo = false;
     float gui_scale_factor = 6;
