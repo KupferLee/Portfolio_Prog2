@@ -58,6 +58,7 @@ int main() {
 
             case false:
             {
+                /*
                 for (int i = 0; i < Map->Get_Size_Collsion(); i ++)
                 {
                     // Fehler ist da wo ich nach Hitboxen frage
@@ -71,6 +72,7 @@ int main() {
                         Player->Set_Can_Move(true);
                     }
                 }
+                 */
 
                 break;
             }

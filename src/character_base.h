@@ -4,11 +4,13 @@
 
 #include "raylib.h"
 #include "map.h"
+#include <memory>
 
 
 class character_base {
 protected:
     Vector2 position;
+    Vector3 current_tile;
 
     int movement_speed;
     enum direction {down, up};
@@ -21,7 +23,9 @@ protected:
 
 
 public:
-    virtual Vector2 get_position();
+    int Get_Position_X();
+    int Get_Position_Y();
+    int Get_Position_Z();
     void Draw();
     // collision
     bool Check_Collision(Rectangle obstacle);
