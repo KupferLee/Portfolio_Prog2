@@ -33,7 +33,7 @@ int main() {
     // loading the current json data into vectors so they only need to be parsed once
     Map->Parse();
     Map->Random_Start_Fin();
-    Map->Random_Items();
+    Map->Parse_Items();
 
 
     // Main game loop
@@ -87,8 +87,6 @@ int main() {
             else if (!IsKeyDown(KEY_E))
             {
                 // little backpack shall be only drawn when there is no other info screen currently open
-                DrawText("Press Q for more information.", Game::ScreenWidth - 750, Game::ScreenHeight - 100, 30, BLACK);
-                DrawText("Press E to erase GUI.", Game::ScreenWidth - 750, Game::ScreenHeight - 50, 30, BLACK);
                 Inventory->Draw();
             }
 

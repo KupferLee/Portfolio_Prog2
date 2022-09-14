@@ -32,11 +32,7 @@ void character_base::Draw()
                    {this->position.x, this->position.y, 32, 32},
                    {32, 32}, 0, WHITE);
 
-    DrawText(std::to_string(Get_Position_X()).c_str(), 30, 30, 30, BLACK);
-    DrawText(" / ", 60, 30, 30, BLACK);
-    DrawText(std::to_string(Get_Position_Y()).c_str(), 110, 30, 30, BLACK);
 
-    DrawText(std::to_string(Get_Position_Z()).c_str(), 30, 70, 30, BLACK);
 
 }
 

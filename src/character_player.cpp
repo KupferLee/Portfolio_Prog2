@@ -30,15 +30,12 @@ void character_player::Update()
     Calculate_Weight();
     Check_Item_Collision();
 
-    if (IsKeyPressed(KEY_N))
-    {
-        for (int i = 0; i < 10; i++)
-        {
-            inventory_slot = 0;
-            Inventory.setItem(NULL, i);
-        }
-    }
-    else if (is_sort_open == true && IsKeyPressed(KEY_ENTER))
+    // put this here so position isnt fucked up
+    Get_Position_X();
+    Get_Position_Y();
+    Get_Position_Z();
+
+    if (is_sort_open == true && IsKeyPressed(KEY_ENTER))
     {
         if (current_button == 0)
         {
@@ -67,7 +64,7 @@ void character_player::Update()
     }
 
     // disable movement when total weight is more than Player strength
-    if (total_weight < strength)
+    if (total_weight <= strength)
     {
         Movement_Controls();
     }
@@ -192,6 +189,33 @@ void character_player::Check_Item_Collision()
     {
         Item_Pickup(Armor);
         Map->Set_Item_Zero(current_tile.z);
+    }
+
+
+    // add items for testing sort
+    if (IsKeyPressed(KEY_M))
+    {
+        Item_Pickup(Dagger);
+        Item_Pickup(Ring);
+        Item_Pickup(Armor);
+
+        Item_Pickup(Golden_Apple);
+        Item_Pickup(Crystal);
+        Item_Pickup(Chest);
+        Item_Pickup(Potion);
+        Item_Pickup(Golden_Apple);
+        Item_Pickup(Crystal);
+        Item_Pickup(Chest);
+        Item_Pickup(Potion);
+    }
+    // delete all items
+    else if (IsKeyPressed(KEY_N))
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            inventory_slot = 0;
+            Inventory.setItem(NULL, i);
+        }
     }
 }
 
