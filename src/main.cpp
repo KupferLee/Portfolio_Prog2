@@ -92,12 +92,6 @@ int main() {
                 Inventory->Draw();
             }
 
-            // Draw Collision
-            if ( IsKeyDown(KEY_H))
-            {
-                Map->Draw_Collision();
-            }
-
 
         EndDrawing();
     } // Main game loop end

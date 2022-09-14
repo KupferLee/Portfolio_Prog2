@@ -10,6 +10,7 @@ class map {
 public:
     map();
     void Parse();
+    void Parse_Items();
     void Draw();
     void Randomize();
     void Random_Start_Fin();

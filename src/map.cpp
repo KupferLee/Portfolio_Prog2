@@ -39,13 +39,21 @@ void map::Parse()
             }
         }
 
-        if (layer["name"] == "Items") {
-            for (auto const &tileID: layer["data"]) {
+    }
+}
+
+void map::Parse_Items()
+{
+    for (auto const& layer : Level_Map["layers"])
+    {
+        if (layer["name"] == "Items")
+        {
+            for (auto const &tileID: layer["data"])
+            {
                 map_data.layer_items.push_back(((int) tileID) - 1);
 
             }
         }
-
     }
 }
 
@@ -139,17 +147,6 @@ void map::Randomize()
     }
 }
 
-void map::Draw_Collision()
-{
-    for (int i = 0; i < hitboxes.size(); i++) {
-        DrawRectangleRec(hitboxes[i], BLACK);
-    }
-}
-
-Rectangle map::Get_Rectangle(int i) { if (i < hitboxes.size()) { return hitboxes.at(i); } }
-
-int map::Get_Size_Collsion() { return map_data.layer_collision.size(); }
-
 //set start and fin on grass tiles random
 void map::Random_Start_Fin()
 {
@@ -163,13 +160,13 @@ void map::Random_Start_Fin()
 
                 // 30% chance to draw start tile
                 // only if there is grass underneath
-                if (rand() % 10 <= 3 && this->is_start_drawn == false && map_data.layer_path.at(checkpoint_tick) == 0) {
+                if (rand() % 10 <= 0.1 && this->is_start_drawn == false && map_data.layer_path.at(checkpoint_tick) == 0) {
                     map_data.layer_checkpoints.push_back(this->tile_start);
                     this->is_start_drawn = true;
                 }
                 // if last 60 tiles then 90% chance to draw fin
                 // only if there is grass underneath and next to it
-                else if (rand() % 10 <= 9 && this->is_fin_drawn == false && map_data.layer_path.at(checkpoint_tick) == this->tile_grass && map_data.layer_path.at(checkpoint_tick - 1) == tile_grass && map_data.layer_path.at(checkpoint_tick + 1) == tile_grass && this->checkpoint_tick >= map_data.layer_ground.size() - 60) {
+                else if (rand() % 10 <= 0.1 && this->is_fin_drawn == false && map_data.layer_path.at(checkpoint_tick) == this->tile_grass && map_data.layer_path.at(checkpoint_tick - 1) == tile_grass && map_data.layer_path.at(checkpoint_tick + 1) == tile_grass && this->checkpoint_tick >= map_data.layer_ground.size() - 60) {
                     map_data.layer_checkpoints.push_back(this->tile_finish);
                     this->is_fin_drawn = true;
                 }
