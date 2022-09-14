@@ -84,12 +84,14 @@ void map::Randomize()
                         {
                             map_data.layer_path.push_back(this->tile_grass);
                             map_data.layer_collision.push_back(false);
+                            std::cout << tile_grass << " ";
                         }
                         // draw nothing
                         else
                         {
                             map_data.layer_path.push_back(this->tile_empty);
                             map_data.layer_collision.push_back(true);
+                            std::cout << tile_empty << " ";
                         }
                     }
                     // if tile before was grass then chance for grass is higher
@@ -100,12 +102,14 @@ void map::Randomize()
                         {
                             map_data.layer_path.push_back(this->tile_grass);
                             map_data.layer_collision.push_back(false);
+                            std::cout << tile_grass << " ";
                         }
                         //draw nothing
                         else
                         {
                             map_data.layer_path.push_back(this->tile_empty);
                             map_data.layer_collision.push_back(true);
+                            std::cout << tile_empty << " ";
                         }
                     }
 
@@ -114,6 +118,7 @@ void map::Randomize()
                     {
                         map_data.layer_path.push_back(this->tile_empty);
                         map_data.layer_collision.push_back(true);
+                        std::cout << tile_empty << " ";
                     }
 
                 }
@@ -121,14 +126,15 @@ void map::Randomize()
                 else
                 {
                     map_data.layer_path.push_back(this->tile_grass);
+                    std::cout << tile_grass << " ";
                 }
 
                 this->draw_tick++;
 
             }
-            std::cout << "DEBUG: Ground parsed" << std::endl;
         }
     }
+
 
     // create visible hitboxes
     for (int i = 0; i < map_data.layer_collision.size(); i++) {
@@ -305,5 +311,5 @@ void map::Draw()
 
 int map::Get_Tile(int i)
 {
-    return map_data.layer_ground[i];
+    return map_data.layer_path[i];
 }
