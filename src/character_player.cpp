@@ -28,16 +28,6 @@ void character_player::Update()
 {
     Update_Sort_Buttons();
 
-    /*
-    for (int i = 0; i < Map.Get_Size_Collsion(); i++)
-    {
-        if( Check_Collision(Map.Get_Rectangle(i)) )
-        {
-            is_collision = true;
-        }
-    }
-    */
-
     if (IsKeyPressed(KEY_M))
     {
         Item_Pickup(Crystal);
@@ -106,27 +96,31 @@ void character_player::Movement_Controls()
     if (this->can_move == true && this->is_collision == false)
     {
         // up
-        if (IsKeyDown(KEY_W))
+        if (IsKeyPressed(KEY_W))
         {
-            this->position.y = this->position.y - this->movement_speed;
+            // this->position.y = this->position.y - this->movement_speed;
+            this->position.y -= 32;
             this->facing_direction = up;
         }
             // left
-        else if (IsKeyDown(KEY_A))
+        else if (IsKeyPressed(KEY_A))
         {
-            this->position.x = this->position.x - this->movement_speed;
+            // this->position.x = this->position.x - this->movement_speed;
+            this->position.x -= 32;
             this->facing_direction = down;
         }
             // down
-        else if (IsKeyDown(KEY_S))
+        else if (IsKeyPressed(KEY_S))
         {
-            this->position.y = this->position.y + this->movement_speed;
+            // this->position.y = this->position.y + this->movement_speed;
+            this->position.y += 32;
             this->facing_direction = down;
         }
             //right
-        else if (IsKeyDown(KEY_D))
+        else if (IsKeyPressed(KEY_D))
         {
-            this->position.x = this->position.x + this->movement_speed;
+            // this->position.x = this->position.x + this->movement_speed;
+            this->position.x += 32;
             this->facing_direction = down;
         }
 
