@@ -92,32 +92,33 @@ void character_player::Update()
 
 void character_player::Movement_Controls()
 {
-    //W A S D
-    if (this->can_move == true && Map->Get_Tile(Get_Position_Z()) == 0) //
+    // W A S D
+    // only able to make step if tile you want to step on is grass
+    if (this->can_move == true) //
     {
         // up
-        if (IsKeyPressed(KEY_W))
+        if (IsKeyPressed(KEY_W) && Map->Get_Tile(Get_Position_Z() - 30) == 0)
         {
             // this->position.y = this->position.y - this->movement_speed;
             this->position.y -= 32;
             this->facing_direction = up;
         }
             // left
-        else if (IsKeyPressed(KEY_A))
+        else if (IsKeyPressed(KEY_A) && Map->Get_Tile(Get_Position_Z() - 1) == 0)
         {
             // this->position.x = this->position.x - this->movement_speed;
             this->position.x -= 32;
             this->facing_direction = down;
         }
             // down
-        else if (IsKeyPressed(KEY_S))
+        else if (IsKeyPressed(KEY_S) && Map->Get_Tile(Get_Position_Z() + 30) == 0)
         {
             // this->position.y = this->position.y + this->movement_speed;
             this->position.y += 32;
             this->facing_direction = down;
         }
             //right
-        else if (IsKeyPressed(KEY_D))
+        else if (IsKeyPressed(KEY_D) && Map->Get_Tile(Get_Position_Z()  + 1) == 0)
         {
             // this->position.x = this->position.x + this->movement_speed;
             this->position.x += 32;
