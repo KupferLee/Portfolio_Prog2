@@ -59,22 +59,7 @@ int main() {
 
             case false:
             {
-                /*
-                for (int i = 0; i < Map->Get_Size_Collsion(); i ++)
-                {
-                    // Fehler ist da wo ich nach Hitboxen frage
-                    if (Player->Check_Collision(Map->Get_Rectangle(i)))
-                    {
-                        Player->Set_Can_Move(false);
-                        std::cout << "DEBUG: Hitbox found." << std::endl;
-                    }
-                    else
-                    {
-                        Player->Set_Can_Move(true);
-                    }
-                }
-                 */
-
+                Player->Set_Can_Move(true);
                 break;
             }
         }

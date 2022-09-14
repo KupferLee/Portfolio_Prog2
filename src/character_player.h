@@ -31,6 +31,7 @@ protected:
 
     void Movement_Controls();
     void Calculate_Weight();
+    void Check_Item_Collision();
 
     bool can_move = true;
     int base_strength = 20; // determines how much weight can be put in inventory

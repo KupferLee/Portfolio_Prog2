@@ -14,7 +14,10 @@ public:
     void Randomize();
     void Random_Start_Fin();
     void Random_Items();
+
     int Get_Tile(int i);
+    int Get_Item(int i);
+    int Set_Item_Zero(int i);
 
     void Draw_Collision();
     Rectangle Get_Rectangle(int i);

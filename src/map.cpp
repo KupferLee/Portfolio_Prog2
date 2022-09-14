@@ -303,7 +303,8 @@ void map::Draw()
     }
 }
 
-int map::Get_Tile(int i)
-{
-    return map_data.layer_path[i];
-}
+int map::Get_Tile(int i) { return map_data.layer_path[i]; }
+
+int map::Get_Item(int i) { return map_data.layer_items[i]; }
+
+int map::Set_Item_Zero(int i) {map_data.layer_items[i] = 0; }

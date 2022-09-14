@@ -27,6 +27,8 @@ character_player::character_player()
 void character_player::Update()
 {
     Update_Sort_Buttons();
+    Calculate_Weight();
+    Check_Item_Collision();
 
     if (IsKeyPressed(KEY_M))
     {
@@ -41,11 +43,10 @@ void character_player::Update()
         Item_Pickup(Potion);
         Item_Pickup(Crystal);
 
-        Item_Pickup(Dagger);
+
         Item_Pickup(Ring);
         Item_Pickup(Armor);
-
-        Calculate_Weight();
+        Item_Pickup(Dagger);
     }
     else if (IsKeyPressed(KEY_N))
     {
@@ -162,6 +163,54 @@ void character_player::Item_Pickup(item_base* item)
         std::cout << "ERROR: No item assigned." << std::endl;
     }
 
+}
+
+void character_player::Check_Item_Collision()
+{
+    if (inventory_slot < 10)
+    {
+        if (Map->Get_Item(current_tile.z) == 5)
+        {
+            Item_Pickup(Chest);
+            Map->Set_Item_Zero(current_tile.z);
+        }
+
+        if (Map->Get_Item(current_tile.z) == 6)
+        {
+            Item_Pickup(Potion);
+            Map->Set_Item_Zero(current_tile.z);
+        }
+
+        if (Map->Get_Item(current_tile.z) == 7)
+        {
+            Item_Pickup(Golden_Apple);
+            Map->Set_Item_Zero(current_tile.z);
+        }
+
+        if (Map->Get_Item(current_tile.z) == 8)
+        {
+            Item_Pickup(Crystal);
+            Map->Set_Item_Zero(current_tile.z);
+        }
+    }
+
+    if (Map->Get_Item(current_tile.z) == 4)
+    {
+        Item_Pickup(Dagger);
+        Map->Set_Item_Zero(current_tile.z);
+    }
+
+    if (Map->Get_Item(current_tile.z) == 9)
+    {
+        Item_Pickup(Ring);
+        Map->Set_Item_Zero(current_tile.z);
+    }
+
+    if (Map->Get_Item(current_tile.z) == 10)
+    {
+        Item_Pickup(Armor);
+        Map->Set_Item_Zero(current_tile.z);
+    }
 }
 
 void character_player::Calculate_Weight()
