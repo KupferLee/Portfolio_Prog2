@@ -16,11 +16,16 @@
 #include "item_ring.h"
 #include "item_armor.h"
 
+#include "map.h"
+
 
 class character_player : public character_base {
 public:
     character_player();
     void Update();
+
+    // collision
+    map* Map = nullptr;
 
 protected:
 
@@ -66,8 +71,7 @@ protected:
 
     void Update_Sort_Buttons();
 
-    // collision
-    map Map = map();
+
 
 public:
     int Get_Current_Slot();

@@ -3,6 +3,7 @@
 
 #include <nlohmann/json.hpp>
 #include <fstream>
+#include <iostream>
 #include "raylib.h"
 
 class map {
@@ -11,8 +12,9 @@ public:
     void Parse();
     void Draw();
     void Randomize();
-    void RandomStartFin();
-    void RandomItems();
+    void Random_Start_Fin();
+    void Random_Items();
+    int Get_Tile(int i);
 
     void Draw_Collision();
     Rectangle Get_Rectangle(int i);
@@ -51,7 +53,7 @@ protected:
     const int tile_armor = 10;
 
 
-
+public:
     //structs for tilemaps
     struct {
         Texture2D tilemap;

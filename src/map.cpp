@@ -73,30 +73,37 @@ void map::Randomize()
             for (auto const &tileID: layer["data"]) {
 
                 // as soon as first row down start here
-                if (draw_tick > 30) {
+                if (draw_tick > 30)
+                {
 
                     // if above tile was grass then chance for grass is higher
-                    if (map_data.layer_path.at(draw_tick - 30) == 0) {
+                    if (map_data.layer_path.at(draw_tick - 30) == 0)
+                    {
                         // draw grass
-                        if (rand() % 10 <= 6) {
+                        if (rand() % 10 <= 6)
+                        {
                             map_data.layer_path.push_back(this->tile_grass);
                             map_data.layer_collision.push_back(false);
                         }
                         // draw nothing
-                        else {
+                        else
+                        {
                             map_data.layer_path.push_back(this->tile_empty);
                             map_data.layer_collision.push_back(true);
                         }
                     }
                     // if tile before was grass then chance for grass is higher
-                    else if (map_data.layer_path.at(draw_tick - 1) == 0) {
+                    else if (map_data.layer_path.at(draw_tick - 1) == 0)
+                    {
                         // draw grass
-                        if (rand() % 10 <= 6) {
+                        if (rand() % 10 <= 6)
+                        {
                             map_data.layer_path.push_back(this->tile_grass);
                             map_data.layer_collision.push_back(false);
                         }
                         //draw nothing
-                        else {
+                        else
+                        {
                             map_data.layer_path.push_back(this->tile_empty);
                             map_data.layer_collision.push_back(true);
                         }
@@ -111,13 +118,15 @@ void map::Randomize()
 
                 }
                 // first row of tiles all grass
-                else {
+                else
+                {
                     map_data.layer_path.push_back(this->tile_grass);
                 }
 
                 this->draw_tick++;
 
             }
+            std::cout << "DEBUG: Ground parsed" << std::endl;
         }
     }
 
@@ -142,7 +151,7 @@ Rectangle map::Get_Rectangle(int i) { if (i < hitboxes.size()) { return hitboxes
 int map::Get_Size_Collsion() { return map_data.layer_collision.size(); }
 
 //set start and fin on grass tiles random
-void map::RandomStartFin()
+void map::Random_Start_Fin()
 {
     for (auto const& layer : Level_Map["layers"]) {
         //this asks for the name of the layer
@@ -174,7 +183,7 @@ void map::RandomStartFin()
     }
 }
 
-void map::RandomItems() {
+void map::Random_Items() {
     for (auto const& layer : Level_Map["layers"]) {
 
 
@@ -292,4 +301,9 @@ void map::Draw()
                                {}, 0, WHITE);
         }
     }
+}
+
+int map::Get_Tile(int i)
+{
+    return map_data.layer_ground[i];
 }

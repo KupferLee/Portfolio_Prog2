@@ -2,7 +2,7 @@
 
 int character_base::Get_Position_X()
 {
-    current_tile.x = position.x / 32;
+    current_tile.x = (position.x / 32) - 1;
 
     return current_tile.x;
 }

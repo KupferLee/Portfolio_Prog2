@@ -9,8 +9,8 @@
 
 class character_base {
 protected:
-    Vector2 position;
-    Vector3 current_tile;
+    Vector2 position{};
+    Vector3 current_tile{};
 
     int movement_speed;
     enum direction {down, up};

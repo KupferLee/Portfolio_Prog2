@@ -27,12 +27,13 @@ int main() {
     map* Map = new map;
     inventory_ui* Inventory = new inventory_ui();
     character_player* Player = new character_player;
+    Player->Map = Map;
     Inventory->Player = Player;
 
     // loading the current json data into vectors so they only need to be parsed once
     Map->Randomize();
-    Map->RandomStartFin();
-    Map->RandomItems();
+    Map->Random_Start_Fin();
+    Map->Random_Items();
 
 
     // Main game loop

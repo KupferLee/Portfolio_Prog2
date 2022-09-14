@@ -93,7 +93,9 @@ void character_player::Update()
 void character_player::Movement_Controls()
 {
     //W A S D
-    if (this->can_move == true && this->is_collision == false)
+    // only move if player is standing on grass
+    std::cout << Map->Get_Tile(current_tile.z) << std::endl;
+    if (this->can_move == true) // && Map->Get_Tile(Get_Position_Z()) == 0
     {
         // up
         if (IsKeyPressed(KEY_W))
