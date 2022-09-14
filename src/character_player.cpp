@@ -30,25 +30,7 @@ void character_player::Update()
     Calculate_Weight();
     Check_Item_Collision();
 
-    if (IsKeyPressed(KEY_M))
-    {
-        Item_Pickup(Crystal);
-        Item_Pickup(Golden_Apple);
-        Item_Pickup(Potion);
-        Item_Pickup(Chest);
-        Item_Pickup(Golden_Apple);
-        Item_Pickup(Crystal);
-        Item_Pickup(Golden_Apple);
-        Item_Pickup(Chest);
-        Item_Pickup(Potion);
-        Item_Pickup(Crystal);
-
-
-        Item_Pickup(Ring);
-        Item_Pickup(Armor);
-        Item_Pickup(Dagger);
-    }
-    else if (IsKeyPressed(KEY_N))
+    if (IsKeyPressed(KEY_N))
     {
         for (int i = 0; i < 10; i++)
         {
@@ -194,19 +176,19 @@ void character_player::Check_Item_Collision()
         }
     }
 
-    if (Map->Get_Item(current_tile.z) == 4)
+    if (Map->Get_Item(current_tile.z) == 4 && is_weapons_occupied == false)
     {
         Item_Pickup(Dagger);
         Map->Set_Item_Zero(current_tile.z);
     }
 
-    if (Map->Get_Item(current_tile.z) == 9)
+    if (Map->Get_Item(current_tile.z) == 9 && is_rings_occupied == false)
     {
         Item_Pickup(Ring);
         Map->Set_Item_Zero(current_tile.z);
     }
 
-    if (Map->Get_Item(current_tile.z) == 10)
+    if (Map->Get_Item(current_tile.z) == 10 && is_armor_occupied == false)
     {
         Item_Pickup(Armor);
         Map->Set_Item_Zero(current_tile.z);

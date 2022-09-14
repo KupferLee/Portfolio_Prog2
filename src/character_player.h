@@ -53,9 +53,9 @@ protected:
     void Item_Pickup(item_base* Item);
     //void item_drop();
 
-    bool is_weapons_occupied;
-    bool is_rings_occupied;
-    bool is_armor_occupied;
+    bool is_weapons_occupied = false;
+    bool is_rings_occupied = false;
+    bool is_armor_occupied = false;
 
     // sort algorithm
     void Sort_By_Weight();
