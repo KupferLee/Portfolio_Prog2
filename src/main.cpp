@@ -31,7 +31,7 @@ int main() {
     Inventory->Player = Player;
 
     // loading the current json data into vectors so they only need to be parsed once
-    Map->Randomize();
+    Map->Parse();
     Map->Random_Start_Fin();
     Map->Random_Items();
 
