@@ -300,8 +300,53 @@ void map::Draw()
     }
 }
 
+void map::Draw_Path()
+{
+    DrawText(("X: " + std::to_string((int)Get_Start_Pos().x)).c_str(), 30, 30, 30, BLACK);
+    DrawText(("Y: " + std::to_string((int)Get_Start_Pos().y)).c_str(), 30, 70, 30, BLACK);
+
+    DrawText(("X: " + std::to_string((int)Get_Fin_Pos().x)).c_str(), 30, 120, 30, BLACK);
+    DrawText(("Y: " + std::to_string((int)Get_Fin_Pos().y)).c_str(), 30, 160, 30, BLACK);
+
+    if (IsKeyDown(KEY_H))
+    {
+        DrawRectangle(Get_Start_Pos().x * 32, Get_Start_Pos().y * 32, 32, 32, GREEN);
+        DrawRectangle(Get_Fin_Pos().x * 32, Get_Fin_Pos().y * 32, 32, 32, RED);
+
+        DrawLine(Get_Start_Pos().x * 32, Get_Start_Pos().y * 32, Get_Fin_Pos().x, Get_Fin_Pos().y, RED);
+    }
+}
+
 int map::Get_Tile(int i) { return map_data.layer_path[i]; }
 
 int map::Get_Item(int i) { return map_data.layer_items[i]; }
 
-int map::Set_Item_Zero(int i) {map_data.layer_items[i] = 0; }
+void map::Set_Item_Zero(int i) {map_data.layer_items[i] = 0; }
+
+Vector2 map::Get_Start_Pos()
+{
+    for (int i = 0; i < map_data.layer_checkpoints.size(); i++)
+    {
+        if (map_data.layer_checkpoints[i] == 3)
+        {
+            start_position.x = i % 30;
+            start_position.y = i / 30;
+        }
+    }
+
+    return this->start_position;
+}
+
+Vector2 map::Get_Fin_Pos()
+{
+    for (int i = 0; i < map_data.layer_checkpoints.size(); i++)
+    {
+        if (map_data.layer_checkpoints[i] == 2)
+        {
+            finish_position.x = i % 30;
+            finish_position.y = i / 30;
+        }
+    }
+
+    return this->finish_position;
+}

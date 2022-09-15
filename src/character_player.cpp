@@ -88,7 +88,7 @@ void character_player::Movement_Controls()
         {
             // this->position.x = this->position.x - this->movement_speed;
             this->position.x -= 32;
-            this->facing_direction = down;
+            // this->facing_direction = down;
         }
             // down
         else if (IsKeyPressed(KEY_S) && Map->Get_Tile(Get_Position_Z() + 30) == 0)
@@ -102,7 +102,7 @@ void character_player::Movement_Controls()
         {
             // this->position.x = this->position.x + this->movement_speed;
             this->position.x += 32;
-            this->facing_direction = down;
+            // this->facing_direction = down;
         }
 
         this->hitbox = {position.x - 32, position.y - 32, 32, 32};

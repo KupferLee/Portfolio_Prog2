@@ -4,6 +4,7 @@
 #include <nlohmann/json.hpp>
 #include <fstream>
 #include <iostream>
+#include <memory>
 #include "raylib.h"
 
 class map {
@@ -18,7 +19,13 @@ public:
 
     int Get_Tile(int i);
     int Get_Item(int i);
-    int Set_Item_Zero(int i);
+    void Set_Item_Zero(int i);
+
+    // get tile positions in x/y in tiles
+    Vector2 Get_Start_Pos();
+    Vector2 Get_Fin_Pos();
+
+    void Draw_Path();
 
     void Draw_Collision();
     Rectangle Get_Rectangle(int i);
@@ -55,6 +62,9 @@ protected:
     const int tile_crystal = 8;
     const int tile_ring = 9;
     const int tile_armor = 10;
+
+    Vector2 start_position = {0, 0};
+    Vector2 finish_position = {0, 0};
 
 
 public:

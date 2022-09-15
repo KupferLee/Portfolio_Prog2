@@ -74,10 +74,12 @@ int main() {
             DrawText("If you see this, this is not working!", 10, 10, 30, DARKBLUE);
 
             // draw what is currently loaded within the map vectors
-        Map->Draw();
+            Map->Draw();
+            Map->Draw_Path();
 
             // draw Player
-        Player->Draw();
+            Player->Draw();
+
 
 
             if (IsKeyDown(KEY_Q))
