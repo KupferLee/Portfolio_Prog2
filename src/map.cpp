@@ -313,7 +313,7 @@ void map::Draw_Path()
         DrawRectangle(Get_Start_Pos().x * 32, Get_Start_Pos().y * 32, 32, 32, GREEN);
         DrawRectangle(Get_Fin_Pos().x * 32, Get_Fin_Pos().y * 32, 32, 32, RED);
 
-        DrawLine(Get_Start_Pos().x * 32, Get_Start_Pos().y * 32, Get_Fin_Pos().x, Get_Fin_Pos().y, RED);
+        DrawLine(Get_Start_Pos().x * 32 + 16, Get_Start_Pos().y * 32 + 16, Get_Fin_Pos().x * 32 + 16, Get_Fin_Pos().y * 32 + 16, PINK);
     }
 }
 
