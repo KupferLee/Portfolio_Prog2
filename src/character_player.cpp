@@ -8,7 +8,6 @@ character_player::character_player()
 {
     // Player
     this->texture = LoadTexture("assets/graphics/characters/player_32.png");
-    this->position = {32, 32};
     this->movement_speed = 3;
 
     // sort gui
@@ -355,6 +354,8 @@ void character_player::Draw_Sort_Buttons()
                        {0, 0}, 0, WHITE);
     }
 }
+
+void character_player::Set_Starting_Pos() { this->position = {(Map->Get_Start_Pos().x + 1) * 32, (Map->Get_Start_Pos().y + 1) * 32}; }
 
 // return item attributes
 int character_player::Get_Current_Slot() { return this->inventory_slot; }

@@ -310,6 +310,15 @@ void map::Draw_Path()
 
     if (IsKeyDown(KEY_H))
     {
+        if (Vector2Distance({Get_Start_Pos().x - 32, Get_Start_Pos().y}, Get_Fin_Pos()) < Vector2Distance({Get_Start_Pos().x + 32, Get_Start_Pos().y}, Get_Fin_Pos()))
+        {
+            DrawRectangle((Get_Start_Pos().x - 1)*32, Get_Start_Pos().y * 32, 32, 32, PINK);
+        }
+        else
+        {
+            DrawRectangle((Get_Start_Pos().x + 1)*32, Get_Start_Pos().y, 32, 32, PINK);
+        }
+
         DrawRectangle(Get_Start_Pos().x * 32, Get_Start_Pos().y * 32, 32, 32, GREEN);
         DrawRectangle(Get_Fin_Pos().x * 32, Get_Fin_Pos().y * 32, 32, 32, RED);
 

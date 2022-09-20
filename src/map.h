@@ -1,11 +1,12 @@
 #ifndef RAYLIBSTARTER_MAP_H
 #define RAYLIBSTARTER_MAP_H
 
+#include "raylib.h"
 #include <nlohmann/json.hpp>
 #include <fstream>
 #include <iostream>
-#include <memory>
-#include "raylib.h"
+#include "raymath.h"
+
 
 class map {
 public:

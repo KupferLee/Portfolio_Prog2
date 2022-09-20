@@ -23,6 +23,7 @@ class character_player : public character_base {
 public:
     character_player();
     void Update();
+    void Set_Starting_Pos();
 
     // collision
     map* Map = nullptr;

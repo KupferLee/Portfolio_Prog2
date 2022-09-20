@@ -35,6 +35,7 @@ int main() {
     Map->Random_Start_Fin();
     Map->Parse_Items();
 
+    Player->Set_Starting_Pos();
 
     // Main game loop
     while (!WindowShouldClose()) // Detect window close button or ESC key
