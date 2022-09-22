@@ -18,6 +18,8 @@ public:
     void Random_Start_Fin();
     void Random_Items();
 
+    void Add_Robot_Path(int x, int y);
+
     int Get_Tile(int i);
     int Get_Item(int i);
     void Set_Item_Zero(int i);
@@ -44,9 +46,7 @@ protected:
     int items_max = 10; // how many items there can be spawned at one map
     int item_current = 0; // how many items are currently spawned on the map
 
-    bool is_dagger = false;
-    bool is_ring = false;
-    bool is_chestplate = false;
+    Vector2 current_step = {0, 0};
 
     bool is_start_drawn = false;
     bool is_fin_drawn = false;
@@ -67,8 +67,6 @@ protected:
     Vector2 start_position = {0, 0};
     Vector2 finish_position = {0, 0};
 
-
-public:
     //structs for tilemaps
     struct {
         Texture2D tilemap;
@@ -83,6 +81,7 @@ public:
         std::vector<int> layer_items;
         std::vector<int> layer_checkpoints;
         std::vector<bool> layer_collision;
+        std::vector<int> layer_robot_path;
         int map_width;
         int map_height;
     } map_data{};

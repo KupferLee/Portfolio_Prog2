@@ -28,8 +28,9 @@ public:
     int Get_Position_Z();
     void Draw();
     // collision
-    bool Check_Collision(Rectangle obstacle);
-    Rectangle Get_Hitbox();
+
+    map* Map = nullptr;
+
 
 };
 

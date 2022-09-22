@@ -8,6 +8,7 @@
 #include "map.h"
 #include "inventory_ui.h"
 #include "character_player.h"
+#include "character_robot.h"
 #include <iostream>
 
 int main() {
@@ -27,15 +28,19 @@ int main() {
     map* Map = new map;
     inventory_ui* Inventory = new inventory_ui();
     character_player* Player = new character_player;
-    Player->Map = Map;
+    character_robot* Robot = new character_robot;
     Inventory->Player = Player;
 
     // loading the current json data into vectors so they only need to be parsed once
     Map->Parse();
     Map->Random_Start_Fin();
     Map->Parse_Items();
+    Player->Map = Map;
+    Robot->Map = Map;
 
     Player->Set_Starting_Pos();
+    Robot->Set_Starting_Pos();
+
 
     // Main game loop
     while (!WindowShouldClose()) // Detect window close button or ESC key
@@ -47,6 +52,7 @@ int main() {
 
 
         Player->Update();
+        Robot->Update();
 
 
 
@@ -76,9 +82,10 @@ int main() {
 
             // draw what is currently loaded within the map vectors
             Map->Draw();
-            Map->Draw_Path();
 
-            // draw Player
+            // draw characters
+            Robot->Draw();
+            Robot->Draw_Path();
             Player->Draw();
 
 

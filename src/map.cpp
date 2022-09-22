@@ -252,6 +252,11 @@ void map::Random_Items() {
 
 }
 
+void map::Add_Robot_Path(int x, int y)
+{
+    map_data.layer_robot_path[x % 30, y / 30] = 1;
+}
+
 // draws map after a set json file
 void map::Draw()
 {
@@ -298,32 +303,18 @@ void map::Draw()
                                {}, 0, WHITE);
         }
     }
-}
 
-void map::Draw_Path()
-{
-    DrawText(("X: " + std::to_string((int)Get_Start_Pos().x)).c_str(), 30, 30, 30, BLACK);
-    DrawText(("Y: " + std::to_string((int)Get_Start_Pos().y)).c_str(), 30, 70, 30, BLACK);
-
-    DrawText(("X: " + std::to_string((int)Get_Fin_Pos().x)).c_str(), 30, 120, 30, BLACK);
-    DrawText(("Y: " + std::to_string((int)Get_Fin_Pos().y)).c_str(), 30, 160, 30, BLACK);
-
-    if (IsKeyDown(KEY_H))
-    {
-        if (Vector2Distance({Get_Start_Pos().x - 32, Get_Start_Pos().y}, Get_Fin_Pos()) < Vector2Distance({Get_Start_Pos().x + 32, Get_Start_Pos().y}, Get_Fin_Pos()))
-        {
-            DrawRectangle((Get_Start_Pos().x - 1)*32, Get_Start_Pos().y * 32, 32, 32, PINK);
+    // draw robot path
+    /*
+    for (int y{}; y < map_data.map_height; y++) {
+        for (int x{}; x < map_data.map_width; x++) {
+            if (map_data.layer_robot_path[x + y * map_data.map_width] == 1)
+            {
+                DrawRectangle(x*32, y *32, 32, 32, PINK);
+            }
         }
-        else
-        {
-            DrawRectangle((Get_Start_Pos().x + 1)*32, Get_Start_Pos().y, 32, 32, PINK);
-        }
-
-        DrawRectangle(Get_Start_Pos().x * 32, Get_Start_Pos().y * 32, 32, 32, GREEN);
-        DrawRectangle(Get_Fin_Pos().x * 32, Get_Fin_Pos().y * 32, 32, 32, RED);
-
-        DrawLine(Get_Start_Pos().x * 32 + 16, Get_Start_Pos().y * 32 + 16, Get_Fin_Pos().x * 32 + 16, Get_Fin_Pos().y * 32 + 16, PINK);
     }
+    */
 }
 
 int map::Get_Tile(int i) { return map_data.layer_path[i]; }

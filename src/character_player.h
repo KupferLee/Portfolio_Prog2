@@ -16,17 +16,15 @@
 #include "item_ring.h"
 #include "item_armor.h"
 
-#include "map.h"
-
 
 class character_player : public character_base {
 public:
     character_player();
     void Update();
-    void Set_Starting_Pos();
 
     // collision
-    map* Map = nullptr;
+    // map* Map = nullptr;
+    void Set_Starting_Pos();
 
 protected:
 
