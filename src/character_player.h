@@ -75,7 +75,7 @@ protected:
 
 public:
     int Get_Current_Slot();
-    Texture2D Get_Texture(int slot);
+    Texture2D Get_Item_Texture(int slot);
     std::string Get_Item_Name(int slot);
     int Get_Item_Weight(int slot);
     int Get_Item_Value(int slot);

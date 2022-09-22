@@ -250,10 +250,7 @@ void map::Random_Items() {
 
 }
 
-void map::Add_Robot_Path(int x, int y)
-{
-    map_data.layer_robot_path[(x % 30) * (y / 30)] = 1;
-}
+
 
 // draws map after a set json file
 void map::Draw()
@@ -302,17 +299,19 @@ void map::Draw()
         }
     }
 
-    /*
-    // draw robot path
-    for (int y{}; y < map_data.map_height; y++) {
-        for (int x{}; x < map_data.map_width; x++) {
-            if (map_data.layer_robot_path[x + y * map_data.map_width] == 1)
-            {
-                DrawRectangle(x*32, y *32, 32, 32, PINK);
+    if (IsKeyDown(KEY_H))
+    {
+        // draw robot path
+        for (int y{}; y < map_data.map_height; y++) {
+            for (int x{}; x < map_data.map_width; x++) {
+                if (map_data.layer_robot_path[x + y * map_data.map_width] == 1)
+                {
+                    DrawRectangle(x*32, y *32, 32, 32, PINK);
+                }
             }
         }
     }
-     */
+
 }
 
 int map::Get_Tile(int i) { return map_data.layer_path[i]; }
@@ -320,6 +319,11 @@ int map::Get_Tile(int i) { return map_data.layer_path[i]; }
 int map::Get_Item(int i) { return map_data.layer_items[i]; }
 
 void map::Set_Item_Zero(int i) {map_data.layer_items[i] = 0; }
+
+void map::Add_Robot_Path(int i)
+{
+    map_data.layer_robot_path[i] = 1;
+}
 
 Vector2 map::Get_Start_Pos()
 {

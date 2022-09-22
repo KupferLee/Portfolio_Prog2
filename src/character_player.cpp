@@ -360,7 +360,7 @@ void character_player::Set_Starting_Pos() { this->position = {(Map->Get_Start_Po
 // return item attributes
 int character_player::Get_Current_Slot() { return this->inventory_slot; }
 
-Texture2D character_player::Get_Texture(int slot) { return Inventory.getItem(slot)->Get_Texture(); }
+Texture2D character_player::Get_Item_Texture(int slot) { return Inventory.getItem(slot)->Get_Texture(); }
 
 std::string character_player::Get_Item_Name(int slot) { return Inventory.getItem(slot)->Get_Name(); }
 

@@ -18,7 +18,7 @@ public:
     void Random_Start_Fin();
     void Random_Items();
 
-    void Add_Robot_Path(int x, int y);
+    void Add_Robot_Path(int i);
 
     int Get_Tile(int i);
     int Get_Item(int i);

@@ -97,7 +97,7 @@ void inventory_ui::draw_current_slot(int i)
     // draw every occupied slot
     if (this->Player->Get_Current_Slot() > i)
     {
-        DrawTexturePro(Player->Get_Texture(i),
+        DrawTexturePro(Player->Get_Item_Texture(i),
                        {0, 0, 16, 16},
                        {this->ui_slots[i]},
                        {0, 0}, 0, WHITE);
@@ -105,7 +105,7 @@ void inventory_ui::draw_current_slot(int i)
     // only draw Dagger in weapon slot if there is a Dagger in it
     if (this->Player->Get_Weapons_Occupied() == true) //
     {
-        DrawTexturePro(this->Player->Get_Texture(10),
+        DrawTexturePro(this->Player->Get_Item_Texture(10),
                        {0, 0, 16, 16},
                        {this->ui_slots[10].x, this->ui_slots[10].y, 16 * gui_scale_factor, 16 * gui_scale_factor},
                        {0, 0}, 0, WHITE);
@@ -113,7 +113,7 @@ void inventory_ui::draw_current_slot(int i)
     // only draw ring in ring slot if there is a ring in it
     if (this->Player->Get_Rings_Occupied() == true)
     {
-        DrawTexturePro(this->Player->Get_Texture(11),
+        DrawTexturePro(this->Player->Get_Item_Texture(11),
                        {0, 0, 16, 16},
                        {this->ui_slots[11].x, this->ui_slots[11].y, 16 * gui_scale_factor, 16 * gui_scale_factor},
                        {0, 0}, 0, WHITE);
@@ -122,7 +122,7 @@ void inventory_ui::draw_current_slot(int i)
     // only draw Armor if slot is occupied
     if (this->Player->Get_Armor_Occupied() == true)
     {
-        DrawTexturePro(this->Player->Get_Texture(12),
+        DrawTexturePro(this->Player->Get_Item_Texture(12),
                        {0, 0, 16, 16},
                        {this->ui_slots[12].x, this->ui_slots[12].y, 16 * gui_scale_factor, 16 * gui_scale_factor},
                        {0, 0}, 0, WHITE);

@@ -12,40 +12,44 @@ character_robot::character_robot()
 
 void character_robot::Update()
 {
+    // update movement every turn
+    Get_Position_X();
+    Get_Position_Y();
+    Get_Position_Z();
+
     robot_center = {position.x - 16, position.y - 16};
 
-    if (IsKeyPressed(KEY_SPACE) && !Reached_Finish())
+    if (IsKeyDown(KEY_SPACE) && !Reached_Finish())
     {
         // checks which of the 3 neighbour tiles is closest to finish tile and steps onto it
         // check left
         if (Check_Left())
         {
             this->position = {this->position.x - 32, this->position.y};
-            Map->Add_Robot_Path(position.x, position.y);
         }
         // check right
         else if (Check_Right())
         {
             this->position = {this->position.x + 32, this->position.y};
-            Map->Add_Robot_Path(position.x, position.y);
         }
         // if right or left and down are same amount do down
             // if right and left are same amount do down
         else if (Right_Equal_Down() || Left_Equal_Down() || Right_Equal_Left())
         {
             this->position = {this->position.x, this->position.y + 32};
-            Map->Add_Robot_Path(position.x, position.y);
         }
         // check down
         else if (Check_Down())
         {
             this->position = {this->position.x, this->position.y + 32};
-            Map->Add_Robot_Path(position.x, position.y);
+
         }
+
+        Map->Add_Robot_Path(this->current_tile.z);
     }
-    else
+    else if (Reached_Finish())
     {
-        // this->position = {Map->Get_Fin_Pos().x * 32, Map->Get_Fin_Pos().y * 32};
+        Map->Add_Robot_Path(this->current_tile.z);
     }
 
 }
@@ -63,10 +67,7 @@ void character_robot::Draw_Path()
     {
         DrawCircle(start.x, start.y, 16, GREEN);
         DrawCircle(finish.x, finish.y, 16, RED);
-        DrawCircle(robot_center.x, robot_center.y, 16, BLACK);
-
-        DrawLine(start.x, start.y, finish.x, finish.y, PINK);
-
+        DrawCircle(robot_center.x, robot_center.y, 10, BLACK);
     }
 }
 
@@ -171,7 +172,6 @@ bool character_robot::Reached_Finish()
 {
     if (robot_center.x == finish.x && robot_center.y == finish.y)
     {
-        std::cout << "DEBUG: Finish reached." << std::endl;
         return true;
     }
     else
