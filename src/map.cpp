@@ -299,6 +299,19 @@ void map::Draw()
         }
     }
 
+    // draw path
+    for (int y{}; y < map_data.map_height; y++) {
+        for (int x{}; x < map_data.map_width; x++) {
+            if (map_data.layer_robot_path[x + y * map_data.map_width] == 1)
+            {
+                DrawTexturePro(Tileatlas_Texture,
+                               {(float)(map_data.layer_items[x + y * map_data.map_width] % this->tilemap_data.tile_map_width) * 16, (float)(map_data.layer_items[x + y * map_data.map_width] / this->tilemap_data.tile_map_width) * 16, 16, 16 },
+                               { (float)(x * 16 * 2),(float)(y * 16 * 2),16 * 2,16 * 2},
+                               {}, 0, WHITE);
+            }
+        }
+    }
+
     if (IsKeyDown(KEY_H))
     {
         // draw robot path

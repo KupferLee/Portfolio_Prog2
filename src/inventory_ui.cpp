@@ -302,7 +302,7 @@ void inventory_ui::draw_tutorial()
 
     DrawText("Move with WASD", ui_infos_position.x, ui_infos_position.y, 30, WHITE);
     DrawText("Find path with SPACE", ui_infos_position.x, ui_infos_position.y + 40, 30, WHITE);
-    DrawText("Show path with H", ui_infos_position.x, ui_infos_position.y + 80, 30, WHITE);
+    DrawText("Show hitboxen with H", ui_infos_position.x, ui_infos_position.y + 80, 30, WHITE);
     DrawText("Open inventory with I", ui_infos_position.x, ui_infos_position.y + 120, 30, WHITE);
     DrawText("Add items with M, erase with N", ui_infos_position.x, ui_infos_position.y + 160, 30, WHITE);
     DrawText("Sort items with TAB", ui_infos_position.x, ui_infos_position.y + 200, 30, WHITE);
