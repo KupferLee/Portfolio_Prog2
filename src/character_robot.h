@@ -9,7 +9,11 @@
 
 class character_robot : public character_base {
 protected:
-
+    bool Check_Left();
+    bool Check_Right();
+    bool Check_Down();
+    bool Left_Equal_Down();
+    bool Right_Equal_Down();
 
 public:
     character_robot();

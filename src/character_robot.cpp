@@ -12,27 +12,42 @@ character_robot::character_robot()
 
 void character_robot::Update()
 {
-    /*
-    if (IsKeyPressed(KEY_SPACE))
+
+    if (IsKeyPressed(KEY_SPACE) && this->position.x != Map->Get_Fin_Pos().x*32 && this->position.y != Map->Get_Fin_Pos().y)
     {
-        if (Vector2Distance({Map->Get_Start_Pos().x - 32, Map->Get_Start_Pos().y}, Map->Get_Fin_Pos()) < Vector2Distance({Map->Get_Start_Pos().x + 32, Map->Get_Start_Pos().y}, Map->Get_Fin_Pos()) && Vector2Distance({Map->Get_Start_Pos().x, Map->Get_Start_Pos().y + 32}, Map->Get_Fin_Pos()))
+        // checks which of the 3 neighbour tiles is closest to finish tile and steps onto it
+        // check left
+        if (Check_Left())
         {
             this->position = {this->position.x - 32, this->position.y};
             Map->Add_Robot_Path(position.x, position.y);
         }
-        else if (Vector2Distance({Map->Get_Start_Pos().x + 32, Map->Get_Start_Pos().y}, Map->Get_Fin_Pos()) < Vector2Distance({Map->Get_Start_Pos().x - 32, Map->Get_Start_Pos().y}, Map->Get_Fin_Pos()) && Vector2Distance({Map->Get_Start_Pos().x, Map->Get_Start_Pos().y + 32}, Map->Get_Fin_Pos()))
+        // check right
+        else if (Check_Right())
         {
             this->position = {this->position.x + 32, this->position.y};
             Map->Add_Robot_Path(position.x, position.y);
         }
-        else if (Vector2Distance({Map->Get_Start_Pos().x, Map->Get_Start_Pos().y + 32}, Map->Get_Fin_Pos()) < Vector2Distance({Map->Get_Start_Pos().x - 32, Map->Get_Start_Pos().y}, Map->Get_Fin_Pos()) && Vector2Distance({Map->Get_Start_Pos().x + 32, Map->Get_Start_Pos().y}, Map->Get_Fin_Pos()))
+        // if right and down are same amount do right
+        else if (Right_Equal_Down())
+        {
+            this->position = {this->position.x + 32, this->position.y};
+            Map->Add_Robot_Path(position.x, position.y);
+        }
+        // if left and down are same amount do left
+        else if (Left_Equal_Down())
+        {
+            this->position = {this->position.x - 32, this->position.y};
+            Map->Add_Robot_Path(position.x, position.y);
+        }
+        // check down
+        else if (Check_Down())
         {
             this->position = {this->position.x, this->position.y + 32};
             Map->Add_Robot_Path(position.x, position.y);
         }
     }
-    */
-    
+
 }
 
 
@@ -65,3 +80,74 @@ void character_robot::Draw_Path()
 }
 
 void character_robot::Set_Starting_Pos() { this->position = {(Map->Get_Start_Pos().x + 1) * 32, (Map->Get_Start_Pos().y + 1) * 32}; }
+
+bool character_robot::Check_Left()
+{
+    if (Vector2Distance({position.x - 32, position.y}, {Map->Get_Fin_Pos().x *32, Map->Get_Fin_Pos().y * 32})
+    < Vector2Distance({position.x + 32, position.y}, {Map->Get_Fin_Pos().x *32, Map->Get_Fin_Pos().y * 32})
+    && Vector2Distance({position.x - 32, position.y},{Map->Get_Fin_Pos().x *32, Map->Get_Fin_Pos().y * 32})
+    < Vector2Distance({position.x, position.y + 32}, {Map->Get_Fin_Pos().x *32, Map->Get_Fin_Pos().y * 32}))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool character_robot::Check_Right()
+{
+    if (Vector2Distance({position.x + 32, position.y}, {Map->Get_Fin_Pos().x *32, Map->Get_Fin_Pos().y * 32})
+    < Vector2Distance({position.x - 32, position.y}, {Map->Get_Fin_Pos().x *32, Map->Get_Fin_Pos().y * 32})
+    && Vector2Distance({position.x + 32, position.y}, {Map->Get_Fin_Pos().x *32, Map->Get_Fin_Pos().y * 32})
+    < Vector2Distance({position.x, position.y + 32}, {Map->Get_Fin_Pos().x *32, Map->Get_Fin_Pos().y * 32}))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool character_robot::Check_Down()
+{
+    if (Vector2Distance({position.x, position.y + 32}, {Map->Get_Fin_Pos().x *32, Map->Get_Fin_Pos().y * 32})
+    < Vector2Distance({position.x - 32, position.y}, {Map->Get_Fin_Pos().x *32, Map->Get_Fin_Pos().y * 32})
+    && Vector2Distance({position.x, position.y + 32}, {Map->Get_Fin_Pos().x *32, Map->Get_Fin_Pos().y * 32})
+    < Vector2Distance({position.x + 32, position.y}, {Map->Get_Fin_Pos().x *32, Map->Get_Fin_Pos().y * 32}))
+    {
+        
+    }
+}
+
+bool character_robot::Left_Equal_Down()
+{
+    if (Vector2Distance({position.x - 32, position.y}, {Map->Get_Fin_Pos().x *32, Map->Get_Fin_Pos().y * 32})
+    < Vector2Distance({position.x + 32, position.y}, {Map->Get_Fin_Pos().x *32, Map->Get_Fin_Pos().y * 32})
+    && Vector2Distance({position.x - 32, position.y},{Map->Get_Fin_Pos().x *32, Map->Get_Fin_Pos().y * 32})
+    == Vector2Distance({position.x, position.y + 32}, {Map->Get_Fin_Pos().x *32, Map->Get_Fin_Pos().y * 32}))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool character_robot::Right_Equal_Down()
+{
+    if (Vector2Distance({position.x + 32, position.y}, {Map->Get_Fin_Pos().x *32, Map->Get_Fin_Pos().y * 32})
+    < Vector2Distance({position.x - 32, position.y}, {Map->Get_Fin_Pos().x *32, Map->Get_Fin_Pos().y * 32})
+    && Vector2Distance({position.x + 32, position.y}, {Map->Get_Fin_Pos().x *32, Map->Get_Fin_Pos().y * 32})
+    == Vector2Distance({position.x, position.y + 32}, {Map->Get_Fin_Pos().x *32, Map->Get_Fin_Pos().y * 32}))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}

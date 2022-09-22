@@ -21,24 +21,31 @@ void map::Parse()
 {
     // go through all contents of "layers"
     // put numbers in vector accordingly to json file
-    for (auto const& layer : Level_Map["layers"]) {
+    for (auto const& layer : Level_Map["layers"])
+    {
         //this asks for the name of each layer
         //then inserts its data into the vectors of the mapdata
 
-        if (layer["name"] == "Ground") {
+        if (layer["name"] == "Ground")
+        {
             for (auto const &tileID: layer["data"]) {
                 map_data.layer_ground.push_back(((int) tileID) - 1);
 
             }
         }
 
-        if (layer["name"] == "Path") {
+        if (layer["name"] == "Path")
+        {
             for (auto const &tileID: layer["data"]) {
                 map_data.layer_path.push_back(((int) tileID) - 1);
 
             }
         }
 
+        for (int i = 0; i < map_data.layer_ground.size(); i++)
+        {
+            map_data.layer_robot_path.push_back(0);
+        }
     }
 }
 
@@ -134,15 +141,6 @@ void map::Randomize()
                 this->draw_tick++;
 
             }
-        }
-    }
-
-
-    // create visible hitboxes
-    for (int i = 0; i < map_data.layer_collision.size(); i++) {
-        if (map_data.layer_collision[i]) {
-            Rectangle createdRectangle = {i % this->map_data.map_width * 32.0f + 32, (i / this->map_data.map_width * 32.0f) + 32, 32, 32 };
-            hitboxes.push_back(createdRectangle);
         }
     }
 }
@@ -254,7 +252,7 @@ void map::Random_Items() {
 
 void map::Add_Robot_Path(int x, int y)
 {
-    map_data.layer_robot_path[x % 30, y / 30] = 1;
+    map_data.layer_robot_path[(x % 30) * (y / 30)] = 1;
 }
 
 // draws map after a set json file
@@ -305,7 +303,7 @@ void map::Draw()
     }
 
     // draw robot path
-    /*
+
     for (int y{}; y < map_data.map_height; y++) {
         for (int x{}; x < map_data.map_width; x++) {
             if (map_data.layer_robot_path[x + y * map_data.map_width] == 1)
@@ -314,7 +312,6 @@ void map::Draw()
             }
         }
     }
-    */
 }
 
 int map::Get_Tile(int i) { return map_data.layer_path[i]; }
