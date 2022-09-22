@@ -50,6 +50,7 @@ void character_robot::Update()
     else if (Reached_Finish())
     {
         Map->Add_Robot_Path(this->current_tile.z);
+        this->facing_direction = up;
     }
 
 }
