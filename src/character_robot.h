@@ -14,6 +14,12 @@ protected:
     bool Check_Down();
     bool Left_Equal_Down();
     bool Right_Equal_Down();
+    bool Right_Equal_Left();
+    bool Reached_Finish();
+
+    Vector2 finish = {0, 0};
+    Vector2 start = {0, 0};
+    Vector2 robot_center = {0, 0};
 
 public:
     character_robot();

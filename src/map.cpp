@@ -302,8 +302,8 @@ void map::Draw()
         }
     }
 
+    /*
     // draw robot path
-
     for (int y{}; y < map_data.map_height; y++) {
         for (int x{}; x < map_data.map_width; x++) {
             if (map_data.layer_robot_path[x + y * map_data.map_width] == 1)
@@ -312,6 +312,7 @@ void map::Draw()
             }
         }
     }
+     */
 }
 
 int map::Get_Tile(int i) { return map_data.layer_path[i]; }
