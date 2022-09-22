@@ -21,6 +21,8 @@ protected:
     Vector2 start = {0, 0};
     Vector2 robot_center = {0, 0};
 
+    void Find_Path();
+
 public:
     character_robot();
     void Draw_Path();
