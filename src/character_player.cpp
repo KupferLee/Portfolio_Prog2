@@ -210,7 +210,7 @@ void character_player::Check_Item_Collision()
     // delete all items
     else if (IsKeyPressed(KEY_N))
     {
-        for (int i = 0; i < 12; i++)
+        for (int i = 0; i < 13; i++)
         {
             Inventory.setItem(NULL, i);
         }
