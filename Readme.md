@@ -1,4 +1,22 @@
-This Code is based on raylibstarter-mininal by Christoph Hahn (https://github.com/chfhhd/raylibstarter-minimal) and further advanced by Lee Ellermann as part of an university exam. It is meant as an portfolio of different tasks.
+This Code is based on raylibstarter-mininal by Christoph Hahn (https://github.com/chfhhd/raylibstarter-minimal) and further advanced by Lee Ellermann as part of an university exam. It is meant as an portfolio of different tasks. For further explanation on the different features please look into the Git Wiki.
+
+Naming Convention:
+// in code
+variable varabiable_a;
+
+object Object_A;
+
+method Method_A;
+
+// in files
+class class_a;
+
+asset asset_a.png
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 ```
                 | (_) |       | |           | |           

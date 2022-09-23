@@ -31,7 +31,7 @@ int main() {
     character_robot* Robot = new character_robot;
     Inventory->Player = Player;
 
-    // loading the current json data into vectors so they only need to be parsed once
+    // loading the current json data into vectors, so they only need to be parsed once
     Map->Parse();
     Map->Random_Start_Fin();
     Map->Parse_Items();
