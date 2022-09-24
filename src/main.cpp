@@ -9,7 +9,6 @@
 #include "inventory_ui.h"
 #include "character_player.h"
 #include "character_robot.h"
-#include <iostream>
 
 int main() {
     // Raylib initialization
@@ -26,12 +25,14 @@ int main() {
     inventory_ui* Inventory = new inventory_ui();
     character_player* Player = new character_player;
     character_robot* Robot = new character_robot;
+
     Inventory->Player = Player;
 
     // loading the current json data into vectors, so they only need to be parsed once
     Map->Parse();
     Map->Random_Start_Fin();
     Map->Parse_Items();
+
     Player->Map = Map;
     Robot->Map = Map;
 
