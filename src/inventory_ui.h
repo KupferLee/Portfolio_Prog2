@@ -13,7 +13,7 @@ public:
     void Update();
     void Draw();
     bool Is_Backpack_Open();
-    bool is_info_open();
+    bool Is_Info_Open();
     character_player* Player = new character_player;
 
 protected:
@@ -25,28 +25,31 @@ protected:
     Texture2D inventory_infos;
     Texture2D tileset;
 
-    void set_slots();
+    void Set_Slots();
     void navigate_inventory();
 
     void draw_items();
     void draw_current_slot(int i);
     void draw_info();
 
-    // variables have gui in front of them so i can see if they are for the object Inventory or for gui textures
-    bool gui_isOpen = false;
-    bool gui_isInfo = false;
+    bool is_open = false;
+    bool gui_is_info = false;
     float gui_scale_factor = 6;
     int gui_current_slot = 0;
     int special_slot_weapons = 10;
     int special_slot_rings = 11;
     int special_slot_armor = 12;
-    int gui_max_slots = 13;
+
     int slot_offset = 19 * gui_scale_factor;
 
+    // determines if backpack is drawn on left or right side
+    int backpack_slot = 0;
+
     Vector2 ui_weight_position[2];
-    Rectangle ui_infos_position;
+    Vector2 ui_infos_position;
     Rectangle ui_slots[16]; // to determine x and y value for the ui_slots
     Rectangle inventory_position;
+    Rectangle backpack_position[2];
 
     // tutorial
     Texture2D tutorial_base;

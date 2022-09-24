@@ -7,41 +7,52 @@ inventory_ui::inventory_ui()
     this->inventory_base = LoadTexture("assets/graphics/gui/inventory_new.png");
     this->inventory_selection = LoadTexture("assets/graphics/gui/selection.png");
     this->inventory_infos = LoadTexture("assets/graphics/gui/infos.png");
-
-    this->ui_infos_position.x = 195; // GetScreenWidth()/2 - this->inventory_infos.width/2;
-    this->ui_infos_position.y = GetScreenHeight() / 2 - this->inventory_infos.height - 50;
-
     this->tutorial_base = LoadTexture("assets/graphics/gui/tutorial.png");
-
     this->tileset = LoadTexture("assets/map/tileset.png");
 
-    this->set_slots();
+    this->Set_Slots();
 
 }
 
 void inventory_ui::Update()
 {
-
-    navigate_inventory();
-
     if (IsKeyPressed(KEY_ENTER))
     {
         is_tutorial = false;
     }
+
+    if (is_tutorial == false)
+    {
+        navigate_inventory();
+
+        // change position of backpack
+        if (IsKeyPressed(KEY_E))
+        {
+            if (backpack_slot == 0)
+            {
+                backpack_slot = 1;
+            }
+            else if (backpack_slot == 1)
+            {
+                backpack_slot = 0;
+            }
+        }
+    }
+
 
 }
 
 void inventory_ui::Draw()
 {
     // draw a little backpack in the corner of the screen
-    // gui_isOpen determines which on the backpack sheet will be drawn and therefore if the icon seems open or not
+    // is_open determines which on the backpack sheet will be drawn and therefore if the icon seems open or not
     DrawTexturePro(this->backpack,
-                   {(float)gui_isOpen * 16, 0, 16, 16},
-                   {(float)GetScreenWidth() - backpack.width/2*gui_scale_factor, (float)GetScreenHeight() - backpack.width/2*gui_scale_factor, 16*this->gui_scale_factor, 16 * this->gui_scale_factor},
+                   {(float)is_open * 16, 0, 16, 16},
+                   {this->backpack_position[backpack_slot]},
                    {16*2, 16*2}, 0, WHITE);
 
     // draw the inventory itself if it is open
-    if (this->gui_isOpen == true)
+    if (this->is_open == true)
     {
         // draw the base
         DrawTexturePro(this->inventory_base,
@@ -66,7 +77,7 @@ void inventory_ui::Draw()
     }
 
     // draw the info panel if you want
-    if (gui_isInfo == true && Player->Get_Sort_Open() == false)
+    if (gui_is_info == true && Player->Get_Sort_Open() == false)
     {
         DrawTexturePro(this->inventory_infos,
                        {0, 0, (float)this->inventory_infos.width, (float)this->inventory_infos.height},
@@ -185,16 +196,19 @@ void inventory_ui::draw_info()
     }
 }
 
-bool inventory_ui::Is_Backpack_Open() { return gui_isOpen; }
+bool inventory_ui::Is_Backpack_Open() { return is_open; }
 
-bool inventory_ui::is_info_open() { return gui_isInfo; }
+bool inventory_ui::Is_Info_Open() { return gui_is_info; }
 
 // assign all the ui_slots coordinates relatively to inventory base
 // they get assigned in .cpp instead of .h because they are dependend on the texture width
-void inventory_ui::set_slots()
+void inventory_ui::Set_Slots()
 {
     // base
     this->inventory_position = {(float)GetScreenWidth()/2 - this->inventory_base.width/2*this->gui_scale_factor, (float)GetScreenHeight() / 2 - this->inventory_base.height / 2 * this->gui_scale_factor, (float)this->inventory_base.width * this->gui_scale_factor, (float)this->inventory_base.height * this->gui_scale_factor};
+
+    this->backpack_position[0] = {(float)GetScreenWidth() - backpack.width/2*gui_scale_factor, (float)GetScreenHeight() - backpack.width/2*gui_scale_factor, 16*this->gui_scale_factor, 16 * this->gui_scale_factor};
+    this->backpack_position[1] = {8*gui_scale_factor, (float)GetScreenHeight() - backpack.width/2*gui_scale_factor, 16*this->gui_scale_factor, 16 * this->gui_scale_factor};
 
     // first row 0 - 4
     this->ui_slots[0] = {(float)inventory_position.x + 12*gui_scale_factor, (float)inventory_position.y + 13*gui_scale_factor, (float)16 * gui_scale_factor, (float)16 * gui_scale_factor};
@@ -217,13 +231,16 @@ void inventory_ui::set_slots()
 
     this->ui_weight_position[0] = { ui_slots[12].x + 23*gui_scale_factor, ui_slots[12].y+3*gui_scale_factor };
     this->ui_weight_position[1] = {ui_weight_position[0].x, ui_weight_position[0].y + 30};
+
+    // info tutorial
+    this->ui_infos_position = {195, (float)GetScreenHeight() / 2 - this->inventory_infos.height - 70};
 }
 
 void inventory_ui::navigate_inventory()
 {
 
     // navigate in the inventory
-    if (gui_isOpen == true && gui_isInfo == false && Player->Get_Sort_Open() == false)
+    if (is_open == true && gui_is_info == false && Player->Get_Sort_Open() == false)
     {
         if (IsKeyPressed(KEY_D) && gui_current_slot < 12 && gui_current_slot != 4 && gui_current_slot != 9 && gui_current_slot != 12)
         {
@@ -272,24 +289,24 @@ void inventory_ui::navigate_inventory()
 
 
     // when i pressed change inventory state
-    if(IsKeyPressed(KEY_I) && this->gui_isOpen == true && this->gui_isInfo == false)
+    if(IsKeyPressed(KEY_I) && this->is_open == true && this->gui_is_info == false)
     {
-        this->gui_isOpen = false;
+        this->is_open = false;
     }
 
-    else if (IsKeyPressed(KEY_I) && this->gui_isOpen == false)
+    else if (IsKeyPressed(KEY_I) && this->is_open == false)
     {
-        this->gui_isOpen = true;
+        this->is_open = true;
     }
 
     // if inventory is open and space is pressed open info box
-    if (IsKeyPressed(KEY_SPACE) && this->gui_isOpen == true && this->gui_isInfo == false)
+    if (IsKeyPressed(KEY_SPACE) && this->is_open == true && this->gui_is_info == false)
     {
-        this->gui_isInfo = true;
+        this->gui_is_info = true;
     }
-    else if (IsKeyPressed(KEY_SPACE) || IsKeyPressed(KEY_I) && this->gui_isInfo == true)
+    else if (IsKeyPressed(KEY_SPACE) || IsKeyPressed(KEY_I) && this->gui_is_info == true)
     {
-        this->gui_isInfo = false;
+        this->gui_is_info = false;
     }
 }
 
@@ -307,6 +324,7 @@ void inventory_ui::draw_tutorial()
     DrawText("Collect item on Map with ENTER", ui_infos_position.x, ui_infos_position.y + 160, 30, WHITE);
     DrawText("Add 3b) items with M, erase with N", ui_infos_position.x, ui_infos_position.y + 200, 30, WHITE);
     DrawText("Sort items with TAB", ui_infos_position.x, ui_infos_position.y + 240, 30, WHITE);
+    DrawText("Change backpack position with E", ui_infos_position.x, ui_infos_position.y + 280, 30, WHITE);
 
-    DrawText("Close tutorial with ENTER", ui_infos_position.x, ui_infos_position.y + 300, 30, WHITE);
+    DrawText("Close tutorial with ENTER", ui_infos_position.x, ui_infos_position.y + 320, 30, WHITE);
 }
