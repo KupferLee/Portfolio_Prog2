@@ -9,16 +9,33 @@
 
 class character_base {
 protected:
+    Texture2D texture;
     Vector2 position{};
-    Vector3 current_tile{};
+    Vector2 character_center = {0, 0};
 
-    int movement_speed;
+    Vector3 current_tile{};
+    Vector2 finish = {0, 0};
+    Vector2 start = {0, 0};
+
+    Texture2D message;
+    Vector2 message_position = {0, 0};
+    float scale_factor = 6;
+
     enum direction {down, up};
     direction facing_direction = down;
-    Rectangle hitbox;
-    bool is_collision = false;
+
     bool can_move = true;
-    Texture2D texture;
+    bool is_message_open = false;
+    bool was_message_seen = false;
+
+    void Find_Path();
+    bool Check_Left();
+    bool Check_Right();
+    bool Check_Down();
+    bool Left_Equal_Down();
+    bool Right_Equal_Down();
+    bool Right_Equal_Left();
+    bool Reached_Finish();
 
 
 
@@ -27,7 +44,6 @@ public:
     int Get_Position_Y();
     int Get_Position_Z();
     void Draw();
-    // collision
 
     map* Map = nullptr;
 

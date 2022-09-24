@@ -8,7 +8,6 @@ character_player::character_player()
 {
     // Player
     this->texture = LoadTexture("assets/graphics/characters/player_32.png");
-    this->movement_speed = 3;
 
     // sort gui
     this->sort_buttons = LoadTexture("assets/graphics/gui/sort_buttons.png");
@@ -78,33 +77,25 @@ void character_player::Movement_Controls()
         // up
         if (IsKeyPressed(KEY_W) && Map->Get_Tile(Get_Position_Z() - 30) == 0)
         {
-            // this->position.y = this->position.y - this->movement_speed;
             this->position.y -= 32;
             this->facing_direction = up;
         }
             // left
         else if (IsKeyPressed(KEY_A) && Map->Get_Tile(Get_Position_Z() - 1) == 0)
         {
-            // this->position.x = this->position.x - this->movement_speed;
             this->position.x -= 32;
-            // this->facing_direction = down;
         }
             // down
         else if (IsKeyPressed(KEY_S) && Map->Get_Tile(Get_Position_Z() + 30) == 0)
         {
-            // this->position.y = this->position.y + this->movement_speed;
             this->position.y += 32;
             this->facing_direction = down;
         }
             //right
         else if (IsKeyPressed(KEY_D) && Map->Get_Tile(Get_Position_Z()  + 1) == 0)
         {
-            // this->position.x = this->position.x + this->movement_speed;
             this->position.x += 32;
-            // this->facing_direction = down;
         }
-
-        this->hitbox = {position.x - 32, position.y - 32, 32, 32};
     }
 }
 
