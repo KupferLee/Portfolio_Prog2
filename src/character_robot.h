@@ -26,7 +26,7 @@ protected:
 public:
     character_robot();
     void Draw_Path();
-    void Update();
+    void Update(bool inventory);
     void Set_Starting_Pos();
 };
 

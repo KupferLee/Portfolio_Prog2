@@ -23,7 +23,7 @@ character_player::character_player()
     // collsion
 }
 
-void character_player::Update()
+void character_player::Update(bool inventory)
 {
     Update_Sort_Buttons();
     Calculate_Weight();
@@ -63,7 +63,7 @@ void character_player::Update()
     }
 
     // disable movement when total weight is more than Player strength
-    if (total_weight <= strength)
+    if (total_weight <= strength && inventory == false)
     {
         Movement_Controls();
     }
@@ -145,50 +145,54 @@ void character_player::Item_Pickup(item_base* item)
 
 void character_player::Check_Item_Collision()
 {
-    if (inventory_slot < 10)
+    if (IsKeyPressed(KEY_ENTER))
     {
-        if (Map->Get_Item(current_tile.z) == 5)
+        if (inventory_slot < 10)
         {
-            Item_Pickup(Chest);
+            if (Map->Get_Item(current_tile.z) == 5)
+            {
+                Item_Pickup(Chest);
+                Map->Set_Item_Zero(current_tile.z);
+            }
+
+            if (Map->Get_Item(current_tile.z) == 6)
+            {
+                Item_Pickup(Potion);
+                Map->Set_Item_Zero(current_tile.z);
+            }
+
+            if (Map->Get_Item(current_tile.z) == 7)
+            {
+                Item_Pickup(Golden_Apple);
+                Map->Set_Item_Zero(current_tile.z);
+            }
+
+            if (Map->Get_Item(current_tile.z) == 8)
+            {
+                Item_Pickup(Crystal);
+                Map->Set_Item_Zero(current_tile.z);
+            }
+        }
+
+        if (Map->Get_Item(current_tile.z) == 4 && is_weapons_occupied == false)
+        {
+            Item_Pickup(Dagger);
             Map->Set_Item_Zero(current_tile.z);
         }
 
-        if (Map->Get_Item(current_tile.z) == 6)
+        if (Map->Get_Item(current_tile.z) == 9 && is_rings_occupied == false)
         {
-            Item_Pickup(Potion);
+            Item_Pickup(Ring);
             Map->Set_Item_Zero(current_tile.z);
         }
 
-        if (Map->Get_Item(current_tile.z) == 7)
+        if (Map->Get_Item(current_tile.z) == 10 && is_armor_occupied == false)
         {
-            Item_Pickup(Golden_Apple);
-            Map->Set_Item_Zero(current_tile.z);
-        }
-
-        if (Map->Get_Item(current_tile.z) == 8)
-        {
-            Item_Pickup(Crystal);
+            Item_Pickup(Armor);
             Map->Set_Item_Zero(current_tile.z);
         }
     }
 
-    if (Map->Get_Item(current_tile.z) == 4 && is_weapons_occupied == false)
-    {
-        Item_Pickup(Dagger);
-        Map->Set_Item_Zero(current_tile.z);
-    }
-
-    if (Map->Get_Item(current_tile.z) == 9 && is_rings_occupied == false)
-    {
-        Item_Pickup(Ring);
-        Map->Set_Item_Zero(current_tile.z);
-    }
-
-    if (Map->Get_Item(current_tile.z) == 10 && is_armor_occupied == false)
-    {
-        Item_Pickup(Armor);
-        Map->Set_Item_Zero(current_tile.z);
-    }
 
 
     // add items for testing sort
@@ -246,7 +250,7 @@ void character_player::Calculate_Weight()
     }
 }
 
-// sort algorithm
+// sort algorithms
 void character_player::Sort_By_Weight()
 {
     // go through all set item slots
@@ -267,7 +271,7 @@ void character_player::Sort_By_Weight()
         }
     }
 
-    std::cout << "DEBUG: Items are sorted by weight now." << std::endl;
+    std::cout << "DEBUG: Items are sorted by weight now, lowest to highest." << std::endl;
 }
 
 void character_player::Sort_By_Value()
@@ -289,7 +293,7 @@ void character_player::Sort_By_Value()
         }
     }
 
-    std::cout << "DEBUG: Items are sorted by value now." << std::endl;
+    std::cout << "DEBUG: Items are sorted by value now, highest to lowest." << std::endl;
 }
 
 void character_player::Sort_By_Name()
@@ -313,7 +317,7 @@ void character_player::Sort_By_Name()
         }
     }
 
-    std::cout << "DEBUG: Items are sorted by name now." << std::endl;
+    std::cout << "DEBUG: Items are sorted by name now, A to Z." << std::endl;
 }
 
 // sort gui

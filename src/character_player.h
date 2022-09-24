@@ -20,10 +20,7 @@
 class character_player : public character_base {
 public:
     character_player();
-    void Update();
-
-    // collision
-    // map* Map = nullptr;
+    void Update(bool inventory);
     void Set_Starting_Pos();
 
 protected:
@@ -46,35 +43,34 @@ protected:
     item_ring* Ring = new item_ring;
     item_armor* Armor = new item_armor;
 
-    // Inventory for item objects
+    // inventory for item objects
     Inventory_Template<item_base*, 14> Inventory;
     int inventory_slot = 0;
     void Item_Pickup(item_base* Item);
-    //void item_drop();
 
     bool is_weapons_occupied = false;
     bool is_rings_occupied = false;
     bool is_armor_occupied = false;
 
     // sort algorithm
-    void Sort_By_Weight();
-    void Sort_By_Name();
-    void Sort_By_Value();
+    int current_button = 0;
+    bool is_sort_open = false;
 
     Texture2D sort_buttons;
     Texture2D sort_select;
     Rectangle sort_base_position;
     Rectangle sort_select_position[3];
 
-    int current_button = 0;
-    bool is_sort_open = false;
-
+    void Sort_By_Weight();
+    void Sort_By_Name();
+    void Sort_By_Value();
     void Update_Sort_Buttons();
 
 
 
 public:
     int Get_Current_Slot();
+
     Texture2D Get_Item_Texture(int slot);
     std::string Get_Item_Name(int slot);
     int Get_Item_Weight(int slot);

@@ -255,7 +255,7 @@ void map::Random_Items() {
 // draws map after a set json file
 void map::Draw()
 {
-    // draw Ground
+    // draw water
     for (int y{}; y < map_data.map_height; y++) {
         for (int x{}; x < map_data.map_width; x++) {
             if (map_data.layer_ground[x + y * map_data.map_width] != -1)
@@ -266,7 +266,7 @@ void map::Draw()
         }
     }
 
-    // Draw Path
+    // draw grass
     for (int y{}; y < map_data.map_height; y++) {
         for (int x{}; x < map_data.map_width; x++) {
             if (map_data.layer_path[x + y * map_data.map_width] != -1)
@@ -299,7 +299,8 @@ void map::Draw()
         }
     }
 
-    // draw path
+    // path finding
+    // draw the path the robot lays down
     for (int y{}; y < map_data.map_height; y++) {
         for (int x{}; x < map_data.map_width; x++) {
             if (map_data.layer_robot_path[x + y * map_data.map_width] == 1)
@@ -327,16 +328,17 @@ void map::Draw()
 
 }
 
+// path the robot lays down to visualize
+void map::Add_Robot_Path(int i)
+{
+    map_data.layer_robot_path[i] = 1;
+}
+
 int map::Get_Tile(int i) { return map_data.layer_path[i]; }
 
 int map::Get_Item(int i) { return map_data.layer_items[i]; }
 
 void map::Set_Item_Zero(int i) {map_data.layer_items[i] = 0; }
-
-void map::Add_Robot_Path(int i)
-{
-    map_data.layer_robot_path[i] = 1;
-}
 
 Vector2 map::Get_Start_Pos()
 {

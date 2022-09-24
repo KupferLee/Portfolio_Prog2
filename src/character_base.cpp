@@ -32,3 +32,4 @@ void character_base::Draw()
 
 }
 
+

@@ -14,11 +14,11 @@ public:
         if (slot < size)
         {
             items_container[slot] = item;
-            std::cout << "DEBUG: Item Set " << slot << std::endl;
+            std::cout << "DEBUG: Item set " << slot << std::endl;
         }
         else
         {
-            std::cout << "ERROR: Items array full" << std::endl;
+            std::cout << "DEBUG: Item array full, no item added." << std::endl;
         }
     }
 

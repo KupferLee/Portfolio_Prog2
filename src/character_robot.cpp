@@ -10,7 +10,7 @@ character_robot::character_robot()
     this->facing_direction = down;
 }
 
-void character_robot::Update()
+void character_robot::Update(bool inventory)
 {
     // update movement every turn
     Get_Position_X();
@@ -19,8 +19,10 @@ void character_robot::Update()
 
     robot_center = {position.x - 16, position.y - 16};
 
-    Find_Path();
-
+    if (inventory == false)
+    {
+        Find_Path();
+    }
 }
 
 

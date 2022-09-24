@@ -185,7 +185,7 @@ void inventory_ui::draw_info()
     }
 }
 
-bool inventory_ui::is_backpack_open() { return gui_isOpen; }
+bool inventory_ui::Is_Backpack_Open() { return gui_isOpen; }
 
 bool inventory_ui::is_info_open() { return gui_isInfo; }
 
@@ -304,9 +304,9 @@ void inventory_ui::draw_tutorial()
     DrawText("Find path with SPACE", ui_infos_position.x, ui_infos_position.y + 40, 30, WHITE);
     DrawText("Show hitboxes with H", ui_infos_position.x, ui_infos_position.y + 80, 30, WHITE);
     DrawText("Open inventory with I", ui_infos_position.x, ui_infos_position.y + 120, 30, WHITE);
-    DrawText("Add items with M, erase with N", ui_infos_position.x, ui_infos_position.y + 160, 30, WHITE);
-    DrawText("Sort items with TAB", ui_infos_position.x, ui_infos_position.y + 200, 30, WHITE);
-    DrawText("Erase GUI temporary with E", ui_infos_position.x, ui_infos_position.y + 240, 30, WHITE);
+    DrawText("Collect item on Map with ENTER", ui_infos_position.x, ui_infos_position.y + 160, 30, WHITE);
+    DrawText("Add 3b) items with M, erase with N", ui_infos_position.x, ui_infos_position.y + 200, 30, WHITE);
+    DrawText("Sort items with TAB", ui_infos_position.x, ui_infos_position.y + 240, 30, WHITE);
 
     DrawText("Close tutorial with ENTER", ui_infos_position.x, ui_infos_position.y + 300, 30, WHITE);
 }

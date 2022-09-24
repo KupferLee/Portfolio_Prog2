@@ -12,7 +12,7 @@ public:
     inventory_ui();
     void Update();
     void Draw();
-    bool is_backpack_open();
+    bool Is_Backpack_Open();
     bool is_info_open();
     character_player* Player = new character_player;
 

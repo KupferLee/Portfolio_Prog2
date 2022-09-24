@@ -23,8 +23,7 @@ int main() {
     ToggleFullscreen();
 #endif
 
-    // Your own initialization code here
-    Texture2D infoTexture = LoadTexture("assets/graphics/infografik.png");
+    // initialization
     map* Map = new map;
     inventory_ui* Inventory = new inventory_ui();
     character_player* Player = new character_player;
@@ -45,38 +44,15 @@ int main() {
     // Main game loop
     while (!WindowShouldClose()) // Detect window close button or ESC key
     {
-        // Updates that are made by frame are coded here
-
         Inventory->Update();
 
-
-
-        Player->Update();
-        Robot->Update();
-
-
-
-        switch (Inventory->is_backpack_open())
-        {
-            case true:
-            {
-                Player->Set_Can_Move(false);
-                break;
-            }
-
-            case false:
-            {
-                Player->Set_Can_Move(true);
-                break;
-            }
-        }
+        Player->Update(Inventory->Is_Backpack_Open());
+        Robot->Update(Inventory->Is_Backpack_Open());
 
 
 
         BeginDrawing();
-            // You can draw on the screen between BeginDrawing() and EndDrawing()
-            // ...
-            // ...
+            // If map doesnt get draw this is an error message on the screen
             ClearBackground(BLUE);
             DrawText("If you see this, this is not working!", 10, 10, 30, DARKBLUE);
 
@@ -88,25 +64,11 @@ int main() {
             Robot->Draw_Path();
             Player->Draw();
 
-
-
-            if (IsKeyDown(KEY_Q))
-            {
-                DrawTexture(infoTexture, 0, 0, WHITE);
-            }
-            else if (!IsKeyDown(KEY_E))
-            {
-                // little backpack shall be only drawn when there is no other info screen currently open
-                Inventory->Draw();
-            }
-
+            // Draw GUI
+            Inventory->Draw();
 
         EndDrawing();
-    } // Main game loop end
-
-    // De-initialization here
-    // ...
-    // ...
+    }
 
     // Close window and OpenGL context
     CloseWindow();
