@@ -9,6 +9,8 @@
 
 class character_robot : public character_base {
 protected:
+    bool is_message_open = false;
+    bool was_message_seen = false;
     bool Check_Left();
     bool Check_Right();
     bool Check_Down();
@@ -20,6 +22,10 @@ protected:
     Vector2 finish = {0, 0};
     Vector2 start = {0, 0};
     Vector2 robot_center = {0, 0};
+    Vector2 message_position = {0, 0};
+    float scale_factor = 6;
+
+    Texture2D message;
 
     void Find_Path();
 

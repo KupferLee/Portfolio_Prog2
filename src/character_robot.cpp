@@ -7,7 +7,10 @@
 character_robot::character_robot()
 {
     this->texture = LoadTexture("assets/graphics/characters/robot_32.png");
+    this->message = LoadTexture("assets/graphics/gui/path_found.png");
     this->facing_direction = down;
+
+    this->message_position = {195, (float)GetScreenHeight() / 2 - this->message.height - 50};
 }
 
 void character_robot::Update(bool inventory)
@@ -22,6 +25,11 @@ void character_robot::Update(bool inventory)
     if (inventory == false)
     {
         Find_Path();
+    }
+
+    if (is_message_open == true && IsKeyPressed(KEY_ENTER))
+    {
+        is_message_open = false;
     }
 }
 
@@ -38,6 +46,22 @@ void character_robot::Draw_Path()
         DrawCircle(start.x, start.y, 16, GREEN);
         DrawCircle(finish.x, finish.y, 16, RED);
         DrawCircle(robot_center.x, robot_center.y, 10, BLACK);
+    }
+
+    if (is_message_open == true)
+    {
+        // base texture that message is printed on
+        DrawTexturePro(message,
+                       {0, 0, (float)message.width, (float)message.height},
+                       {(float)GetScreenWidth()/2 - message.width/2*scale_factor, (float)GetScreenHeight()/2 - message.height/2*scale_factor, (float)message.width*scale_factor, (float)message.height*scale_factor},
+                       {0, 0}, 0, WHITE);
+
+        // Text of the message
+        DrawText("Your robot found the fastest path!", message_position.x, message_position.y, 30, WHITE);
+        DrawText("To follow it stand on the start tile", message_position.x, message_position.y + 40, 30, WHITE);
+        DrawText("and press SPACE!", message_position.x, message_position.y + 80, 30, WHITE);
+
+        DrawText("Close this message with ENTER", message_position.x, message_position.y + 300, 30, WHITE);
     }
 }
 
@@ -112,6 +136,12 @@ void character_robot::Find_Path()
     {
         Map->Add_Robot_Path(this->current_tile.z);
         this->facing_direction = up;
+        if (this->was_message_seen == false)
+        {
+            this->is_message_open = true;
+            this->was_message_seen = true;
+        }
+
     }
 }
 
