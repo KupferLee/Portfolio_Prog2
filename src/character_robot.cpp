@@ -61,6 +61,8 @@ void character_robot::Draw_Path()
         DrawText("To follow it stand on the start tile", message_position.x, message_position.y + 40, 30, WHITE);
         DrawText("and press SPACE!", message_position.x, message_position.y + 80, 30, WHITE);
 
+        DrawText("TODO: Make this work.", message_position.x, message_position.y + 140, 30, WHITE);
+
         DrawText("Close this message with ENTER", message_position.x, message_position.y + 300, 30, WHITE);
     }
 }
