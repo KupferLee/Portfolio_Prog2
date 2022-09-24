@@ -12,8 +12,10 @@ public:
     inventory_ui();
     void Update();
     void Draw();
+
     bool Is_Backpack_Open();
     bool Is_Info_Open();
+
     character_player* Player = new character_player;
 
 protected:
@@ -23,31 +25,30 @@ protected:
     Texture2D inventory_base;
     Texture2D inventory_selection;
     Texture2D inventory_infos;
-    Texture2D tileset;
 
     void Set_Slots();
-    void navigate_inventory();
+    void Navigate_Inventory();
 
-    void draw_items();
-    void draw_current_slot(int i);
-    void draw_info();
+    void Draw_Items();
+    void Draw_Current_Slot(int i);
+    void Draw_Info();
 
     bool is_open = false;
-    bool gui_is_info = false;
-    float gui_scale_factor = 6;
-    int gui_current_slot = 0;
+    bool is_info = false;
+    float scale_factor = 6;
+    int current_slot = 0;
     int special_slot_weapons = 10;
     int special_slot_rings = 11;
     int special_slot_armor = 12;
 
-    int slot_offset = 19 * gui_scale_factor;
+    int slot_offset = 19 * scale_factor;
 
-    // determines if backpack is drawn on left or right side
-    int backpack_slot = 0;
+    int backpack_slot = 0; // determines if backpack is drawn on left or right side
 
-    Vector2 ui_weight_position[2];
-    Vector2 ui_infos_position;
-    Rectangle ui_slots[16]; // to determine x and y value for the ui_slots
+    // to determine x and y value for the slot_position
+    Vector2 weight_position[2];
+    Vector2 infos_position;
+    Rectangle slot_position[16];
     Rectangle inventory_position;
     Rectangle backpack_position[2];
 
@@ -56,7 +57,7 @@ protected:
 
     bool is_tutorial = true;
 
-    void draw_tutorial();
+    void Draw_Tutorial();
 
 };
 

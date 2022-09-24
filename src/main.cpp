@@ -14,8 +14,6 @@
 int main() {
     // Raylib initialization
     // Project name, screen size, fullscreen mode etc. can be specified in the config.h.in file
-    // ScreenWidth = 30 * 16 * 2 = 960;
-    // ScreenHeight = 20 * 16 * 2 = 640;
     InitWindow(Game::ScreenWidth, Game::ScreenHeight, Game::PROJECT_NAME);
     SetTargetFPS(60);
 
