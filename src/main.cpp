@@ -51,6 +51,7 @@ int main() {
         Robot->Update(Inventory->Is_Backpack_Open());
 
         // check if robot found any items
+        // TODO: only add if total weight + item weight < strength
         if (Robot->Item_Found() != -1) // && Player->Get_Total_Weight() < Player->Get_Total_Strength()
         {
             Player->Robot_Item(Robot->Item_Found());
