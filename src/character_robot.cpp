@@ -99,6 +99,11 @@ void character_robot::Find_Path()
         }
 
         Map->Add_Robot_Path(this->current_tile.z);
+
+        if (Map->Get_Item(current_tile.z) != -1)
+        {
+            std::cout << "DEBUG: Robot found item." << std::endl;
+        }
     }
         // consider water with path finding
     else if (IsKeyDown(KEY_B) && !Reached_Finish())
