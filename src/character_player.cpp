@@ -22,7 +22,7 @@ character_player::character_player()
     // collsion
 }
 
-void character_player::Update(bool inventory)
+void character_player::Update(bool inventory, bool robot_message)
 {
     Update_Sort_Buttons();
     Calculate_Weight();
@@ -62,7 +62,7 @@ void character_player::Update(bool inventory)
     }
 
     // disable movement when total weight is more than Player strength
-    if (total_weight <= strength && inventory == false)
+    if (total_weight <= strength && inventory == false && robot_message == false)
     {
         Movement_Controls();
     }

@@ -20,7 +20,7 @@
 class character_player : public character_base {
 public:
     character_player();
-    void Update(bool inventory);
+    void Update(bool inventory, bool robot_message);
     void Set_Starting_Pos();
 
 protected:

@@ -10,13 +10,12 @@
 class character_robot : public character_base {
 protected:
 
-
-
 public:
     character_robot();
     void Draw_Path();
     void Update(bool inventory);
     void Set_Starting_Pos();
+    bool Is_Message_Open();
 };
 
 

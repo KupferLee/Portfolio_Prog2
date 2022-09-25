@@ -73,3 +73,5 @@ void character_robot::Set_Starting_Pos()
     this->finish = {Map->Get_Fin_Pos().x * 32 + 16, Map->Get_Fin_Pos().y * 32 + 16};
     this->position = {(Map->Get_Start_Pos().x + 1) * 32, (Map->Get_Start_Pos().y + 1) * 32};
 }
+
+bool character_robot::Is_Message_Open() { return is_message_open; }

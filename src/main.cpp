@@ -45,7 +45,7 @@ int main() {
     {
         Inventory->Update();
 
-        Player->Update(Inventory->Is_Backpack_Open());
+        Player->Update(Inventory->Is_Backpack_Open(), Robot->Is_Message_Open());
         Robot->Update(Inventory->Is_Backpack_Open());
 
 
