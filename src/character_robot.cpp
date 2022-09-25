@@ -7,15 +7,15 @@
 character_robot::character_robot()
 {
     this->texture = LoadTexture("assets/graphics/characters/robot_32.png");
-    this->message = LoadTexture("assets/graphics/gui/path_found.png");
+    this->message = LoadTexture("assets/graphics/gui/robot_message.png");
     this->facing_direction = down;
 
-    this->message_position = {195, (float)GetScreenHeight() / 2 - this->message.height - 50};
+    this->message_position = {195, (float)GetScreenHeight() / 2 - this->message.height - 40};
 }
 
 void character_robot::Update(bool inventory)
 {
-    // update movement every turn
+    // update positions every turn
     Get_Position_X();
     Get_Position_Y();
     Get_Position_Z();
@@ -56,12 +56,8 @@ void character_robot::Draw_GUI()
 
         // Text of the message
         DrawText("Your robot found the fastest path!", message_position.x, message_position.y, 30, WHITE);
-        DrawText("To follow it stand on the start tile", message_position.x, message_position.y + 40, 30, WHITE);
-        DrawText("and press SPACE!", message_position.x, message_position.y + 80, 30, WHITE);
 
-        DrawText("TODO: Make this work.", message_position.x, message_position.y + 140, 30, WHITE);
-
-        DrawText("Close this message with ENTER", message_position.x, message_position.y + 300, 30, WHITE);
+        DrawText("Close this message with ENTER", message_position.x, message_position.y + 280, 30, WHITE);
     }
 
     else  if (IsKeyDown(KEY_H))

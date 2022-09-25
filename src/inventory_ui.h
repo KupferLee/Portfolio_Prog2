@@ -14,7 +14,6 @@ public:
     void Draw();
 
     bool Is_Backpack_Open();
-    bool Is_Info_Open();
 
     character_player* Player = new character_player;
 

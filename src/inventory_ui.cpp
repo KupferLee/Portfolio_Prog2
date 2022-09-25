@@ -197,8 +197,6 @@ void inventory_ui::Draw_Info()
 
 bool inventory_ui::Is_Backpack_Open() { return is_open; }
 
-bool inventory_ui::Is_Info_Open() { return is_info; }
-
 // assign all the slot_position coordinates relatively to inventory base
 // they get assigned in .cpp instead of .h because they are dependend on the texture width
 void inventory_ui::Set_Slots()
@@ -232,7 +230,7 @@ void inventory_ui::Set_Slots()
     this->weight_position[1] = {weight_position[0].x, weight_position[0].y + 30};
 
     // info tutorial
-    this->infos_position = {195, (float)GetScreenHeight() / 2 - this->inventory_infos.height - 70};
+    this->infos_position = {195, (float)GetScreenHeight() / 2 - this->inventory_infos.height - 50};
 }
 
 void inventory_ui::Navigate_Inventory()
@@ -318,12 +316,11 @@ void inventory_ui::Draw_Tutorial()
 
     DrawText("Move with WASD", infos_position.x, infos_position.y, 30, WHITE);
     DrawText("Find path with SPACE", infos_position.x, infos_position.y + 40, 30, WHITE);
-    DrawText("Show hitboxes with H", infos_position.x, infos_position.y + 80, 30, WHITE);
-    DrawText("Open inventory with I", infos_position.x, infos_position.y + 120, 30, WHITE);
-    DrawText("Collect item on Map with ENTER", infos_position.x, infos_position.y + 160, 30, WHITE);
-    DrawText("Add 3b) items with M, erase with N", infos_position.x, infos_position.y + 200, 30, WHITE);
-    DrawText("Sort items with TAB", infos_position.x, infos_position.y + 240, 30, WHITE);
-    DrawText("Change backpack position with E", infos_position.x, infos_position.y + 280, 30, WHITE);
+    DrawText("Open inventory with I", infos_position.x, infos_position.y + 80, 30, WHITE);
+    DrawText("Collect item on Map with ENTER", infos_position.x, infos_position.y + 120, 30, WHITE);
+    DrawText("Add 3b) items with M, erase with N", infos_position.x, infos_position.y + 160, 30, WHITE);
+    DrawText("Sort items with TAB", infos_position.x, infos_position.y + 200, 30, WHITE);
+    DrawText("Change backpack position with E", infos_position.x, infos_position.y + 240, 30, WHITE);
 
-    DrawText("Close tutorial with ENTER", infos_position.x, infos_position.y + 320, 30, WHITE);
+    DrawText("Close tutorial with ENTER", infos_position.x, infos_position.y + 300, 30, WHITE);
 }
