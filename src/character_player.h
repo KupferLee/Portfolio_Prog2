@@ -84,7 +84,7 @@ public:
     int Get_Total_Weight();
     int Get_Total_Strength();
 
-    void Set_Can_Move(bool move);
+    void Robot_Item(int item);
 
     bool Get_Sort_Open();
     void Draw_Sort_Buttons();

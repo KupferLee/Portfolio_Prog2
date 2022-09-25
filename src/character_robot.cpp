@@ -56,6 +56,8 @@ void character_robot::Draw_GUI()
 
         // Text of the message
         DrawText("Your robot found the fastest path!", message_position.x, message_position.y, 30, WHITE);
+        DrawText("It put any items it found into your", message_position.x, message_position.y + 60, 30, WHITE);
+        DrawText("inventory, press I to check that!", message_position.x, message_position.y + 100, 30, WHITE);
 
         DrawText("Close this message with ENTER", message_position.x, message_position.y + 280, 30, WHITE);
     }
@@ -98,12 +100,13 @@ void character_robot::Find_Path()
 
         }
 
-        Map->Add_Robot_Path(this->current_tile.z);
-
         if (Map->Get_Item(current_tile.z) != -1)
         {
-            std::cout << "DEBUG: Robot found item." << std::endl;
+            which_item = Map->Get_Item(current_tile.z);
+            std::cout << "DEBUG: Robot found item. " << which_item << std::endl;
         }
+
+        Map->Add_Robot_Path(this->current_tile.z);
     }
         // consider water with path finding
     else if (IsKeyDown(KEY_B) && !Reached_Finish())
@@ -257,3 +260,7 @@ void character_robot::Set_Starting_Pos()
 }
 
 bool character_robot::Is_Message_Open() { return is_message_open; }
+
+int character_robot::Item_Found() { return which_item; }
+
+void character_robot::Item_Pick_Up() { Map->Set_Item_Zero(current_tile.z); which_item = -1; }

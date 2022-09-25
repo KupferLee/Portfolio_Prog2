@@ -216,6 +216,41 @@ void character_player::Check_Item_Collision()
     }
 }
 
+void character_player::Robot_Item(int item)
+{
+    switch (item)
+    {
+        case 4:
+            Item_Pickup(Dagger);
+            break;
+
+        case 5:
+            Item_Pickup(Chest);
+            break;
+
+        case 6:
+            Item_Pickup(Potion);
+            break;
+
+        case 7:
+            Item_Pickup(Golden_Apple);
+            break;
+
+        case 8:
+            Item_Pickup(Crystal);
+            break;
+
+        case 9:
+            Item_Pickup(Ring);
+            break;
+
+        case 10:
+            Item_Pickup(Armor);
+            break;
+    }
+
+}
+
 void character_player::Calculate_Weight()
 {
     // first reset total weight
@@ -377,8 +412,6 @@ bool character_player::Get_Armor_Occupied() { return is_armor_occupied; }
 int character_player::Get_Total_Weight() { return total_weight; }
 
 int character_player::Get_Total_Strength() { return this->strength; }
-
-void character_player::Set_Can_Move(bool move) { can_move = move; }
 
 bool character_player::Get_Sort_Open() { return is_sort_open; }
 

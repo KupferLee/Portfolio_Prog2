@@ -50,6 +50,13 @@ int main() {
         Player->Update(Inventory->Is_Backpack_Open(), Robot->Is_Message_Open());
         Robot->Update(Inventory->Is_Backpack_Open());
 
+        // check if robot found any items
+        if (Robot->Item_Found() != -1) // && Player->Get_Total_Weight() < Player->Get_Total_Strength()
+        {
+            Player->Robot_Item(Robot->Item_Found());
+            Robot->Item_Pick_Up();
+        }
+
 
         // Render
         BeginDrawing();

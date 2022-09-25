@@ -27,14 +27,23 @@ protected:
     bool Right_Equal_Left();
     bool Reached_Finish();
 
+    // items
+    int which_item = -1;
+
 public:
     character_robot();
-    void Find_Path();
-    void Draw_Path();
-    void Draw_GUI();
     void Update(bool inventory);
     void Set_Starting_Pos();
+
+    void Find_Path();
+    void Draw_Path();
+
     bool Is_Message_Open();
+    void Draw_GUI();
+
+    int Item_Found();
+    void Item_Pick_Up();
+
 };
 
 
