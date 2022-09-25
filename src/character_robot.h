@@ -13,6 +13,7 @@ protected:
 public:
     character_robot();
     void Draw_Path();
+    void Draw_GUI();
     void Update(bool inventory);
     void Set_Starting_Pos();
     bool Is_Message_Open();

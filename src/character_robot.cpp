@@ -38,16 +38,14 @@ void character_robot::Draw_Path()
 {
     if (IsKeyDown(KEY_H))
     {
-        DrawText(("Start  X: " + std::to_string((int)Map->Get_Start_Pos().x)).c_str(), 30, 30, 30, BLACK);
-        DrawText(("Start  Y: " + std::to_string((int)Map->Get_Start_Pos().y)).c_str(), 30, 70, 30, BLACK);
-        DrawText(("Finish X: " + std::to_string((int)Map->Get_Fin_Pos().x)).c_str(), 30, 120, 30, BLACK);
-        DrawText(("Finish Y: " + std::to_string((int)Map->Get_Fin_Pos().y)).c_str(), 30, 160, 30, BLACK);
-
         DrawCircle(start.x, start.y, 16, GREEN);
         DrawCircle(finish.x, finish.y, 16, RED);
         DrawCircle(character_center.x, character_center.y, 10, BLACK);
     }
+}
 
+void character_robot::Draw_GUI()
+{
     if (is_message_open == true)
     {
         // base texture that message is printed on
@@ -64,6 +62,14 @@ void character_robot::Draw_Path()
         DrawText("TODO: Make this work.", message_position.x, message_position.y + 140, 30, WHITE);
 
         DrawText("Close this message with ENTER", message_position.x, message_position.y + 300, 30, WHITE);
+    }
+
+    else  if (IsKeyDown(KEY_H))
+    {
+        DrawText(("Start  X: " + std::to_string((int) Map->Get_Start_Pos().x)).c_str(), 30, 30, 30, BLACK);
+        DrawText(("Start  Y: " + std::to_string((int) Map->Get_Start_Pos().y)).c_str(), 30, 70, 30, BLACK);
+        DrawText(("Finish X: " + std::to_string((int) Map->Get_Fin_Pos().x)).c_str(), 30, 120, 30, BLACK);
+        DrawText(("Finish Y: " + std::to_string((int) Map->Get_Fin_Pos().y)).c_str(), 30, 160, 30, BLACK);
     }
 }
 

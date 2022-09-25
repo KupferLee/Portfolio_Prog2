@@ -43,13 +43,15 @@ int main() {
     // Main game loop
     while (!WindowShouldClose()) // Detect window close button or ESC key
     {
+        // update GUI
         Inventory->Update();
 
+        // Update Actors
         Player->Update(Inventory->Is_Backpack_Open(), Robot->Is_Message_Open());
         Robot->Update(Inventory->Is_Backpack_Open());
 
 
-
+        // Render
         BeginDrawing();
             // If map doesnt get draw this is an error message on the screen
             ClearBackground(BLUE);
@@ -57,14 +59,15 @@ int main() {
 
             // draw what is currently loaded within the map vectors
             Map->Draw();
+            Robot->Draw_Path();
 
             // draw characters
             Robot->Draw();
-            Robot->Draw_Path();
             Player->Draw();
 
             // Draw GUI
             Inventory->Draw();
+            Robot->Draw_GUI();
 
         EndDrawing();
     }
