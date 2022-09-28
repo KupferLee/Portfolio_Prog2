@@ -317,7 +317,7 @@ void inventory_ui::Draw_Tutorial()
     DrawText("Move with WASD", infos_position.x, infos_position.y, 30, WHITE);
     DrawText("Find path with SPACE", infos_position.x, infos_position.y + 40, 30, WHITE);
     DrawText("Open inventory with I", infos_position.x, infos_position.y + 80, 30, WHITE);
-    DrawText("Collect item on Map with ENTER", infos_position.x, infos_position.y + 120, 30, WHITE);
+    DrawText("Collect item with ENTER, drop with L", infos_position.x, infos_position.y + 120, 30, WHITE);
     DrawText("Add 3b) items with M, erase with N", infos_position.x, infos_position.y + 160, 30, WHITE);
     DrawText("Sort items with TAB", infos_position.x, infos_position.y + 200, 30, WHITE);
     DrawText("Change backpack position with E", infos_position.x, infos_position.y + 240, 30, WHITE);

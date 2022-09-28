@@ -33,7 +33,11 @@ void character_player::Update(bool inventory, bool robot_message)
     Get_Position_Y();
     Get_Position_Z();
 
-    Item_Drop();
+    if (inventory == true)
+    {
+        Item_Drop();
+    }
+
 
     if (is_sort_open == true && IsKeyPressed(KEY_ENTER))
     {
@@ -144,9 +148,11 @@ void character_player::Item_Pickup(item_base* item)
 
 }
 
+// drop the last item that was added to your inventory
+// if there is already an item on the tile you standing on you cannot drop your item
 void character_player::Item_Drop()
 {
-    if(IsKeyPressed(KEY_L) && Map->Get_Item(current_tile.z) == -1)
+    if(IsKeyPressed(KEY_L) && Map->Get_Item(current_tile.z) == -1 && inventory_slot > 0)
     {
         if (Inventory.getItem(inventory_slot-1) == Dagger)
         {
@@ -193,44 +199,44 @@ void character_player::Check_Item_Collision()
             if (Map->Get_Item(current_tile.z) == 5)
             {
                 Item_Pickup(Chest);
-                Map->Set_Item(current_tile.z, 0);
+                Map->Set_Item(current_tile.z, -1);
             }
 
             if (Map->Get_Item(current_tile.z) == 6)
             {
                 Item_Pickup(Potion);
-                Map->Set_Item(current_tile.z, 0);
+                Map->Set_Item(current_tile.z, -1);
             }
 
             if (Map->Get_Item(current_tile.z) == 7)
             {
                 Item_Pickup(Golden_Apple);
-                Map->Set_Item(current_tile.z, 0);
+                Map->Set_Item(current_tile.z, -1);
             }
 
             if (Map->Get_Item(current_tile.z) == 8)
             {
                 Item_Pickup(Crystal);
-                Map->Set_Item(current_tile.z, 0);
+                Map->Set_Item(current_tile.z, -1);
             }
         }
 
         if (Map->Get_Item(current_tile.z) == 4) //  && is_weapons_occupied == false
         {
             Item_Pickup(Dagger);
-            Map->Set_Item(current_tile.z, 0);
+            Map->Set_Item(current_tile.z, -1);
         }
 
         if (Map->Get_Item(current_tile.z) == 9) // && is_rings_occupied == false
         {
             Item_Pickup(Ring);
-            Map->Set_Item(current_tile.z, 0);
+            Map->Set_Item(current_tile.z, -1);
         }
 
         if (Map->Get_Item(current_tile.z) == 10) // && is_armor_occupied == false
         {
             Item_Pickup(Armor);
-            Map->Set_Item(current_tile.z, 0);
+            Map->Set_Item(current_tile.z, -1);
         }
     }
 
