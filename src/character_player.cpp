@@ -184,9 +184,28 @@ void character_player::Item_Drop()
         }
 
         Map->Set_Item(current_tile.z, item_id);
-
         inventory_slot = inventory_slot - 1;
-        std::cout << "Current Slot " << inventory_slot << std::endl;
+    }
+    else if (IsKeyPressed(KEY_L) && inventory_slot == 0)
+    {
+        if (is_armor_occupied)
+        {
+            Map->Set_Item(current_tile.z, 10);
+            Inventory.setItem(NULL, 10);
+            is_armor_occupied = false;
+        }
+        else if (is_rings_occupied)
+        {
+            Map->Set_Item(current_tile.z, 9);
+            Inventory.setItem(NULL, 9);
+            is_rings_occupied = false;
+        }
+        else if (is_weapons_occupied)
+        {
+            Map->Set_Item(current_tile.z, 4);
+            Inventory.setItem(NULL, 4);
+            is_weapons_occupied = false;
+        }
     }
 }
 
@@ -449,7 +468,7 @@ void character_player::Set_Starting_Pos() { this->position = {(Map->Get_Start_Po
 // return item attributes
 int character_player::Get_Current_Slot() { return this->inventory_slot; }
 
-Texture2D character_player::Get_Item_Texture(int slot) { return Inventory.getItem(slot)->Get_Texture(); }
+Texture2D character_player::Get_Item_Texture(int slot) { if (Inventory.getItem(slot) != NULL) return Inventory.getItem(slot)->Get_Texture(); }
 
 std::string character_player::Get_Item_Name(int slot) { return Inventory.getItem(slot)->Get_Name(); }
 

@@ -30,7 +30,7 @@ protected:
     void Check_Item_Collision();
 
     bool can_move = true;
-    int base_strength = 20; // determines how much weight can be put in inventory
+    int base_strength = 25; // determines how much weight can be put in inventory
     int strength = 0;
     int total_weight = 0;
 
