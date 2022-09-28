@@ -3,9 +3,9 @@
 item_ring::item_ring()
 {
     this->name = "Ring";
-    this->description = "+10 Strength";
-    this->value = 7;
-    this->weight = 1;
+    this->description = "A magic Ring. +10 Strength";
+    this->value = 8;
+    this->weight = 0;
     this->texture_id = 9;
     this->texture = LoadTexture("assets/graphics/gui/item_ring.png");
 

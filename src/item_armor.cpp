@@ -6,7 +6,7 @@
 
 item_armor::item_armor()
 {
-    this->value = 5;
+    this->value = 4;
     this->name = "Armor";
     this->description = "A heavy Armor.";
     this->weight = 8;
