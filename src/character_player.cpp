@@ -101,10 +101,17 @@ void character_player::Movement_Controls()
 
 
 // Inventory
+// items get filled into normal slots, equipment gets automatically equipped to special slots
 void character_player::Item_Pickup(item_base* item)
 {
     // only fill in the first 10 slots, not the 3 special ones
-    if (this->inventory_slot < 10 && item != Dagger && item != Ring && item != Armor)
+    if (this->inventory_slot < 10 && item != Dagger && item != Ring && item != Armor )
+    {
+        Inventory.setItem(item, this->inventory_slot);
+
+        this->inventory_slot++;
+    }
+    else if (is_weapons_occupied && item == Dagger || item == Ring && is_rings_occupied|| item == Armor && is_armor_occupied)
     {
         Inventory.setItem(item, this->inventory_slot);
 
@@ -165,19 +172,19 @@ void character_player::Check_Item_Collision()
             }
         }
 
-        if (Map->Get_Item(current_tile.z) == 4 && is_weapons_occupied == false)
+        if (Map->Get_Item(current_tile.z) == 4) //  && is_weapons_occupied == false
         {
             Item_Pickup(Dagger);
             Map->Set_Item_Zero(current_tile.z);
         }
 
-        if (Map->Get_Item(current_tile.z) == 9 && is_rings_occupied == false)
+        if (Map->Get_Item(current_tile.z) == 9) // && is_rings_occupied == false
         {
             Item_Pickup(Ring);
             Map->Set_Item_Zero(current_tile.z);
         }
 
-        if (Map->Get_Item(current_tile.z) == 10 && is_armor_occupied == false)
+        if (Map->Get_Item(current_tile.z) == 10) // && is_armor_occupied == false
         {
             Item_Pickup(Armor);
             Map->Set_Item_Zero(current_tile.z);
