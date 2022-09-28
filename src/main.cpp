@@ -12,9 +12,10 @@
 
 int main() {
     // Raylib initialization
-    // Project name, screen size, fullscreen mode etc. can be specified in the config.h.in file
+    // Project name, screen size, fullscreen mode etc. can be specified in the config.h file
     InitWindow(Game::ScreenWidth, Game::ScreenHeight, Game::PROJECT_NAME);
     SetTargetFPS(60);
+    SetWindowIcon(LoadImage("assets/graphics/gui/game_icon.png"));
 
 #ifdef GAME_START_FULLSCREEN
     ToggleFullscreen();
