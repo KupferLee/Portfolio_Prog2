@@ -339,7 +339,7 @@ int map::Get_Tile(int i) { return map_data.layer_path[i]; }
 
 int map::Get_Item(int i) { return map_data.layer_items[i]; }
 
-void map::Set_Item_Zero(int i) {map_data.layer_items[i] = 0; }
+void map::Set_Item(int position, int item) { map_data.layer_items[position] = item; }
 
 Vector2 map::Get_Start_Pos()
 {

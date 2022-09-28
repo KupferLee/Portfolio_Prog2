@@ -263,4 +263,4 @@ bool character_robot::Is_Message_Open() { return is_message_open; }
 
 int character_robot::Item_Found() { return which_item; }
 
-void character_robot::Item_Pick_Up() { Map->Set_Item_Zero(current_tile.z); which_item = -1; }
+void character_robot::Item_Pick_Up() { Map->Set_Item(current_tile.z, 0); which_item = -1; }

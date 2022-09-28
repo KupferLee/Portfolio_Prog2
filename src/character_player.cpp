@@ -33,6 +33,8 @@ void character_player::Update(bool inventory, bool robot_message)
     Get_Position_Y();
     Get_Position_Z();
 
+    Item_Drop();
+
     if (is_sort_open == true && IsKeyPressed(KEY_ENTER))
     {
         if (current_button == 0)
@@ -102,6 +104,7 @@ void character_player::Movement_Controls()
 
 // Inventory
 // items get filled into normal slots, equipment gets automatically equipped to special slots
+// if the equipment slot is full already the item gets added to a normal slot
 void character_player::Item_Pickup(item_base* item)
 {
     // only fill in the first 10 slots, not the 3 special ones
@@ -141,6 +144,46 @@ void character_player::Item_Pickup(item_base* item)
 
 }
 
+void character_player::Item_Drop()
+{
+    if(IsKeyPressed(KEY_L) && Map->Get_Item(current_tile.z) == -1)
+    {
+        if (Inventory.getItem(inventory_slot-1) == Dagger)
+        {
+            item_id = 4;
+        }
+        else if (Inventory.getItem(inventory_slot-1) == Chest)
+        {
+            item_id = 5;
+        }
+        else if (Inventory.getItem(inventory_slot-1) == Potion)
+        {
+            item_id = 6;
+        }
+        else if (Inventory.getItem(inventory_slot-1) == Golden_Apple)
+        {
+            item_id = 7;
+        }
+        else if (Inventory.getItem(inventory_slot-1) == Crystal)
+        {
+            item_id = 8;
+        }
+        else if (Inventory.getItem(inventory_slot-1) == Ring)
+        {
+            item_id = 9;
+        }
+        if (Inventory.getItem(inventory_slot-1) == Armor)
+        {
+            item_id = 10;
+        }
+
+        Map->Set_Item(current_tile.z, item_id);
+
+        inventory_slot = inventory_slot - 1;
+        std::cout << "Current Slot " << inventory_slot << std::endl;
+    }
+}
+
 void character_player::Check_Item_Collision()
 {
     if (IsKeyPressed(KEY_ENTER))
@@ -150,44 +193,44 @@ void character_player::Check_Item_Collision()
             if (Map->Get_Item(current_tile.z) == 5)
             {
                 Item_Pickup(Chest);
-                Map->Set_Item_Zero(current_tile.z);
+                Map->Set_Item(current_tile.z, 0);
             }
 
             if (Map->Get_Item(current_tile.z) == 6)
             {
                 Item_Pickup(Potion);
-                Map->Set_Item_Zero(current_tile.z);
+                Map->Set_Item(current_tile.z, 0);
             }
 
             if (Map->Get_Item(current_tile.z) == 7)
             {
                 Item_Pickup(Golden_Apple);
-                Map->Set_Item_Zero(current_tile.z);
+                Map->Set_Item(current_tile.z, 0);
             }
 
             if (Map->Get_Item(current_tile.z) == 8)
             {
                 Item_Pickup(Crystal);
-                Map->Set_Item_Zero(current_tile.z);
+                Map->Set_Item(current_tile.z, 0);
             }
         }
 
         if (Map->Get_Item(current_tile.z) == 4) //  && is_weapons_occupied == false
         {
             Item_Pickup(Dagger);
-            Map->Set_Item_Zero(current_tile.z);
+            Map->Set_Item(current_tile.z, 0);
         }
 
         if (Map->Get_Item(current_tile.z) == 9) // && is_rings_occupied == false
         {
             Item_Pickup(Ring);
-            Map->Set_Item_Zero(current_tile.z);
+            Map->Set_Item(current_tile.z, 0);
         }
 
         if (Map->Get_Item(current_tile.z) == 10) // && is_armor_occupied == false
         {
             Item_Pickup(Armor);
-            Map->Set_Item_Zero(current_tile.z);
+            Map->Set_Item(current_tile.z, 0);
         }
     }
 

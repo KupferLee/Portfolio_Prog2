@@ -46,8 +46,9 @@ protected:
     // inventory for item objects
     Inventory_Template<item_base*, 14> Inventory;
     int inventory_slot = 0;
+    int item_id;
     void Item_Pickup(item_base* Item);
-
+    void Item_Drop();
     bool is_weapons_occupied = false;
     bool is_rings_occupied = false;
     bool is_armor_occupied = false;

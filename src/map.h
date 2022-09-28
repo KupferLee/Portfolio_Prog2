@@ -22,7 +22,7 @@ public:
 
     int Get_Tile(int i);
     int Get_Item(int i);
-    void Set_Item_Zero(int i);
+    void Set_Item(int position, int item);
 
     // get tile positions in x/y in tiles
     Vector2 Get_Start_Pos();
