@@ -31,7 +31,7 @@ int main() {
     // loading the current json data into vectors, so they only need to be parsed once
     Map->Parse();
     Map->Random_Start_Fin();
-    Map->Parse_Items();
+    Map->Random_Items();
 
     Player->Map = Map;
     Robot->Map = Map;
