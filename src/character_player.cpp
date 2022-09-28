@@ -152,7 +152,7 @@ void character_player::Item_Pickup(item_base* item)
 // if there is already an item on the tile you standing on you cannot drop your item
 void character_player::Item_Drop()
 {
-    if(IsKeyPressed(KEY_L) && Map->Get_Item(current_tile.z) == -1 && inventory_slot > 0)
+    if(IsKeyPressed(KEY_BACKSPACE) && Map->Get_Item(current_tile.z) == -1 && inventory_slot > 0)
     {
         if (Inventory.getItem(inventory_slot-1) == Dagger)
         {
@@ -186,8 +186,11 @@ void character_player::Item_Drop()
         Map->Set_Item(current_tile.z, item_id);
         inventory_slot = inventory_slot - 1;
     }
-    else if (IsKeyPressed(KEY_L) && inventory_slot == 0)
+    // drop equipment from special slots
+    // there is a weird bug still
+    else if (IsKeyPressed(KEY_BACKSPACE) && inventory_slot == 0)
     {
+        // here is a weird bug with weapons?
         if (is_armor_occupied)
         {
             Map->Set_Item(current_tile.z, 10);
