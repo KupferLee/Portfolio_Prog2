@@ -14,7 +14,7 @@ public:
         if (slot < size)
         {
             items_container[slot] = item;
-            std::cout << "DEBUG: Item set " << slot << std::endl;
+            // std::cout << "DEBUG: Item set " << slot << std::endl;
         }
         else
         {

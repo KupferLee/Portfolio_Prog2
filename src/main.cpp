@@ -29,13 +29,17 @@ int main() {
     Inventory->Player = Player;
 
     // loading the current json data into vectors, so they only need to be parsed once
+    // start/finish tiles are always random within the three first/three last rows
+    // items are currently randomized but can also be parsed from the json file
     Map->Parse();
     Map->Random_Start_Fin();
     Map->Random_Items();
 
+    // giving them the map so the starting position can be calculated with the start tile
     Player->Map = Map;
     Robot->Map = Map;
 
+    // for the starting position to be set the map data has to exist, so it's not called within the constructor
     Player->Set_Starting_Pos();
     Robot->Set_Starting_Pos();
 
@@ -43,14 +47,14 @@ int main() {
     // Main game loop
     while (!WindowShouldClose()) // Detect window close button or ESC key
     {
-        // update GUI
+        // Update GUI
         Inventory->Update();
 
         // Update Actors
         Player->Update(Inventory->Is_Backpack_Open(), Robot->Is_Message_Open());
         Robot->Update(Inventory->Is_Backpack_Open());
 
-        // check if robot found any items
+        // Check if robot found any items
         // TODO: only add if total weight + item weight < strength
         if (Robot->Item_Found() != -1) // && Player->Get_Total_Weight() < Player->Get_Total_Strength()
         {
@@ -63,13 +67,13 @@ int main() {
         BeginDrawing();
             // If map doesnt get draw this is an error message on the screen
             ClearBackground(BLUE);
-            DrawText("If you see this, this is not working!", 10, 10, 30, DARKBLUE);
+            DrawText("If you see this, the map is not working!", 10, 10, 30, DARKBLUE);
 
-            // draw what is currently loaded within the map vectors
+            // Draw what is currently loaded within the map vectors
             Map->Draw();
             Robot->Draw_Path();
 
-            // draw characters
+            // Draw characters
             Robot->Draw();
             Player->Draw();
 

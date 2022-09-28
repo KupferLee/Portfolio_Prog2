@@ -68,6 +68,7 @@ void map::Parse_Items()
 // if there is already a grass tile the chance is higher that down or right will be another grass tile spawned
 //
 // NOTE: this is not failsafe yet!
+// NOTE: it has problems with robot path draw
 void map::Randomize()
 {
     //go through all contents of "layers"
