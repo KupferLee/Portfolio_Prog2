@@ -118,12 +118,6 @@ void character_player::Item_Pickup(item_base* item)
 
         this->inventory_slot++;
     }
-    else if (is_weapons_occupied && item == Dagger || item == Ring && is_rings_occupied|| item == Armor && is_armor_occupied)
-    {
-        Inventory.setItem(item, this->inventory_slot);
-
-        this->inventory_slot++;
-    }
     // if pick up weapon and special slot weapon empty fill in special slot
     else if (item == Dagger && Inventory.getItem(10) == NULL)
     {
@@ -194,19 +188,19 @@ void character_player::Item_Drop()
         if (is_armor_occupied)
         {
             Map->Set_Item(current_tile.z, 10);
-            Inventory.setItem(NULL, 10);
+            Inventory.setItem(NULL, 12);
             is_armor_occupied = false;
         }
         else if (is_rings_occupied)
         {
             Map->Set_Item(current_tile.z, 9);
-            Inventory.setItem(NULL, 9);
+            Inventory.setItem(NULL, 11);
             is_rings_occupied = false;
         }
         else if (is_weapons_occupied)
         {
             Map->Set_Item(current_tile.z, 4);
-            Inventory.setItem(NULL, 4);
+            Inventory.setItem(NULL, 10);
             is_weapons_occupied = false;
         }
     }
