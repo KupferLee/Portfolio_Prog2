@@ -1,6 +1,19 @@
-This Code is based on raylibstarter-mininal by Christoph Hahn (https://github.com/chfhhd/raylibstarter-minimal) and further advanced by Lee Ellermann as part of an university exam. It is meant as an portfolio of different tasks. For further explanation on the different features please look into the Git Wiki.
+## Hello
+This Code is based on raylibstarter-mininal by Christoph Hahn and further advanced by Lee Ellermann
+as part of an university exam. It is meant as an portfolio of different tasks. For further explanation
+on the different features please look into the Git Wiki.
 
-Naming Convention:
+All relevant information for the exam are within the Document "Datei-Struktur und Aufgabe 6" and written
+in German. You can find the pdf document in the same folder as this readme.
+
+## Used Libraries:
+
+Raylibstarter Minimal: https://github.com/chfhhd/raylibstarter-minimal
+
+Json Einbindung von Nlohmann: https://github.com/nlohmann/json
+
+## Naming Convention:
+
 // in code
 variable varabiable_a;
 
