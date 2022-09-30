@@ -230,7 +230,7 @@ void inventory_ui::Set_Slots()
     this->weight_position[1] = {weight_position[0].x, weight_position[0].y + 30};
 
     // info tutorial
-    this->infos_position = {160, (float)GetScreenHeight() / 2 - this->inventory_infos.height - 60};
+    this->infos_position = {200, (float)GetScreenHeight() / 2 - this->inventory_infos.height - 60};
 }
 
 void inventory_ui::Navigate_Inventory()
@@ -314,13 +314,15 @@ void inventory_ui::Draw_Tutorial()
                    {(float)GetScreenWidth()/2 - this->tutorial_base.width/2*this->scale_factor, (float)GetScreenHeight() / 2 - this->tutorial_base.height / 2 * this->scale_factor, (float)this->tutorial_base.width * this->scale_factor, (float)this->tutorial_base.height * this->scale_factor},
                    {0, 0} ,0, WHITE);
 
-    DrawText("Move with WASD", infos_position.x, infos_position.y, 30, WHITE);
-    DrawText("Find path with SPACE", infos_position.x, infos_position.y + 40, 30, WHITE);
-    DrawText("Open inventory with I", infos_position.x, infos_position.y + 80, 30, WHITE);
-    DrawText("Collect item with ENTER, drop with BCKSP", infos_position.x, infos_position.y + 120, 30, WHITE);
-    DrawText("Add 3b) items with M, erase with N", infos_position.x, infos_position.y + 160, 30, WHITE);
-    DrawText("Sort items with TAB", infos_position.x, infos_position.y + 200, 30, WHITE);
-    DrawText("Change backpack position with E", infos_position.x, infos_position.y + 240, 30, WHITE);
+    DrawText("Move with WASD", infos_position.x - 40, infos_position.y, 30, WHITE);
+    DrawText("Find path with SPACE", infos_position.x - 40, infos_position.y + 40, 30, WHITE);
+    DrawText("Open inventory with I", infos_position.x - 40, infos_position.y + 80, 30, WHITE);
+    DrawText("Collect item with ENTER, drop with BCKSP", infos_position.x - 40, infos_position.y + 120, 30, WHITE);
+    DrawText("Add 3b) items with M, erase with N", infos_position.x - 40, infos_position.y + 160, 30, WHITE);
+    DrawText("Sort items with TAB", infos_position.x - 40, infos_position.y + 200, 30, WHITE);
+    DrawText("See item info with SPACE", infos_position.x - 40, infos_position.y + 240, 30, WHITE);
+    DrawText("Change backpack position with E", infos_position.x - 40, infos_position.y + 280, 30, WHITE);
 
-    DrawText("Close tutorial with ENTER", infos_position.x, infos_position.y + 300, 30, WHITE);
+
+    DrawText("Close tutorial with ENTER", infos_position.x, infos_position.y + 320, 30, WHITE);
 }
