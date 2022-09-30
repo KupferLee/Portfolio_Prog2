@@ -137,8 +137,9 @@ void character_player::Item_Pickup(item_base* item)
     }
     else
     {
-        std::cout << "ERROR: No item assigned." << std::endl;
+        // std::cout << "DEBUG: No item assigned." << std::endl;
     }
+
 
 }
 

@@ -3,7 +3,7 @@ This Code is based on raylibstarter-mininal by Christoph Hahn and further advanc
 as part of an university exam. It is meant as an portfolio of different tasks. For further explanation
 on the different features please look into the Git Wiki.
 
-All relevant information for the exam are within the Document "Datei-Struktur und Aufgabe 6" and written
+All relevant information for the exam are within the Document "Datei-Struktur_und_Aufgabe 6" and written
 in German. You can find the pdf document in the same folder as this readme.
 
 ## Used Libraries:
