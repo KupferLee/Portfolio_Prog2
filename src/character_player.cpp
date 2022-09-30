@@ -238,19 +238,19 @@ void character_player::Check_Item_Collision()
             }
         }
 
-        if (Map->Get_Item(current_tile.z) == 4) //  && is_weapons_occupied == false
+        if (Map->Get_Item(current_tile.z) == 4 && is_weapons_occupied == false)
         {
             Item_Pickup(Dagger);
             Map->Set_Item(current_tile.z, -1);
         }
 
-        if (Map->Get_Item(current_tile.z) == 9) // && is_rings_occupied == false
+        if (Map->Get_Item(current_tile.z) == 9 && is_rings_occupied == false)
         {
             Item_Pickup(Ring);
             Map->Set_Item(current_tile.z, -1);
         }
 
-        if (Map->Get_Item(current_tile.z) == 10) // && is_armor_occupied == false
+        if (Map->Get_Item(current_tile.z) == 10 && is_armor_occupied == false)
         {
             Item_Pickup(Armor);
             Map->Set_Item(current_tile.z, -1);
